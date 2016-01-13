@@ -1,0 +1,52 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8"></meta>
+<title>Insert title here</title>
+
+<style type="text/css">
+body {
+	background-color: #F0F8FF;
+}
+
+li.odd {
+	color: white;
+	background-color: #87CEFA;
+}
+
+li.even {
+	color: black;
+	background-color: #CCF2FF;
+}
+</style>
+
+</head>
+<body>
+	<div>
+		hoge.html
+		<div th:text="'use message : ' + #{hoge.message1}">m1</div>
+		<div th:text="'use message : ' + #{hoge.message2}">m2</div>
+		<div th:text="'use message : ' + #{hoge.message3(${modelMessage1})}">m3</div>
+		<div th:text="'use SpEL : ' + ${@systemProperties['hoge.test']}">m4</div>
+		<div th:text="'use SpEL : ' + ${@test2Properties['test2.hogehoge']}">m5</div>
+		<div th:text="'use var : ' + ${modelMessage1}">m6</div>
+	</div>
+
+	<div>
+		<th:block th:each="list : ${listTest}">
+			<span th:text="${list}" th:style="${listStat.odd}? 'color:red'"></span>
+		</th:block>
+	</div>
+
+	<div style="width: 400px">
+		<ul style="list-style: none; padding: 0px">
+			<th:block th:each="list : ${listTest}">
+				<li th:text="${list}" th:class="${listStat.odd}? 'odd':'even'" />
+			</th:block>
+		</ul>
+	</div>
+</body>
+</html>

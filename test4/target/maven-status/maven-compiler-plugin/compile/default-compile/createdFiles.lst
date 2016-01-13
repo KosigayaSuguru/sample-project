@@ -1,0 +1,9 @@
+impl\test4\RegistService.class
+inter\test4\IfBean.class
+main\test4\Main.class
+impl\test4\RegistRepository.class
+conf\test4\AppConfig2.class
+bean\test4\BeanA.class
+conf\test4\AppConfig.class
+inter\test4\IfService.class
+bean\test4\BeanB.class

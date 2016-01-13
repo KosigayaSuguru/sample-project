@@ -1,0 +1,39 @@
+package test3;
+
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.Properties;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.stereotype.Component;
+
+@Component
+@Configuration
+public class AppConfig {
+
+	@Value(value = "${catalina.home}")
+	String catalinaHome;
+
+	@Bean
+	TestBean testBean(){
+		TestBean tmp = new TestBean();
+		tmp.setHoge("DI_HOGE");
+		tmp.setMoge("DI_MOGE");
+		tmp.setCatalinaHome(catalinaHome);
+		return tmp;
+	}
+
+	@Bean
+	Properties test2Properties(){
+        Properties p = new Properties();
+        try(Reader r = new InputStreamReader(AppConfig.class.getResourceAsStream("/test2.properties"),"UTF-8");){
+            p.load(r);
+        } catch(Exception e){
+        	e.printStackTrace();
+        }
+		return p;
+	}
+}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.2.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<context:annotation-config />
+	<mvc:annotation-driven />
+
+	<!-- aspectJのruntimeとweaverがいる( from maven repogitory) -->
+	<!-- <aop:config proxy-target-class="true" /> -->
+	<aop:aspectj-autoproxy proxy-target-class="false" />
+	<tx:annotation-driven proxy-target-class="false" />
+
+	<context:component-scan base-package="test3" />
+	<context:property-placeholder location="classpath:*.properties" />
+
+
+	<!-- <bean id="testProperties" -->
+	<!-- class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
+	<!-- <property name="locations" value="classpath:test.properties" /> -->
+	<!-- <property name="fileEncoding" value="UTF-8" /> -->
+	<!-- </bean> -->
+
+	<bean id="hogeMessages"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:hoge" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<!-- データソースの設定は DbConfig.java へ -->
+	<!-- <bean id="dataSource" -->
+	<!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+	<!-- <property name="driverClassName" value="org.h2.Driver" /> -->
+	<!-- <property name="url" value="jdbc:h2:~/test" /> -->
+	<!-- <property name="username" value="sa" /> -->
+	<!-- <property name="password" value="" /> -->
+	<!-- </bean> -->
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource">
+			<ref bean="dataSourceTest" />
+		</property>
+	</bean>
+
+	<bean class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSourceTest" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+
+	<bean id="templateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		<property name="characterEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+		<property name="messageSource" ref="hogeMessages" />
+		<property name="templateEngineMessageSource" ref="hogeMessages" />
+	</bean>
+
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="UTF-8" />
+		<property name="order" value="1" />
+	</bean>
+
+	<!-- アドバイザの定義 -->
+	<!-- 細かいことは分からないが、BeanNameAutoProxyCreator が @Transactional と干渉するっぽい -->
+	<!-- <bean id="myAdvisor" -->
+	<!-- class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"> -->
+	<!-- <property name="advice" ref="testAdvice" /> -->
+	<!-- <property name="patterns" value=".*" /> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="beanNameAutoProxy" -->
+	<!-- class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> -->
+	<!-- <property name="beanNames"> -->
+	<!-- <value>testController</value> -->
+	<!-- </property> -->
+	<!-- <property name="interceptorNames"> -->
+	<!-- <value>myAdvisor</value> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="testAdvice" class="test3.TestAdvice" /> -->
+</beans>
