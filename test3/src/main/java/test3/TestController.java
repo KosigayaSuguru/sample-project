@@ -55,8 +55,8 @@ public class TestController extends WebApplicationObjectSupport {
 				// Test spring DI getBean ->
 
 		// Test spring jdbcTemplete <-
-		RowMapper<Test> mapper = new BeanPropertyRowMapper<Test>(Test.class);
-		List<Test> dtoList = jdbcTemplate.query("select * from test", mapper);
+		RowMapper<TestEntity> mapper = new BeanPropertyRowMapper<TestEntity>(TestEntity.class);
+		List<TestEntity> dtoList = jdbcTemplate.query("select * from test", mapper);
 		// Test spring jdbcTemplete ->
 
 		transactional();
@@ -111,7 +111,7 @@ public class TestController extends WebApplicationObjectSupport {
 	@Transactional
 	public void transactional() {
 		System.out.println("transactional()");
-		RowMapper<Test> mapper = new BeanPropertyRowMapper<Test>(Test.class);
-		List<Test> dtoList = jdbcTemplate.query("select * from test", mapper);
+		RowMapper<TestEntity> mapper = new BeanPropertyRowMapper<TestEntity>(TestEntity.class);
+		List<TestEntity> dtoList = jdbcTemplate.query("select * from test", mapper);
 	}
 }
