@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -43,10 +44,30 @@ public class TestController extends WebApplicationObjectSupport {
 	@Value(value = "${test.hogehoge}")
 	private String mage;
 
+	// @ModelAttributeのvalueに指定した値が属性名、returnが実体になって、modelにaddされる
+	@ModelAttribute("modelAttributeTest1")
+	public String modelAttributeTest1() {
+
+		System.out.println("modelAttributeTest1");
+		return "modelAttributeTest1";
+	}
+
+	// @ModelAttributeのvalueを指定しない場合、属性名がstringになる
+	@ModelAttribute
+	public String modelAttributeTest2() {
+
+		System.out.println("modelAttributeTest2");
+		return "modelAttributeTest2";
+	}
+
 	@RequestMapping(value = "/Test")
 	public String test(Locale locale, Model model) {
 		System.out.println("TEST1");
 		System.out.println("TEST2");
+
+		// Get model attribute -<
+		String modelAttributeTest1 = (String) model.asMap().get("modelAttributeTest1");
+		// Get model attribute ->
 
 		// Test spring DI getBean <-
 		ApplicationContext context = getApplicationContext();
@@ -100,10 +121,13 @@ public class TestController extends WebApplicationObjectSupport {
 	}
 
 	@RequestMapping(value = "/TestVelovity")
-	public String velocityTest(Model model){
+	public String velocityTest(Model model) {
 
+		// VelocityViewの中で（#createVelocityContext）modelの値をVelocityContextにputAllしているので、
+		// modelにaddAttirbuteすると、テンプレート上で使える
 		model.addAttribute("listTest",
 				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
+
 		return "velocityTemplate";
 	}
 
