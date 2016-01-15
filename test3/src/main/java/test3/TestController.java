@@ -121,7 +121,7 @@ public class TestController extends WebApplicationObjectSupport {
 		testService = new TestService();
 		testService.service();
 
-		// タイプセーフなEnum -<
+		// タイプセーフEnum（たまたま型が同じだった全然関係ない値との比較、代入等を防ぐ） -<
 		String nextView = "";
 		switch (testBean.getTestStatus()) {
 		case TEST_STATUS1:
@@ -144,7 +144,7 @@ public class TestController extends WebApplicationObjectSupport {
 			// 取りあえず省略
 			break;
 		}
-		// タイプセーフなEnum ->
+		// タイプセーフEnum ->
 
 		return nextView;
 	}
