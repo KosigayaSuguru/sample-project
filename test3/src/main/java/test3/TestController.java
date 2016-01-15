@@ -27,6 +27,7 @@ public class TestController extends WebApplicationObjectSupport {
 
 	private TestService testService;
 
+	@Autowired
 	private TestBean testBean;
 
 	@Autowired
@@ -112,12 +113,40 @@ public class TestController extends WebApplicationObjectSupport {
 		});
 		// Test ramda ->
 
+		// modelにThymeleafのforeachテスト用のデータ追加 -<
 		model.addAttribute("listTest",
 				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
+		// modelにThymeleafのforeachテスト用のデータ追加 ->
 
 		testService = new TestService();
 		testService.service();
-		return "hoge";
+
+		// タイプセーフなEnum -<
+		String nextView = "";
+		switch (testBean.getTestStatus()) {
+		case TEST_STATUS1:
+			// 列挙に対応したコード値が欲しい場合は↓みたいな感じ
+			System.out.println(TestEnumStatus.TEST_STATUS1.getCode());
+
+			// 処理結果に応じた次画面用のView名を取得する
+			nextView = TestEnumView.TEST_VIEW_TYMELEAF_SAMLE.getViewName();
+
+			break;
+		case TEST_STATUS2:
+			// 取りあえず省略
+			break;
+
+		case TEST_STATUS3:
+			// 取りあえず省略
+			break;
+
+		default:
+			// 取りあえず省略
+			break;
+		}
+		// タイプセーフなEnum ->
+
+		return nextView;
 	}
 
 	@RequestMapping(value = "/TestVelovity")
@@ -128,7 +157,7 @@ public class TestController extends WebApplicationObjectSupport {
 		model.addAttribute("listTest",
 				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
 
-		return "velocityTemplate";
+		return TestEnumView.TEST_VIEW_VELOCITY_SAMPLE.getViewName();
 	}
 
 	public TestBean getTest() {

@@ -23,6 +23,7 @@ public class AppConfig {
 		tmp.setHoge("DI_HOGE");
 		tmp.setMoge("DI_MOGE");
 		tmp.setCatalinaHome(catalinaHome);
+		tmp.setTestStatus(TestEnumStatus.TEST_STATUS1);
 		return tmp;
 	}
 

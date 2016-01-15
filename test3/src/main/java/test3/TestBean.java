@@ -7,6 +7,7 @@ public class TestBean {
 	private String hoge;
 	private String moge;
 	private String catalinaHome;
+	private TestEnumStatus testStatus;
 
 	public String getHoge() {
 		return hoge;
@@ -42,5 +43,13 @@ public class TestBean {
 		System.out.println("----------------");
 		hoge.accept("ramdaTest");
 		System.out.println("----------------");
+	}
+
+	public TestEnumStatus getTestStatus() {
+		return testStatus;
+	}
+
+	public void setTestStatus(TestEnumStatus testStatus) {
+		this.testStatus = testStatus;
 	}
 }
