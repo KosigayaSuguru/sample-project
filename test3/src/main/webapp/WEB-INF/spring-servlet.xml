@@ -62,9 +62,14 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
-		<property name="order" value="2" />
+		<property name="order" value="99" />
 	</bean>
 
+	<!-- あまりないと思うが、ThymeleafとVelovityのviewを共存させようとすると、 Thmeleaf側のorderをVelocityより後にしないと、Thmeleaf側のResolverでエラーが出て止まる。
+		ただ、Velocityのorderを前にすると、Thymeleafにアクセスした際に Velocityが名前解決できなかったっていうWarningを出す。
+		※動作自体はする 完全に両立させるための解決法は不明 -->
+
+	<!-- Thymeleaf用ViewResolver設定 -->
 	<bean id="templateResolver"
 		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
 		<property name="prefix" value="/WEB-INF/templates/" />
@@ -82,6 +87,23 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
 		<property name="characterEncoding" value="UTF-8" />
+		<property name="order" value="2" />
+	</bean>
+
+	<!-- Velocity用ViewResolver設定 -->
+	<bean id="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="cache" value="false" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".html" />
+		<!-- if you want to use the Spring Velocity macros set this property to
+			true -->
+		<property name="exposeSpringMacroHelpers" value="true" />
 		<property name="order" value="1" />
 	</bean>
 

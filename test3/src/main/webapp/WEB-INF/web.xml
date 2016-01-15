@@ -32,5 +32,7 @@
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/Test</url-pattern>
+		<url-pattern>/TestVelovity</url-pattern>
 	</servlet-mapping>
+
 </web-app>

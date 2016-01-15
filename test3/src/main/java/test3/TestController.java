@@ -99,6 +99,14 @@ public class TestController extends WebApplicationObjectSupport {
 		return "hoge";
 	}
 
+	@RequestMapping(value = "/TestVelovity")
+	public String velocityTest(Model model){
+
+		model.addAttribute("listTest",
+				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
+		return "velocityTemplate";
+	}
+
 	public TestBean getTest() {
 		return testBean;
 	}
