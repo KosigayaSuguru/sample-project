@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,6 +37,9 @@ public class Main {
 		List<Test> list = Arrays.asList(new Test(11),new Test(12),new Test(13));
 		Map<String, Integer> bbb = list.stream().map(e->"aa" + e.getUho() + "aa").collect(Collectors.toMap(s->s,s->s.length()));
 		//stream test<-
+
+		Function<String, Integer> function = string -> Integer.parseInt(string);
+		function.apply("12345678");
 
 		for(String str : service){
 			Service hoge = ServiceFactory.create(str);
