@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Velocity Page</title>
+
+<style type="text/css">
+body {
+    width: 480px;
+    height: auto;
+}
+
+.false {
+	background-color: DarkGray;
+}
+
+.true {
+	background-color: GreenYellow;
+}
+</style>
+
+</head>
+<body>
+	<div>TestSession.str1 = "$!{sessionTest.str1}"</div>
+	<div>TestSession.getMessage() = "$!{sessionTest.getMessage1()}"</div>
+	<div>TestSession.getMessage() = "$!{sessionTest.getMessage2()}"</div>
+
+	#set ($judge = "ok")
+	#if (${sessionTest.isTrue($judge)}) #set ($class = "true") #else #set ($class = "false") #end
+	<div class="$class">TestSession.isTrue() = "$!{sessionTest.isTrue("ok")}"</div>
+
+	#set ($judge = "ng")
+	#if (${sessionTest.isTrue($judge)}) #set ($class = "true") #else #set ($class = "false") #end
+	<div class="$class">TestSession.isTrue() = "$!{sessionTest.isTrue("ng")}"</div>
+
+	#set ($judge = "other")
+	#if (${sessionTest.isTrue($judge)}) #set ($class = "true") #else #set ($class = "false") #end
+	<div class="$class">TestSession.isTrue() = "$!{sessionTest.isTrue("other")}"</div>
+
+	<div>
+		#foreach ($item in $listTest) $item</br> #end
+	</div>
+</body>
+</html>

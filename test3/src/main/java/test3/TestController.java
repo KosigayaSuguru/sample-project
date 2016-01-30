@@ -19,10 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Controller
+@SessionAttributes(types = {TestSession.class})
 public class TestController extends WebApplicationObjectSupport {
 
 	private TestService testService;
@@ -146,6 +148,13 @@ public class TestController extends WebApplicationObjectSupport {
 		}
 		// タイプセーフEnum ->
 
+
+		if(!model.containsAttribute("sessionTest")){
+			System.out.println("addSession");
+			TestSession sess = new TestSession();
+			sess.str1 = "TestSession.str1";
+			model.addAttribute("sessionTest", sess);
+		}
 		return nextView;
 	}
 
