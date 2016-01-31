@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Properties;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
@@ -183,10 +181,13 @@ public class TestController extends WebApplicationObjectSupport {
 	public String velocityTestConfirm(@Validated @ModelAttribute("testForm") TestForm form, BindingResult result,
 			Model model) {
 
+		// error_message.propertiesからコード値を元にメッセージを引っ張ってくる
+		//name1はコード値を直接指定
+		//name2はエラーオブジェクトから。アノテーションで指定した値が{1},{2}で置換される（エラーオブジェクトのargmentsに格納される）
 		result.getAllErrors().stream().forEach(System.out::println);
 		String errorName1 = hogeMessages.getMessage("NotEmpty.testForm.name1", null, Locale.getDefault());
-		String errorName2 = hogeMessages.getMessage("NotEmpty.testForm.name2", null, Locale.getDefault());
-//		String errorName1 = hogeMessages.getMessage(result.getFieldError("name1").getCode(), null, Locale.getDefault());
+//		String errorName2 = hogeMessages.getMessage("NotEmpty.testForm.name2", null, Locale.getDefault());
+		String errorName2 = hogeMessages.getMessage(result.getFieldError("name2"), Locale.getDefault());
 		model.addAttribute("errorName1", errorName1);
 		model.addAttribute("errorName2", errorName2);
 		return TestEnumView.TEST_VIEW_VELOCITY_SAMPLE.getViewName();

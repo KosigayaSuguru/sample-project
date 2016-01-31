@@ -1,12 +1,14 @@
 package test3;
 
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class TestForm {
 
-	@NotEmpty(message="${NotEmpty.testForm.name1}")
+	@NotEmpty
 	public String name1;
-	@NotEmpty(message="${NotEmpty.testForm.name2}")
+	@Size(max = 4, min = 2)
 	public String name2;
 
 	public String getName1() {
