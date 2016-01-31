@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
@@ -17,6 +19,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -24,7 +28,7 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Controller
-@SessionAttributes(types = {TestSession.class})
+@SessionAttributes(types = { TestSession.class, TestForm.class })
 public class TestController extends WebApplicationObjectSupport {
 
 	private TestService testService;
@@ -61,6 +65,13 @@ public class TestController extends WebApplicationObjectSupport {
 
 		System.out.println("modelAttributeTest2");
 		return "modelAttributeTest2";
+	}
+
+	@ModelAttribute("testForm")
+	public TestForm testForm() {
+
+		System.out.println("testForm");
+		return new TestForm();
 	}
 
 	@RequestMapping(value = "/Test")
@@ -148,8 +159,7 @@ public class TestController extends WebApplicationObjectSupport {
 		}
 		// タイプセーフEnum ->
 
-
-		if(!model.containsAttribute("sessionTest")){
+		if (!model.containsAttribute("sessionTest")) {
 			System.out.println("addSession");
 			TestSession sess = new TestSession();
 			sess.str1 = "TestSession.str1";
@@ -158,14 +168,27 @@ public class TestController extends WebApplicationObjectSupport {
 		return nextView;
 	}
 
-	@RequestMapping(value = "/TestVelovity")
-	public String velocityTest(Model model) {
+	@RequestMapping(value = "/TestVelocity")
+	public String velocityTest(@ModelAttribute("testForm") TestForm form, Model model) {
 
 		// VelocityViewの中で（#createVelocityContext）modelの値をVelocityContextにputAllしているので、
 		// modelにaddAttirbuteすると、テンプレート上で使える
 		model.addAttribute("listTest",
 				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
 
+		return TestEnumView.TEST_VIEW_VELOCITY_SAMPLE.getViewName();
+	}
+
+	@RequestMapping(value = "/TestVelocityConfirm")
+	public String velocityTestConfirm(@Validated @ModelAttribute("testForm") TestForm form, BindingResult result,
+			Model model) {
+
+		result.getAllErrors().stream().forEach(System.out::println);
+		String errorName1 = hogeMessages.getMessage("NotEmpty.testForm.name1", null, Locale.getDefault());
+		String errorName2 = hogeMessages.getMessage("NotEmpty.testForm.name2", null, Locale.getDefault());
+//		String errorName1 = hogeMessages.getMessage(result.getFieldError("name1").getCode(), null, Locale.getDefault());
+		model.addAttribute("errorName1", errorName1);
+		model.addAttribute("errorName2", errorName2);
 		return TestEnumView.TEST_VIEW_VELOCITY_SAMPLE.getViewName();
 	}
 

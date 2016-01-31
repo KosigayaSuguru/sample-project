@@ -40,5 +40,13 @@ body {
 	<div>
 		#foreach ($item in $listTest) $item</br> #end
 	</div>
+
+	<div>
+	<form method="POST" action="TestVelocityConfirm" name="testForm">
+	<span><input type="text" name="name1" /></span><span style="color:red">$!errorName1</span><br/>
+	<span><input type="text" name="name2" /></span><span style="color:red">$!errorName2</span><br/>
+	<span><input type="submit" value="確認" /></span><br/>
+	</form>
+	</div>
 </body>
 </html>
