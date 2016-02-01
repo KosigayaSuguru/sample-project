@@ -182,14 +182,24 @@ public class TestController extends WebApplicationObjectSupport {
 			Model model) {
 
 		// error_message.propertiesからコード値を元にメッセージを引っ張ってくる
-		//name1はコード値を直接指定
-		//name2はエラーオブジェクトから。アノテーションで指定した値が{1},{2}で置換される（エラーオブジェクトのargmentsに格納される）
 		result.getAllErrors().stream().forEach(System.out::println);
+		//name1はコード値を直接指定
 		String errorName1 = hogeMessages.getMessage("NotEmpty.testForm.name1", null, Locale.getDefault());
-//		String errorName2 = hogeMessages.getMessage("NotEmpty.testForm.name2", null, Locale.getDefault());
+
+		//name2はエラーオブジェクトから。エラーメッセージのコード値はspringが自動で生成したもの。
+		//アノテーションで指定した値が{1},{2}で置換される（エラーオブジェクトのargmentsに格納される）
 		String errorName2 = hogeMessages.getMessage(result.getFieldError("name2"), Locale.getDefault());
+
+		//name3はエラーオブジェクトから。エラーメッセージのコード値をアノテーションのmessageで指定。
+		//ValidationMessages.propertiesから読み込む
+		String errorName3 = hogeMessages.getMessage(result.getFieldError("name3"), Locale.getDefault());
+
+		//name4はエラーオブジェクトから。独自アノテーション。fieldで指定した値をプレースホルダーで表示。
+		String errorName4 = hogeMessages.getMessage(result.getFieldError("name4"), Locale.getDefault());
 		model.addAttribute("errorName1", errorName1);
 		model.addAttribute("errorName2", errorName2);
+		model.addAttribute("errorName3", errorName3);
+		model.addAttribute("errorName4", errorName4);
 		return TestEnumView.TEST_VIEW_VELOCITY_SAMPLE.getViewName();
 	}
 
