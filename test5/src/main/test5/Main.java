@@ -32,9 +32,16 @@ public class Main {
 		}
 
 		//stream test->
+
+
+		List<Test> qqqq = Arrays.asList(new Test(11),new Test(11),new Test(12),new Test(13));
+		Map<String, String> ssss = qqqq.stream().map(e->e.getUho()+"").distinct().collect(Collectors.toMap(e->e,e-> e + "hoge"));
+		Map<Integer, List<Test>> aaaa = qqqq.stream().collect(Collectors.groupingBy(Test::getUho));
+//		Map<Integer, Object> bbbb = qqqq.stream().collect(Collectors.toMap(Test::getUho, e->e)); //Test(11)‚ª2‚Â‚ ‚é‚Ì‚Åd•¡ƒGƒ‰[‚É‚È‚é
+
+		List<Test> list = Arrays.asList(new Test(11),new Test(12),new Test(13));
 		Stream<String> aaa = Stream.of("hoge","hage");
 		System.out.println("aaa " + aaa.anyMatch(e -> e.equals("hoge")));
-		List<Test> list = Arrays.asList(new Test(11),new Test(12),new Test(13));
 		Map<String, Integer> bbb = list.stream().map(e->"aa" + e.getUho() + "aa").collect(Collectors.toMap(s->s,s->s.length()));
 		//stream test<-
 
