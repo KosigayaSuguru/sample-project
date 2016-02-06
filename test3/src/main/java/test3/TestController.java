@@ -26,6 +26,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+// Sessionの確認はTestController2で出来る
+
+// イメージ的には@ModelAttribute()で指定してる文字列(HTMLのformのname)をキー値にして、
+// request(@SessionAttributes()で指定されてればセッションにも)にaddAttributeしてるような感じなのかな。。
+
+// ModelAttritubteで指定されたオブジェクトは new で生成されているので、シングルトンにはならない
+
 @Controller
 @SessionAttributes(types = { TestSession.class, TestForm.class })
 public class TestController extends WebApplicationObjectSupport {
@@ -181,6 +188,8 @@ public class TestController extends WebApplicationObjectSupport {
 	@RequestMapping(value = "/TestVelocityConfirm")
 	public String velocityTestConfirm(@Validated @ModelAttribute("testForm") TestForm form, BindingResult result,
 			Model model) {
+
+		System.out.println("testForm=" + form);;
 
 		// error_message.propertiesからコード値を元にメッセージを引っ張ってくる
 		result.getAllErrors().stream().forEach(System.out::println);
