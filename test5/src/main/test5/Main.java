@@ -36,7 +36,8 @@ public class Main {
 
 		List<Test> qqqq = Arrays.asList(new Test(11),new Test(11),new Test(12),new Test(13));
 		Map<String, String> ssss = qqqq.stream().map(e->e.getUho()+"").distinct().collect(Collectors.toMap(e->e,e-> e + "hoge"));
-		Map<Integer, List<Test>> aaaa = qqqq.stream().collect(Collectors.groupingBy(Test::getUho));
+		Map<Integer, List<Test>> aaaa1 = qqqq.stream().collect(Collectors.groupingBy(Test::getUho));
+		Map<Integer, List<Test>> aaaa2 = qqqq.stream().collect(Collectors.groupingBy(e->e.getUho()));
 //		Map<Integer, Object> bbbb = qqqq.stream().collect(Collectors.toMap(Test::getUho, e->e)); //Test(11)‚ª2‚Â‚ ‚é‚Ì‚Åd•¡ƒGƒ‰[‚É‚È‚é
 
 		List<Test> list = Arrays.asList(new Test(11),new Test(12),new Test(13));

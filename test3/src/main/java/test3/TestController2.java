@@ -10,6 +10,7 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 @Controller
 @SessionAttributes(value = "testForm")
+//@SessionAttributes(types = { TestSession.class, TestForm.class })
 public class TestController2 extends WebApplicationObjectSupport {
 
 	@RequestMapping(value = "/Test2")
@@ -17,6 +18,6 @@ public class TestController2 extends WebApplicationObjectSupport {
 
 		System.out.println("testForm=" + model.asMap().get("testForm"));
 
-		return "";
+		return TestEnumView.TEST_VIEW_VELOCITY_SESSION_TEST.getViewName();
 	}
 }
