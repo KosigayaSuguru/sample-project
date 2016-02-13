@@ -5,7 +5,9 @@ public enum TestEnumView {
 
 	TEST_VIEW_TYMELEAF_SAMLE("hoge"),
 	TEST_VIEW_VELOCITY_SAMPLE("velocityTemplate"),
-	TEST_VIEW_VELOCITY_SESSION_TEST("velocitySessionTest");
+	TEST_VIEW_VELOCITY_SESSION_TEST("velocitySessionTest"),
+	TEST_VIEW_VELOCITY_SPRING_BIND_TEST("velocitySpringBindTest")
+	;
 
 	private String viewName;
 

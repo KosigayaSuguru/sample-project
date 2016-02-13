@@ -33,6 +33,7 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/Test</url-pattern>
 		<url-pattern>/Test2</url-pattern>
+		<url-pattern>/Test3</url-pattern>
 		<url-pattern>/TestVelocity</url-pattern>
 		<url-pattern>/TestVelocityConfirm</url-pattern>
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Velocity Page</title>
+
+<style type="text/css">
+body {
+    width: 800px;
+    height: auto;
+}
+
+.false {
+	background-color: DarkGray;
+}
+
+.true {
+	background-color: GreenYellow;
+}
+</style>
+
+</head>
+<body>
+	<div>
+	#springBind("testForm")
+	<form method="POST" action="Test3" name="testForm">
+	#springBind("testForm.name1")
+	<span><input type="text" name="${status.expression}" value="${status.value}"/></span>${status.errorMessage}</br>
+	#springBind("testForm.name2")
+	<span><input type="text" name="${status.expression}" value="${testForm.name2}"/></span>${status.errorMessage}</br>
+	#springBind("testForm.name3")
+	<span><input type="text" name="${status.expression}" value="${testForm.name3}"/></span>${status.errorMessage}</br>
+	#springBind("testForm.name4")
+	<span><input type="text" name="${status.expression}" value="${testForm.name4}"/></span>${status.errorMessage}</br>
+	<span><input type="submit" value="確認" /></span><br/>
+	</form>
+	</div>
+</body>
+</html>
