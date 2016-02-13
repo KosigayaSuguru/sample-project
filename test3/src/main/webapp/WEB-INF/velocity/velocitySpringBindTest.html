@@ -25,13 +25,21 @@ body {
 	#springBind("testForm")
 	<form method="POST" action="Test3" name="testForm">
 	#springBind("testForm.name1")
-	<span><input type="text" name="${status.expression}" value="${status.value}"/></span>${status.errorMessage}</br>
+	<span><input type="text" name="${status.expression}" value="${status.value}"/></span>${status.errorMessage}<br/>
+
 	#springBind("testForm.name2")
-	<span><input type="text" name="${status.expression}" value="${testForm.name2}"/></span>${status.errorMessage}</br>
+	<span><input type="text" name="${status.expression}" value="${testForm.name2}"/></span>${status.errorMessage}<br/>
+
 	#springBind("testForm.name3")
-	<span><input type="text" name="${status.expression}" value="${testForm.name3}"/></span>${status.errorMessage}</br>
+	<span><input type="text" name="${status.expression}" value="${testForm.name3}"/></span>${status.errorMessage}<br/>
+
 	#springBind("testForm.name4")
-	<span><input type="text" name="${status.expression}" value="${testForm.name4}"/></span>${status.errorMessage}</br>
+	<span><input type="text" name="${status.expression}" value="${testForm.name4}"/></span>
+	#foreach($error in ${status.errorMessages})
+	<span>・$error</span>
+	#end
+	<br/>
+	<span style="color:red">※一番下は空欄にするとエラーメッセージが2つ出る。</span><br/>
 	<span><input type="submit" value="確認" /></span><br/>
 	</form>
 	</div>

@@ -17,6 +17,7 @@ public class TestForm {
 	public String name3;
 
 	@TestAnnotation(message = "{Error.validate.message.testAnnotation}", field="FIELD_TEST")
+	@NotEmpty
 	public String name4;
 
 	public String getName1() {
