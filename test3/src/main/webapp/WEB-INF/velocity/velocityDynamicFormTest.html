@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script type="text/javascript" src="velocityDynamicFormTest.js"></script>
+</head>
+
+<body>
+<span class="head">aaa</span>
+<form method="post" name="testForm"  action="dynamicFormTestConfirm">
+
+test　<input type="text" name="test" value="default" /><br>
+
+<div class="inputs0">
+name1　<input class="aaa" type="text" name="name[0].name1" /><br>
+name2　<input class="aaa" type="text" name="name[0].name2" /><br>
+</div>
+<div class="js-add-point"></div>
+<span class="js-add-item">項目追加する</span><br>
+
+<input type="submit" name="submit" value="送信" /><br>
+</form>
+</body>
+</html>
