@@ -38,6 +38,8 @@
 		<url-pattern>/TestVelocityConfirm</url-pattern>
 		<url-pattern>/dynamicFormTest</url-pattern>
 		<url-pattern>/dynamicFormTestConfirm</url-pattern>
+		<url-pattern>/TestFlash</url-pattern>
+		<url-pattern>/TestFlashConfirm</url-pattern>
 
 	</servlet-mapping>
 
