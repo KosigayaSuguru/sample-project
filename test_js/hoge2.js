@@ -8,7 +8,8 @@ $(function(){
 	var res2;
 	var entryId = 0;
 
-	$("#test").on("click",test);
+	$("#test1").on("click",createList);
+	$("#test2").on("click",test);
 
 	Hoge = function(){};
 
