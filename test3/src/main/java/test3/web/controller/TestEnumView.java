@@ -1,4 +1,4 @@
-package test3;
+package test3.web.controller;
 
 // View–¼‚ð’è‹`‚·‚é
 public enum TestEnumView {

@@ -40,6 +40,7 @@
 		<url-pattern>/dynamicFormTestConfirm</url-pattern>
 		<url-pattern>/TestFlash</url-pattern>
 		<url-pattern>/TestFlashConfirm</url-pattern>
+		<url-pattern>/RestTest</url-pattern>
 
 	</servlet-mapping>
 

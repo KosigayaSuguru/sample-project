@@ -1,4 +1,4 @@
-package test3;
+package test3.web.controller;
 
 import javax.validation.Valid;
 
@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
+
+import test3.web.form.TestFormDynamic;
 
 @Controller
 public class TestController3 extends WebApplicationObjectSupport {

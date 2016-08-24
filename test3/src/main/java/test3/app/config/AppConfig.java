@@ -1,4 +1,4 @@
-package test3;
+package test3.app.config;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
+
+import test3.TestBean;
+import test3.TestEnumStatus;
 
 @Component
 @Configuration

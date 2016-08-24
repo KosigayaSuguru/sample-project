@@ -1,4 +1,4 @@
-package test3;
+package test3.app.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

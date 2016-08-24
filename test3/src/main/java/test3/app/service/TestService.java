@@ -1,11 +1,11 @@
-package test3;
+package test3.app.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
 public class TestService {
 
 	@Transactional
-	boolean service() {
+	public boolean service() {
 		return true;
 	}
 }

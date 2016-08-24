@@ -1,4 +1,4 @@
-package test3;
+package test3.web.form;
 
 import javax.validation.constraints.Pattern;
 

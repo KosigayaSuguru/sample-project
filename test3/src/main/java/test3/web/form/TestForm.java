@@ -1,9 +1,11 @@
-package test3;
+package test3.web.form;
 
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import test3.TestAnnotation;
 
 public class TestForm {
 

@@ -1,4 +1,4 @@
-package test3;
+package test3.web.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +25,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import test3.TestBean;
+import test3.TestEntity;
+import test3.TestEnumStatus;
+import test3.TestSession;
+import test3.app.service.TestService;
+import test3.web.form.TestForm;
 
 // SessionÇÃämîFÇÕTestController2Ç≈èoóàÇÈ
 

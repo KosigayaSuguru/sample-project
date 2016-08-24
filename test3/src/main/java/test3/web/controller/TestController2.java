@@ -1,4 +1,4 @@
-package test3;
+package test3.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +16,8 @@ import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.FlashMapManager;
 import org.springframework.web.servlet.support.SessionFlashMapManager;
 import org.springframework.web.util.WebUtils;
+
+import test3.web.form.TestForm;
 
 @Controller
 @SessionAttributes("testForm")
