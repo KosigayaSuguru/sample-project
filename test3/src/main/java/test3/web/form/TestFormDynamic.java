@@ -5,7 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
-public class TestFormDynamic {
+public class TestFormDynamic extends AbstractForm {
 
 	@Pattern(regexp ="[A-Z]")
 	String test;

@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import test3.TestAnnotation;
 
-public class TestForm {
+public class TestForm extends AbstractForm {
 
 	@NotEmpty
 	public String name1;

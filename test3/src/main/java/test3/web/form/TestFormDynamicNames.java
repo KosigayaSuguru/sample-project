@@ -2,7 +2,7 @@ package test3.web.form;
 
 import javax.validation.constraints.Pattern;
 
-public class TestFormDynamicNames {
+public class TestFormDynamicNames extends AbstractForm {
 
 	@Pattern(regexp = "[a-z]")
 	public String name1;
