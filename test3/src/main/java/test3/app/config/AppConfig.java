@@ -55,17 +55,9 @@ public class AppConfig {
 		return messageSource;
 	}
 
-//	<!-- <bean id="testProperties" -->
-//	<!-- class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> -->
-//	<!-- <property name="locations" value="classpath:test.properties" /> -->
-//	<!-- <property name="fileEncoding" value="UTF-8" /> -->
-//	<!-- </bean> -->
-
 	@Bean
 	PropertyPlaceholderConfigurer propertyPlaceholder() throws Exception{
 		PropertyPlaceholderConfigurer holder = new PropertyPlaceholderConfigurer();
-//		ClassPathResource[] locations = { new ClassPathResource("database.properties") };
-//		holder.setLocations(locations);
 		holder.setLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/*.properties"));
 		holder.setFileEncoding("UTF-8");
 		return holder;
