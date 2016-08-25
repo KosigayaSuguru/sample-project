@@ -9,7 +9,7 @@ import test3.TestBean;
 @RestController
 public class TestController4 extends WebApplicationObjectSupport {
 
-	@RequestMapping(value = "/RestTest")
+	@RequestMapping("/RestTest")
 	public TestBean dynamicFormTest() {
 
 		TestBean bean = new TestBean();

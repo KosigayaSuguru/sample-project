@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.SessionFlashMapManager;
 import org.springframework.web.util.WebUtils;
 
 import test3.web.form.TestForm;
+import test3.web.view.EnumViewName;
 
 @Controller
 @SessionAttributes("testForm")
@@ -30,7 +31,7 @@ public class TestController2 extends WebApplicationObjectSupport {
 
 		System.out.println("testForm=" + model.asMap().get("testForm"));
 
-		return TestEnumView.TEST_VIEW_VELOCITY_SESSION_TEST.getViewName();
+		return EnumViewName.VELOCITY_SESSION_TEST.getViewName();
 	}
 
 	// セッション管理対象であるtestFormが、modelにないと例外が発生するので、初回アクセス用にModelAttribute
@@ -52,7 +53,7 @@ public class TestController2 extends WebApplicationObjectSupport {
 			rs.getAllErrors().stream().forEach(e-> System.out.println(e.getDefaultMessage()));
 		}
 
-		return TestEnumView.TEST_VIEW_VELOCITY_SPRING_BIND_TEST.getViewName();
+		return EnumViewName.VELOCITY_SPRING_BIND_TEST.getViewName();
 
 	}
 
@@ -67,13 +68,13 @@ public class TestController2 extends WebApplicationObjectSupport {
 		WebUtils.setSessionAttribute(request, "flashMapManager", flashMapManager);
 		flashMapManager.saveOutputFlashMap(flashMap, request, response);
 
-		return TestEnumView.TEST_VIEW_VELOCITY_SESSION_TEST.getViewName();
+		return EnumViewName.VELOCITY_SESSION_TEST.getViewName();
 	}
 
 	// modelにflashMapが入り、sessionからflashMapが消える。リロードするとmodelに入っていたflashMapも消える）
 	@RequestMapping(value = "/TestFlashConfirm")
 	public String testFlashMapConfirm(HttpSession session, Model model) {
 
-		return TestEnumView.TEST_VIEW_VELOCITY_SESSION_TEST.getViewName();
+		return EnumViewName.VELOCITY_SESSION_TEST.getViewName();
 	}
 }

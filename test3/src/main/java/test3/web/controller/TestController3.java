@@ -10,17 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import test3.web.form.TestFormDynamic;
+import test3.web.url.Urls;
+import test3.web.view.EnumViewName;
 
 @Controller
 public class TestController3 extends WebApplicationObjectSupport {
 
-	@RequestMapping(value = "/dynamicFormTest")
+	@RequestMapping(value = Urls.DYNAMIC_FORM_TEST)
 	public String dynamicFormTest(Model model) {
-		return TestEnumView.TEST_VIEW_VELOCITY_DYNAMIC_FORM_TEST.getViewName();
+
+		return EnumViewName.VELOCITY_DYNAMIC_FORM_TEST.getViewName();
 	}
 
-	@RequestMapping(value = "/dynamicFormTestConfirm")
+	@RequestMapping(value = Urls.DYNAMIC_FORM_CONFIRM_TEST)
 	public String dynamicFormTestConfirm(@Valid @ModelAttribute("testForm") TestFormDynamic testForm, BindingResult rs, Model model) {
-		return TestEnumView.TEST_VIEW_VELOCITY_DYNAMIC_FORM_TEST.getViewName();
+
+		return EnumViewName.VELOCITY_DYNAMIC_FORM_TEST.getViewName();
 	}
 }

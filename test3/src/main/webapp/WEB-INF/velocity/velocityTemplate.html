@@ -43,10 +43,10 @@ body {
 
 	<div>
 	<form method="POST" action="TestVelocityConfirm" name="testForm">
-	<span><input type="text" name="name1" value="${testForm.name1}"/></span><span style="color:red">$!errorName1</span><br/>
-	<span><input type="text" name="name2" value="${testForm.name2}"/></span><span style="color:red">$!errorName2</span><br/>
-	<span><input type="text" name="name3" value="${testForm.name3}"/></span><span style="color:red">$!errorName3</span><br/>
-	<span><input type="text" name="name4" value="${testForm.name4}"/></span><span style="color:red">$!errorName4</span><br/>
+	<span><input type="text" name="name1" value="$!{testForm.name1}"/></span><span style="color:red">$!errorName1</span><br/>
+	<span><input type="text" name="name2" value="$!{testForm.name2}"/></span><span style="color:red">$!errorName2</span><br/>
+	<span><input type="text" name="name3" value="$!{testForm.name3}"/></span><span style="color:red">$!errorName3</span><br/>
+	<span><input type="text" name="name4" value="$!{testForm.name4}"/></span><span style="color:red">$!errorName4</span><br/>
 	<span><input type="submit" value="確認" /></span><br/>
 	</form>
 	</div>

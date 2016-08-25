@@ -32,6 +32,7 @@ import test3.TestEnumStatus;
 import test3.TestSession;
 import test3.app.service.TestService;
 import test3.web.form.TestForm;
+import test3.web.view.EnumViewName;
 
 // Sessionの確認はTestController2で出来る
 
@@ -155,7 +156,7 @@ public class TestController extends WebApplicationObjectSupport {
 			System.out.println(TestEnumStatus.TEST_STATUS1.getCode());
 
 			// 処理結果に応じた次画面用のView名を取得する
-			nextView = TestEnumView.TEST_VIEW_TYMELEAF_SAMLE.getViewName();
+			nextView = EnumViewName.TYMELEAF_SAMLE.getViewName();
 
 			break;
 		case TEST_STATUS2:
@@ -189,7 +190,7 @@ public class TestController extends WebApplicationObjectSupport {
 		model.addAttribute("listTest",
 				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
 
-		return TestEnumView.TEST_VIEW_VELOCITY_SAMPLE.getViewName();
+		return EnumViewName.VELOCITY_SAMPLE.getViewName();
 	}
 
 	@RequestMapping(value = "/TestVelocityConfirm")
@@ -226,7 +227,7 @@ public class TestController extends WebApplicationObjectSupport {
 			model.addAttribute("errorName4", errorName4);
 		}
 
-		return TestEnumView.TEST_VIEW_VELOCITY_SAMPLE.getViewName();
+		return EnumViewName.VELOCITY_SAMPLE.getViewName();
 	}
 
 	public TestBean getTest() {
