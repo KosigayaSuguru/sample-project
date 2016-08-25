@@ -46,7 +46,7 @@ public class AppConfig {
 	MessageSource messageSource() {
 
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		String[] basenames = { "classpath:hoge", "classpath:error_message" };
+		String[] basenames = { "classpath:message/hoge", "classpath:message/error_message" };
 		messageSource.setBasenames(basenames);
 		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
