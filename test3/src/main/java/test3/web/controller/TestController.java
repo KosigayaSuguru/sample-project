@@ -57,7 +57,7 @@ public class TestController extends WebApplicationObjectSupport {
 	private String hoge;
 
 	@Resource
-	private MessageSource hogeMessages;
+	private MessageSource messageSource;
 
 	@Value(value = "${catalina.home}")
 	private String moge;
@@ -114,7 +114,7 @@ public class TestController extends WebApplicationObjectSupport {
 		transactional();
 
 		// Test spring message <-
-		String message = hogeMessages.getMessage("hoge.message1", null, locale);
+		String message = messageSource.getMessage("hoge.message1", null, locale);
 		// Test spring message ->
 
 		// Test spring model <-
@@ -207,26 +207,26 @@ public class TestController extends WebApplicationObjectSupport {
 		FieldError fieldErr = null;
 
 		//name1はコード値を直接指定
-		String errorName1 = hogeMessages.getMessage("NotEmpty.testForm.name1", null, Locale.getDefault());
+		String errorName1 = messageSource.getMessage("NotEmpty.testForm.name1", null, Locale.getDefault());
 		model.addAttribute("errorName1", errorName1);
 
 		// name2はエラーオブジェクトから。エラーメッセージのコード値はspringが自動で生成したもの。
 		// アノテーションで指定した値が{1},{2}で置換される（エラーオブジェクトのargmentsに格納される）
 		if (((fieldErr = result.getFieldError("name2")) != null)) {
-			String errorName2 = hogeMessages.getMessage(fieldErr, Locale.getDefault());
+			String errorName2 = messageSource.getMessage(fieldErr, Locale.getDefault());
 			model.addAttribute("errorName2", errorName2);
 		}
 
 		// name3はエラーオブジェクトから。エラーメッセージのコード値をアノテーションのmessageで指定。
 		// ValidationMessages.propertiesから読み込む
 		if (((fieldErr = result.getFieldError("name3")) != null)) {
-			String errorName3 = hogeMessages.getMessage(fieldErr, Locale.getDefault());
+			String errorName3 = messageSource.getMessage(fieldErr, Locale.getDefault());
 			model.addAttribute("errorName3", errorName3);
 		}
 
 		// name4はエラーオブジェクトから。独自アノテーション。fieldで指定した値をプレースホルダーで表示。
 		if (((fieldErr = result.getFieldError("name4")) != null)) {
-			String errorName4 = hogeMessages.getMessage(result.getFieldError("name4"), Locale.getDefault());
+			String errorName4 = messageSource.getMessage(result.getFieldError("name4"), Locale.getDefault());
 			model.addAttribute("errorName4", errorName4);
 		}
 
