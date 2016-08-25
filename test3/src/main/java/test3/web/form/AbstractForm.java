@@ -1,9 +1,12 @@
 package test3.web.form;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public abstract class AbstractForm {
+public abstract class AbstractForm implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	protected int incrementSeq = 128;
 	protected int sequence = LocalDateTime.now().hashCode();
