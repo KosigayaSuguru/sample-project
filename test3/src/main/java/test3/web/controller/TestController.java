@@ -63,7 +63,10 @@ public class TestController extends WebApplicationObjectSupport {
 	private String moge;
 
 	@Value(value = "${test.hogehoge}")
-	private String mage;
+	private String testHogehoge;
+
+	@Value(value = "${test2.hogehoge}")
+	private String test2Hogehoge;
 
 	// @ModelAttributeのvalueに指定した値が属性名、returnが実体になって、modelにaddされる
 	@ModelAttribute("modelAttributeTest1")
