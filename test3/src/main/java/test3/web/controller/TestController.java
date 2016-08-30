@@ -7,6 +7,8 @@ import java.util.Locale;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -187,6 +189,9 @@ public class TestController extends WebApplicationObjectSupport {
 
 	@RequestMapping(value = "/TestVelocity")
 	public String velocityTest(@ModelAttribute("testForm") TestForm form, Model model) {
+
+		Logger hoge = LoggerFactory.getLogger(this.getClass());
+		hoge.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 		// VelocityViewの中で（#createVelocityContext）modelの値をVelocityContextにputAllしているので、
 		// modelにaddAttirbuteすると、テンプレート上で使える
