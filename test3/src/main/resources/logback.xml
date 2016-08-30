@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE logback>
-<configuration>
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>%date\t[%thread]\t%-5level\t%logger{36}\t%msg%n</pattern>
-		</encoder>
-	</appender>
 
-	<root>
-		<appender-ref ref="STDOUT" />
-	</root>
+<!-- 必要に応じてtomcatの起動パラメータに-Dspring.profiles.activeを付与する -->
+<configuration>
+	<if condition='isDefined("spring.profiles.active")'>
+		<then>
+			<include resource="logback/logback-${spring.profiles.active}.xml" />
+		</then>
+		<else>
+			<include resource="logback/logback-default.xml" />
+		</else>
+	</if>
 </configuration>

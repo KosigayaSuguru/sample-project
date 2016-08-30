@@ -58,6 +58,9 @@ public class TestController extends WebApplicationObjectSupport {
 	@Value(value = "${hoge.test}")
 	private String hoge;
 
+	@Value(value ="${spring.profiles.active}")
+	private String spring_profiles_active;
+
 	@Resource
 	private MessageSource messageSource;
 

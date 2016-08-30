@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+
+<included>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				[local]\t%date\t[%thread]\t%-5level\t%logger{36}\t%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root>
+		<appender-ref ref="STDOUT" />
+	</root>
+</included>
