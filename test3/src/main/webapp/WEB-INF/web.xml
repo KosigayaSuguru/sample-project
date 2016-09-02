@@ -12,6 +12,7 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+
 	<servlet>
 		<description></description>
 		<display-name>TestServlet</display-name>
@@ -31,21 +32,7 @@
 
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
-		<url-pattern>/Test</url-pattern>
-		<url-pattern>/Test2</url-pattern>
-		<url-pattern>/Test3</url-pattern>
-		<url-pattern>/TestVelocity</url-pattern>
-		<url-pattern>/TestVelocityConfirm</url-pattern>
-		<url-pattern>/dynamicFormTest</url-pattern>
-		<url-pattern>/dynamicFormTestConfirm</url-pattern>
-		<url-pattern>/TestFlash</url-pattern>
-		<url-pattern>/TestFlashConfirm</url-pattern>
-		<url-pattern>/RestTest1</url-pattern>
-		<url-pattern>/RestTest2</url-pattern>
-		<url-pattern>/ExceptionTest1</url-pattern>
-		<url-pattern>/ExceptionTest2</url-pattern>
-		<url-pattern>/ExceptionTest3</url-pattern>
-
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>
