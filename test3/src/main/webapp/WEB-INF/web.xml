@@ -40,7 +40,8 @@
 		<url-pattern>/dynamicFormTestConfirm</url-pattern>
 		<url-pattern>/TestFlash</url-pattern>
 		<url-pattern>/TestFlashConfirm</url-pattern>
-		<url-pattern>/RestTest</url-pattern>
+		<url-pattern>/RestTest1</url-pattern>
+		<url-pattern>/RestTest2</url-pattern>
 		<url-pattern>/ExceptionTest1</url-pattern>
 		<url-pattern>/ExceptionTest2</url-pattern>
 		<url-pattern>/ExceptionTest3</url-pattern>
