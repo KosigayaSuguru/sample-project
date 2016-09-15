@@ -7,3 +7,5 @@
 ##### AWS関係
 * http://www.slideshare.net/AmazonWebServicesJapan/amazon-elasticache-60272086
 * http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/ElastiCache.html
+##### nodejs関係
+* http://memo.sugyan.com/entry/20120110/1326197416
