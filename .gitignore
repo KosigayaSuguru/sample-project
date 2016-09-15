@@ -3,3 +3,4 @@
 .recommenders
 RemoteSystemsTempFiles
 */target
+test_nodejs/node_modules/
