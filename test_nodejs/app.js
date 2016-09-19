@@ -10,6 +10,11 @@ var users = require('./routes/users');
 
 var redis = require('./routes/redis');
 
+
+process.on('uncaughtException', function(err) {
+  /* uncaughtException handling */
+});
+
 var app = express();
 
 // view engine setup
@@ -41,6 +46,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
+console.log("aaaaaaaaaaaaaaaaaa")
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -52,6 +58,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+console.log("bbbbbbbbbbbbbbbb")
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
