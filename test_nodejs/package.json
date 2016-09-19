@@ -13,6 +13,7 @@
     "jade": "~1.11.0",
     "morgan": "^1.7.0",
     "npm-install-missing": "^0.1.4",
+    "redis": "^2.6.2",
     "serve-favicon": "^2.3.0"
   },
   "main": "app.js",
