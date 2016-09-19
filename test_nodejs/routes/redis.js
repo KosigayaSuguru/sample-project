@@ -6,7 +6,6 @@ module.exports = function(res, req, next) {
 
     setup(res, req, next);
 
-
     // redisの接続に失敗しても接続処理が非同期処理になっているので、こっちはこっちで処理が走る?
     console.log("set error event");
     share.redisClient.on("error", errorHundler);
@@ -24,16 +23,10 @@ function setup(res, req, next) {
 
                 err = options.error;
                 console.log(err.message);
-
-                if (true) {
-                    // DB接続に失敗した時に例外処理が不要な場合
-                    next();
-
-                } else {
-                    // DB接続に失敗した時に例外処理が必要な場合
-                    next(err);
-
-                }
+                // DB接続に失敗した時に例外処理が不要な場合
+                // next();
+                // DB接続に失敗した時に例外処理が必要な場合
+                next(err);
             }
         });
     }
