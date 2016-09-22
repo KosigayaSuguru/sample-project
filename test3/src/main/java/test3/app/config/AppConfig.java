@@ -1,6 +1,5 @@
 package test3.app.config;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Properties;
@@ -12,12 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.stereotype.Component;
 
 import test3.TestBean;
 import test3.TestEnumStatus;
 
-@Component
 @Configuration
 public class AppConfig {
 
