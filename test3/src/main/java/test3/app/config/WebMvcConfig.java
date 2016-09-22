@@ -15,15 +15,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Autowired
 	MessageSource messageSource;
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
-        localValidatorFactoryBean.setValidationMessageSource(messageSource);
-        return localValidatorFactoryBean;
-    }
 
-    @Override
-    public Validator getValidator() {
-    	return validator();
-    }
+	@Bean
+	public LocalValidatorFactoryBean validator() {
+		LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+		localValidatorFactoryBean.setValidationMessageSource(messageSource);
+		return localValidatorFactoryBean;
+	}
+
+	@Override
+	public Validator getValidator() {
+		return validator();
+	}
 }
