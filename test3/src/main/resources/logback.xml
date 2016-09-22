@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- 必要に応じてtomcatの起動パラメータに-Dspring.profiles.activeを付与する -->
 <configuration>
-	<if condition='isDefined("spring.profiles.active")'>
-		<then>
-			<include resource="logback/logback-${spring.profiles.active}.xml" />
-		</then>
-		<else>
-			<include resource="logback/logback-default.xml" />
-		</else>
-	</if>
+    <timestamp key="date" datePattern="yyyyMMdd" />
+    <property name="format" value="\t%date\t[%thread]\t%-5level\t%logger{36}\t%msg%n" />
+    <if condition='isDefined("spring.profiles.active")'>
+        <then>
+            <property name="logpath" value="d:/java/workspace" />
+            <include resource="logback/logback-${spring.profiles.active}.xml" />
+        </then>
+        <else>
+            <property name="logpath" value="d:/java/workspace" />
+            <include resource="logback/logback-default.xml" />
+        </else>
+    </if>
 </configuration>

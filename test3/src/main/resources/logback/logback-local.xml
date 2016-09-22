@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE logback>
-
 <included>
-	<property name ="format" value="\t%date\t[%thread]\t%-5level\t%logger{36}\t%msg%n"/>
-
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>
-				[local]${format}
-			</pattern>
-		</encoder>
-	</appender>
-
-	<root>
-		<appender-ref ref="STDOUT" />
-	</root>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${logpath}/application-${date}.log</file>
+        <encoder>
+            <pattern>
+                [local]${format}
+            </pattern>
+        </encoder>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                [local]${format}
+            </pattern>
+        </encoder>
+    </appender>
+    <root>
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
 </included>
