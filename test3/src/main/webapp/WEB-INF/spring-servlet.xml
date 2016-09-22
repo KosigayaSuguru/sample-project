@@ -68,16 +68,16 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 	<!-- <property name="password" value="" /> -->
 	<!-- </bean> -->
 
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource">
-			<ref bean="dataSourceTest" />
-		</property>
-	</bean>
+	<!-- <bean id="transactionManager" -->
+	<!-- class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
+	<!-- <property name="dataSource"> -->
+	<!-- <ref bean="dataSourceTest" /> -->
+	<!-- </property> -->
+	<!-- </bean> -->
 
-	<bean class="org.springframework.jdbc.core.JdbcTemplate">
-		<constructor-arg ref="dataSourceTest" />
-	</bean>
+	<!-- <bean class="org.springframework.jdbc.core.JdbcTemplate"> -->
+	<!-- <constructor-arg ref="dataSourceTest" /> -->
+	<!-- </bean> -->
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
