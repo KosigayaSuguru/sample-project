@@ -19,19 +19,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 // @ContextConfiguration("test.xml")
 public class JunitSampleTest {
 
-	//ƒCƒ“ƒWƒFƒNƒVƒ‡ƒ“ƒeƒXƒg
+	//ã‚¤ãƒ³ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ãƒ†ã‚¹ãƒˆ
 	@Autowired
 	TestBean test;
 
-	//ƒCƒ“ƒWƒFƒNƒVƒ‡ƒ“ƒeƒXƒg
+	//ã‚¤ãƒ³ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ãƒ†ã‚¹ãƒˆ
 	@Autowired
 	DataSource dataSourceTest;
 
-	//ƒCƒ“ƒWƒFƒNƒVƒ‡ƒ“ƒeƒXƒg
+	//ã‚¤ãƒ³ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ãƒ†ã‚¹ãƒˆ
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	//ƒCƒ“ƒWƒFƒNƒVƒ‡ƒ“ƒeƒXƒg
+	//ã‚¤ãƒ³ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ãƒ†ã‚¹ãƒˆ
 	@Value("${url.release:orz}")
 	String value;
 

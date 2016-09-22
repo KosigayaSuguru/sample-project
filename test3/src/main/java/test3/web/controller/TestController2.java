@@ -25,7 +25,7 @@ import test3.web.view.EnumViewName;
 // @SessionAttributes(types = { TestSession.class, TestForm.class })
 public class TestController2 extends WebApplicationObjectSupport {
 
-	// ƒZƒbƒVƒ‡ƒ“‚Ìˆø‚«Œp‚ª‚ê•û‚ÌŠm”F—pitestForm‚ªsession‚É‹‚é‚©Amodel‚É‹‚é‚©j
+	// ã‚»ãƒƒã‚·ãƒ§ãƒ³ã®å¼•ãç¶™ãŒã‚Œæ–¹ã®ç¢ºèªç”¨ï¼ˆtestFormãŒsessionã«å±…ã‚‹ã‹ã€modelã«å±…ã‚‹ã‹ï¼‰
 	@RequestMapping(value = "/Test2")
 	public String velocityTestConfirm(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) {
 
@@ -34,7 +34,7 @@ public class TestController2 extends WebApplicationObjectSupport {
 		return EnumViewName.VELOCITY_SESSION_TEST.getViewName();
 	}
 
-	// ƒZƒbƒVƒ‡ƒ“ŠÇ—‘ÎÛ‚Å‚ ‚étestForm‚ªAmodel‚É‚È‚¢‚Æ—áŠO‚ª”­¶‚·‚é‚Ì‚ÅA‰‰ñƒAƒNƒZƒX—p‚ÉModelAttribute
+	// ã‚»ãƒƒã‚·ãƒ§ãƒ³ç®¡ç†å¯¾è±¡ã§ã‚ã‚‹testFormãŒã€modelã«ãªã„ã¨ä¾‹å¤–ãŒç™ºç”Ÿã™ã‚‹ã®ã§ã€åˆå›ã‚¢ã‚¯ã‚»ã‚¹ç”¨ã«ModelAttribute
 	@ModelAttribute("testForm")
 	TestForm testForm(){
 		TestForm test = new TestForm();
@@ -57,7 +57,7 @@ public class TestController2 extends WebApplicationObjectSupport {
 
 	}
 
-	// FlashMap‚ğg‚¤i‰æ–Ê‘JˆÚŒã‚ÉA‰æ–Ê‘JˆÚŒã‚Ìmodel‚ÉflashMap‚ª“ü‚èAsession‚©‚çflashMap‚É‚ªÁ‚¦‚éj
+	// FlashMapã‚’ä½¿ã†ï¼ˆç”»é¢é·ç§»å¾Œã«ã€ç”»é¢é·ç§»å¾Œã®modelã«flashMapãŒå…¥ã‚Šã€sessionã‹ã‚‰flashMapã«ãŒæ¶ˆãˆã‚‹ï¼‰
 	@RequestMapping(value = "/TestFlash")
 	public String testFlashMap(HttpSession session, Model model, HttpServletRequest request, HttpServletResponse response) {
 
@@ -71,7 +71,7 @@ public class TestController2 extends WebApplicationObjectSupport {
 		return EnumViewName.VELOCITY_SESSION_TEST.getViewName();
 	}
 
-	// model‚ÉflashMap‚ª“ü‚èAsession‚©‚çflashMap‚ªÁ‚¦‚éBƒŠƒ[ƒh‚·‚é‚Æmodel‚É“ü‚Á‚Ä‚¢‚½flashMap‚àÁ‚¦‚éj
+	// modelã«flashMapãŒå…¥ã‚Šã€sessionã‹ã‚‰flashMapãŒæ¶ˆãˆã‚‹ã€‚ãƒªãƒ­ãƒ¼ãƒ‰ã™ã‚‹ã¨modelã«å…¥ã£ã¦ã„ãŸflashMapã‚‚æ¶ˆãˆã‚‹ï¼‰
 	@RequestMapping(value = "/TestFlashConfirm")
 	public String testFlashMapConfirm(HttpSession session, Model model) {
 

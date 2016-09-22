@@ -1,6 +1,6 @@
 package test3.web.view;
 
-// View–¼‚ğ’è‹`‚·‚é
+// Viewåã‚’å®šç¾©ã™ã‚‹
 public enum EnumViewName {
 
 	TYMELEAF_SAMLE("hoge", "hogeSp"),

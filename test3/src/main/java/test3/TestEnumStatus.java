@@ -1,6 +1,6 @@
 package test3;
 
-// DBƒ}ƒXƒ^Œü‚¯“™‚ÅƒR[ƒh’l‚ðŽ‚Âê‡A•Ï”code‚ÉƒR[ƒh’l‚ðŠi”[‚µA‚»‚Ì’l‚ðŽg‚¤Ž–
+// DBãƒžã‚¹ã‚¿å‘ã‘ç­‰ã§ã‚³ãƒ¼ãƒ‰å€¤ã‚’æŒã¤å ´åˆã€å¤‰æ•°codeã«ã‚³ãƒ¼ãƒ‰å€¤ã‚’æ ¼ç´ã—ã€ãã®å€¤ã‚’ä½¿ã†äº‹
 public enum TestEnumStatus {
 
 	TEST_STATUS1(1), TEST_STATUS2(11), TEST_STATUS3(111);

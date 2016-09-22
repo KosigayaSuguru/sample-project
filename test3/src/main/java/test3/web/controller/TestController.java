@@ -36,12 +36,12 @@ import test3.app.service.TestService;
 import test3.web.form.TestForm;
 import test3.web.view.EnumViewName;
 
-// Session‚ÌŠm”F‚ÍTestController2‚Åo—ˆ‚é
+// Sessionã®ç¢ºèªã¯TestController2ã§å‡ºæ¥ã‚‹
 
-// ƒCƒ[ƒW“I‚É‚Í@ModelAttribute()‚Åw’è‚µ‚Ä‚é•¶š—ñ(HTML‚Ìform‚Ìname)‚ğƒL[’l‚É‚µ‚ÄA
-// request(@SessionAttributes()‚Åw’è‚³‚ê‚Ä‚ê‚ÎƒZƒbƒVƒ‡ƒ“‚É‚à)‚ÉaddAttribute‚µ‚Ä‚é‚æ‚¤‚ÈŠ´‚¶‚È‚Ì‚©‚ÈBB
+// ã‚¤ãƒ¡ãƒ¼ã‚¸çš„ã«ã¯@ModelAttribute()ã§æŒ‡å®šã—ã¦ã‚‹æ–‡å­—åˆ—(HTMLã®formã®name)ã‚’ã‚­ãƒ¼å€¤ã«ã—ã¦ã€
+// request(@SessionAttributes()ã§æŒ‡å®šã•ã‚Œã¦ã‚Œã°ã‚»ãƒƒã‚·ãƒ§ãƒ³ã«ã‚‚)ã«addAttributeã—ã¦ã‚‹ã‚ˆã†ãªæ„Ÿã˜ãªã®ã‹ãªã€‚ã€‚
 
-// ModelAttritubte‚Åw’è‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚Í new ‚Å¶¬‚³‚ê‚Ä‚¢‚é‚Ì‚ÅAƒVƒ“ƒOƒ‹ƒgƒ“‚É‚Í‚È‚ç‚È‚¢
+// ModelAttritubteã§æŒ‡å®šã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¯ new ã§ç”Ÿæˆã•ã‚Œã¦ã„ã‚‹ã®ã§ã€ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã«ã¯ãªã‚‰ãªã„
 
 @Controller
 @SessionAttributes(types = { TestSession.class, TestForm.class })
@@ -73,7 +73,7 @@ public class TestController extends WebApplicationObjectSupport {
 	@Value(value = "${test2.hogehoge}")
 	private String test2Hogehoge;
 
-	// @ModelAttribute‚Ìvalue‚Éw’è‚µ‚½’l‚ª‘®«–¼Areturn‚ªÀ‘Ì‚É‚È‚Á‚ÄAmodel‚Éadd‚³‚ê‚é
+	// @ModelAttributeã®valueã«æŒ‡å®šã—ãŸå€¤ãŒå±æ€§åã€returnãŒå®Ÿä½“ã«ãªã£ã¦ã€modelã«addã•ã‚Œã‚‹
 	@ModelAttribute("modelAttributeTest1")
 	public String modelAttributeTest1() {
 
@@ -81,7 +81,7 @@ public class TestController extends WebApplicationObjectSupport {
 		return "modelAttributeTest1";
 	}
 
-	// @ModelAttribute‚Ìvalue‚ğw’è‚µ‚È‚¢ê‡A‘®«–¼‚ªstring‚É‚È‚é
+	// @ModelAttributeã®valueã‚’æŒ‡å®šã—ãªã„å ´åˆã€å±æ€§åãŒstringã«ãªã‚‹
 	@ModelAttribute
 	public String modelAttributeTest2() {
 
@@ -148,38 +148,38 @@ public class TestController extends WebApplicationObjectSupport {
 		});
 		// Test ramda ->
 
-		// model‚ÉThymeleaf‚ÌforeachƒeƒXƒg—p‚Ìƒf[ƒ^’Ç‰Á -<
+		// modelã«Thymeleafã®foreachãƒ†ã‚¹ãƒˆç”¨ã®ãƒ‡ãƒ¼ã‚¿è¿½åŠ  -<
 		model.addAttribute("listTest",
 				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
-		// model‚ÉThymeleaf‚ÌforeachƒeƒXƒg—p‚Ìƒf[ƒ^’Ç‰Á ->
+		// modelã«Thymeleafã®foreachãƒ†ã‚¹ãƒˆç”¨ã®ãƒ‡ãƒ¼ã‚¿è¿½åŠ  ->
 
 		testService = new TestService();
 		testService.service();
 
-		// ƒ^ƒCƒvƒZ[ƒtEnumi‚½‚Ü‚½‚ÜŒ^‚ª“¯‚¶‚¾‚Á‚½‘S‘RŠÖŒW‚È‚¢’l‚Æ‚Ì”äŠrA‘ã“ü“™‚ğ–h‚®j -<
+		// ã‚¿ã‚¤ãƒ—ã‚»ãƒ¼ãƒ•Enumï¼ˆãŸã¾ãŸã¾å‹ãŒåŒã˜ã ã£ãŸå…¨ç„¶é–¢ä¿‚ãªã„å€¤ã¨ã®æ¯”è¼ƒã€ä»£å…¥ç­‰ã‚’é˜²ãï¼‰ -<
 		String nextView = "";
 		switch (testBean.getTestStatus()) {
 		case TEST_STATUS1:
-			// —ñ‹“‚É‘Î‰‚µ‚½ƒR[ƒh’l‚ª—~‚µ‚¢ê‡‚Í«‚İ‚½‚¢‚ÈŠ´‚¶
+			// åˆ—æŒ™ã«å¯¾å¿œã—ãŸã‚³ãƒ¼ãƒ‰å€¤ãŒæ¬²ã—ã„å ´åˆã¯â†“ã¿ãŸã„ãªæ„Ÿã˜
 			System.out.println(TestEnumStatus.TEST_STATUS1.getCode());
 
-			// ˆ—Œ‹‰Ê‚É‰‚¶‚½Ÿ‰æ–Ê—p‚ÌView–¼‚ğæ“¾‚·‚é
+			// å‡¦ç†çµæœã«å¿œã˜ãŸæ¬¡ç”»é¢ç”¨ã®Viewåã‚’å–å¾—ã™ã‚‹
 			nextView = EnumViewName.TYMELEAF_SAMLE.getViewName();
 
 			break;
 		case TEST_STATUS2:
-			// æ‚è‚ ‚¦‚¸È—ª
+			// å–ã‚Šã‚ãˆãšçœç•¥
 			break;
 
 		case TEST_STATUS3:
-			// æ‚è‚ ‚¦‚¸È—ª
+			// å–ã‚Šã‚ãˆãšçœç•¥
 			break;
 
 		default:
-			// æ‚è‚ ‚¦‚¸È—ª
+			// å–ã‚Šã‚ãˆãšçœç•¥
 			break;
 		}
-		// ƒ^ƒCƒvƒZ[ƒtEnum ->
+		// ã‚¿ã‚¤ãƒ—ã‚»ãƒ¼ãƒ•Enum ->
 
 		if (!model.containsAttribute("sessionTest")) {
 			System.out.println("addSession");
@@ -196,8 +196,8 @@ public class TestController extends WebApplicationObjectSupport {
 		Logger hoge = LoggerFactory.getLogger(this.getClass());
 		hoge.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
-		// VelocityView‚Ì’†‚Åi#createVelocityContextjmodel‚Ì’l‚ğVelocityContext‚ÉputAll‚µ‚Ä‚¢‚é‚Ì‚ÅA
-		// model‚ÉaddAttirbute‚·‚é‚ÆAƒeƒ“ƒvƒŒ[ƒgã‚Åg‚¦‚é
+		// VelocityViewã®ä¸­ã§ï¼ˆ#createVelocityContextï¼‰modelã®å€¤ã‚’VelocityContextã«putAllã—ã¦ã„ã‚‹ã®ã§ã€
+		// modelã«addAttirbuteã™ã‚‹ã¨ã€ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆä¸Šã§ä½¿ãˆã‚‹
 		model.addAttribute("listTest",
 				Arrays.asList(new String[] { "list_test1", "list_test2", "list_test3", "list_test4" }));
 
@@ -210,29 +210,29 @@ public class TestController extends WebApplicationObjectSupport {
 
 		System.out.println("testForm=" + form);;
 
-		// error_message.properties‚©‚çƒR[ƒh’l‚ğŒ³‚ÉƒƒbƒZ[ƒW‚ğˆø‚Á’£‚Á‚Ä‚­‚é
+		// error_message.propertiesã‹ã‚‰ã‚³ãƒ¼ãƒ‰å€¤ã‚’å…ƒã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å¼•ã£å¼µã£ã¦ãã‚‹
 		result.getAllErrors().stream().forEach(System.out::println);
 		FieldError fieldErr = null;
 
-		//name1‚ÍƒR[ƒh’l‚ğ’¼Úw’è
+		//name1ã¯ã‚³ãƒ¼ãƒ‰å€¤ã‚’ç›´æ¥æŒ‡å®š
 		String errorName1 = messageSource.getMessage("NotEmpty.testForm.name1", null, Locale.getDefault());
 		model.addAttribute("errorName1", errorName1);
 
-		// name2‚ÍƒGƒ‰[ƒIƒuƒWƒFƒNƒg‚©‚çBƒGƒ‰[ƒƒbƒZ[ƒW‚ÌƒR[ƒh’l‚Íspring‚ª©“®‚Å¶¬‚µ‚½‚à‚ÌB
-		// ƒAƒmƒe[ƒVƒ‡ƒ“‚Åw’è‚µ‚½’l‚ª{1},{2}‚Å’uŠ·‚³‚ê‚éiƒGƒ‰[ƒIƒuƒWƒFƒNƒg‚Ìargments‚ÉŠi”[‚³‚ê‚éj
+		// name2ã¯ã‚¨ãƒ©ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ã€‚ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ã‚³ãƒ¼ãƒ‰å€¤ã¯springãŒè‡ªå‹•ã§ç”Ÿæˆã—ãŸã‚‚ã®ã€‚
+		// ã‚¢ãƒãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã§æŒ‡å®šã—ãŸå€¤ãŒ{1},{2}ã§ç½®æ›ã•ã‚Œã‚‹ï¼ˆã‚¨ãƒ©ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®argmentsã«æ ¼ç´ã•ã‚Œã‚‹ï¼‰
 		if (((fieldErr = result.getFieldError("name2")) != null)) {
 			String errorName2 = messageSource.getMessage(fieldErr, Locale.getDefault());
 			model.addAttribute("errorName2", errorName2);
 		}
 
-		// name3‚ÍƒGƒ‰[ƒIƒuƒWƒFƒNƒg‚©‚çBƒGƒ‰[ƒƒbƒZ[ƒW‚ÌƒR[ƒh’l‚ğƒAƒmƒe[ƒVƒ‡ƒ“‚Ìmessage‚Åw’èB
-		// ValidationMessages.properties‚©‚ç“Ç‚İ‚Ş
+		// name3ã¯ã‚¨ãƒ©ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ã€‚ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®ã‚³ãƒ¼ãƒ‰å€¤ã‚’ã‚¢ãƒãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã®messageã§æŒ‡å®šã€‚
+		// ValidationMessages.propertiesã‹ã‚‰èª­ã¿è¾¼ã‚€
 		if (((fieldErr = result.getFieldError("name3")) != null)) {
 			String errorName3 = messageSource.getMessage(fieldErr, Locale.getDefault());
 			model.addAttribute("errorName3", errorName3);
 		}
 
-		// name4‚ÍƒGƒ‰[ƒIƒuƒWƒFƒNƒg‚©‚çB“Æ©ƒAƒmƒe[ƒVƒ‡ƒ“Bfield‚Åw’è‚µ‚½’l‚ğƒvƒŒ[ƒXƒzƒ‹ƒ_[‚Å•\¦B
+		// name4ã¯ã‚¨ãƒ©ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ã€‚ç‹¬è‡ªã‚¢ãƒãƒ†ãƒ¼ã‚·ãƒ§ãƒ³ã€‚fieldã§æŒ‡å®šã—ãŸå€¤ã‚’ãƒ—ãƒ¬ãƒ¼ã‚¹ãƒ›ãƒ«ãƒ€ãƒ¼ã§è¡¨ç¤ºã€‚
 		if (((fieldErr = result.getFieldError("name4")) != null)) {
 			String errorName4 = messageSource.getMessage(result.getFieldError("name4"), Locale.getDefault());
 			model.addAttribute("errorName4", errorName4);

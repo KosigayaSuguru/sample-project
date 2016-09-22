@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DbConfig {
 
-	// tomcat‚ÌƒVƒXƒeƒ€ƒvƒƒpƒeƒB‚ÅŠÂ‹«‚ğw’è‚·‚é(-Drunning.mode="release"Œ©‚½‚¢‚ÈŠ´‚¶)
+	// tomcatã®ã‚·ã‚¹ãƒ†ãƒ ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã§ç’°å¢ƒã‚’æŒ‡å®šã™ã‚‹(-Drunning.mode="release"è¦‹ãŸã„ãªæ„Ÿã˜)
 	@Value("${running.mode:local}")
 	public String runningMode;
 

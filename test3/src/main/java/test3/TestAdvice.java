@@ -6,19 +6,19 @@ import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.stereotype.Component;
 
-//¡Ag‚Á‚Ä‚È‚¢iTestAspect.java‚ÉˆÚsj
+//ä»Šã€ä½¿ã£ã¦ãªã„ï¼ˆTestAspect.javaã«ç§»è¡Œï¼‰
 @Component
 public class TestAdvice  implements MethodBeforeAdvice, AfterReturningAdvice {
 
-	// ƒƒ\ƒbƒhŒÄ‚Ño‚µ‘O‚ÉƒƒbƒZ[ƒW‚ğo—Í‚·‚é
+	// ãƒ¡ã‚½ãƒƒãƒ‰å‘¼ã³å‡ºã—å‰ã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºåŠ›ã™ã‚‹
 	public void before(Method method, Object[] args, Object target) throws Throwable {
 
-		System.out.println("BeforeƒAƒhƒoƒCƒX‚©‚ç‚ÌƒƒOo—Í‚Å‚·");
+		System.out.println("Beforeã‚¢ãƒ‰ãƒã‚¤ã‚¹ã‹ã‚‰ã®ãƒ­ã‚°å‡ºåŠ›ã§ã™");
 	}
 
-	// ƒƒ\ƒbƒhŒÄ‚Ño‚µŒã‚ÉƒƒbƒZ[ƒW‚ğo—Í‚·‚é
+	// ãƒ¡ã‚½ãƒƒãƒ‰å‘¼ã³å‡ºã—å¾Œã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡ºåŠ›ã™ã‚‹
 	public void afterReturning(Object ret, Method method, Object[] args, Object target) throws Throwable {
 
-		System.out.println("AfterƒAƒhƒoƒCƒX‚©‚ç‚ÌƒƒOo—Í‚Å‚·");
+		System.out.println("Afterã‚¢ãƒ‰ãƒã‚¤ã‚¹ã‹ã‚‰ã®ãƒ­ã‚°å‡ºåŠ›ã§ã™");
 	}
 }

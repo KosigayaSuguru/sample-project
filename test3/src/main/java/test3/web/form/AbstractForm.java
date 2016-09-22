@@ -44,7 +44,7 @@ public abstract class AbstractForm implements Serializable {
 
 	/**
 	 * @param postedToken
-	 * @return •Û‚µ‚Ä‚¢‚étoken‚ÆApostedToken‚ªˆê’v‚·‚éê‡Atrue
+	 * @return ä¿æŒã—ã¦ã„ã‚‹tokenã¨ã€postedTokenãŒä¸€è‡´ã™ã‚‹å ´åˆã€true
 	 */
 	public boolean checkToken(String postedToken) {
 		if (this.token.equals(postedToken)) {
