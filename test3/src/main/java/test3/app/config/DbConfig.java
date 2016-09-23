@@ -2,12 +2,14 @@ package test3.app.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@Component
+@Configuration
+@EnableTransactionManagement
 public class DbConfig {
 
 	// tomcatのシステムプロパティで環境を指定する(-Drunning.mode="release"見たいな感じ)
@@ -73,18 +75,6 @@ public class DbConfig {
 
 		return tmp;
 	}
-
-//	<bean id="transactionManager"
-//			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-//			<property name="dataSource">
-//				<ref bean="dataSourceTest" />
-//			</property>
-//		</bean>
-//
-//		<bean class="org.springframework.jdbc.core.JdbcTemplate">
-//			<constructor-arg ref="dataSourceTest" />
-//		</bean>
-//
 
 	@Bean
 	public DataSourceTransactionManager transactionManager(){
