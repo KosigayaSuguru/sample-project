@@ -1,5 +1,8 @@
 package test3.app.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +11,8 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.velocity.VelocityConfigurer;
+import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
@@ -60,4 +65,29 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		viewResolver.setOrder(2);
 		return viewResolver;
 	}
+
+	// Velocity用の設定
+	@Bean
+	VelocityConfigurer velocityConfig(){
+		VelocityConfigurer velocityConfig = new VelocityConfigurer();
+		velocityConfig.setResourceLoaderPath("/WEB-INF/velocity/");
+		Map<String, Object> propertiesMap = new HashMap<>();
+		propertiesMap.put("input.encoding", "UTF-8");
+		propertiesMap.put("output.encoding", "UTF-8");
+		velocityConfig.setVelocityPropertiesMap(propertiesMap);
+		return velocityConfig;
+	}
+
+	@Bean
+	VelocityViewResolver velocityViewResolver(){
+		VelocityViewResolver resolver = new VelocityViewResolver();
+		resolver.setCache(false);
+		resolver.setPrefix("");
+		resolver.setSuffix(".html");
+		resolver.setContentType("text/html;charset=UTF-8");
+		resolver.setExposeSpringMacroHelpers(true);
+		resolver.setOrder(1);
+		return resolver;
+	}
+
 }

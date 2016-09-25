@@ -113,28 +113,27 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
 	<!-- Velocity用ViewResolver設定 -->
 	<!-- input, outputの設定をしないと文字化けする -->
-	<bean id="velocityConfig"
-		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<property name="resourceLoaderPath" value="/WEB-INF/velocity/" />
-		<property name="velocityPropertiesMap">
-			<map>
-				<entry key="input.encoding" value="UTF-8" />
-				<entry key="output.encoding" value="UTF-8" />
-			</map>
-		</property>
-	</bean>
 
-	<bean
-		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
-		<property name="cache" value="false" />
-		<property name="prefix" value="" />
-		<property name="suffix" value=".html" />
-		<property name="contentType" value="text/html;charset=UTF-8" />
-		<!-- if you want to use the Spring Velocity macros set this property to
-			true -->
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="order" value="1" />
-	</bean>
+	<!-- <bean id="velocityConfig" -->
+	<!-- class="org.springframework.web.servlet.view.velocity.VelocityConfigurer"> -->
+	<!-- <property name="resourceLoaderPath" value="/WEB-INF/velocity/" /> -->
+	<!-- <property name="velocityPropertiesMap"> -->
+	<!-- <map> -->
+	<!-- <entry key="input.encoding" value="UTF-8" /> -->
+	<!-- <entry key="output.encoding" value="UTF-8" /> -->
+	<!-- </map> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+	<!-- <bean -->
+	<!-- class="org.springframework.web.servlet.view.velocity.VelocityViewResolver"> -->
+	<!-- <property name="cache" value="false" /> -->
+	<!-- <property name="prefix" value="" /> -->
+	<!-- <property name="suffix" value=".html" /> -->
+	<!-- <property name="contentType" value="text/html;charset=UTF-8" /> -->
+	<!-- <property name="exposeSpringMacroHelpers" value="true" /> -->
+	<!-- <property name="order" value="1" /> -->
+	<!-- </bean> -->
 
 	<!-- アドバイザの定義 -->
 	<!-- 細かいことは分からないが、BeanNameAutoProxyCreator が @Transactional と干渉するっぽい -->

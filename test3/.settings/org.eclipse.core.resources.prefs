@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/resources/database.properties=UTF-8
+encoding//src/main/resources/message/error_message.properties=UTF-8
+encoding//src/main/resources/message/hoge_ja.properties=UTF-8
 encoding//src/main/resources/test.properties=UTF-8
 encoding//src/main/resources/test2.properties=UTF-8
 encoding//src/test/java=UTF-8
