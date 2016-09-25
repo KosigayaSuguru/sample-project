@@ -91,25 +91,25 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 		※動作自体はする 完全に両立させるための解決法は不明 -->
 
 	<!-- Thymeleaf用ViewResolver設定 -->
-	<bean id="templateResolver"
-		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-		<property name="prefix" value="/WEB-INF/templates/" />
-		<property name="suffix" value=".html" />
-		<property name="templateMode" value="HTML5" />
-		<property name="characterEncoding" value="UTF-8" />
-	</bean>
+	<!-- <bean id="templateResolver" -->
+	<!-- class="org.thymeleaf.templateresolver.ServletContextTemplateResolver"> -->
+	<!-- <property name="prefix" value="/WEB-INF/templates/" /> -->
+	<!-- <property name="suffix" value=".html" /> -->
+	<!-- <property name="templateMode" value="HTML5" /> -->
+	<!-- <property name="characterEncoding" value="UTF-8" /> -->
+	<!-- </bean> -->
 
-	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
-		<property name="templateResolver" ref="templateResolver" />
-		<property name="messageSource" ref="messageSource" />
-		<property name="templateEngineMessageSource" ref="messageSource" />
-	</bean>
+	<!-- <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine"> -->
+	<!-- <property name="templateResolver" ref="templateResolver" /> -->
+	<!-- <property name="messageSource" ref="messageSource" /> -->
+	<!-- <property name="templateEngineMessageSource" ref="messageSource" /> -->
+	<!-- </bean> -->
 
-	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
-		<property name="templateEngine" ref="templateEngine" />
-		<property name="characterEncoding" value="UTF-8" />
-		<property name="order" value="2" />
-	</bean>
+	<!-- <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver"> -->
+	<!-- <property name="templateEngine" ref="templateEngine" /> -->
+	<!-- <property name="characterEncoding" value="UTF-8" /> -->
+	<!-- <property name="order" value="2" /> -->
+	<!-- </bean> -->
 
 	<!-- Velocity用ViewResolver設定 -->
 	<!-- input, outputの設定をしないと文字化けする -->
