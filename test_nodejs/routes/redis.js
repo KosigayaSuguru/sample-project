@@ -31,7 +31,12 @@ function setup() {
 }
 
 function errorHundler(err) {
+    console.error("redis error handler");
     console.error(err);
     share.redisClient.quit();
-    callback(err);
+    // handle error
+    // callback(err);
+
+    // throgh error
+    callback();
 }
