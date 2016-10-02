@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import test3.annotation.TestAnnotation;
+import test3.app.annotation.TestAnnotation;
 
 public class TestForm extends AbstractForm {
 

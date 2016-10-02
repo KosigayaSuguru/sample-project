@@ -1,4 +1,4 @@
-package test3.annotation;
+package test3.app.annotation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
