@@ -93,9 +93,19 @@ public class DbConfig {
 	}
 
 	@Bean
+	DriverManagerDataSource dataSourceTest2() {
+		DriverManagerDataSource ds = new DriverManagerDataSource();
+		ds.setDriverClassName("com.mysql.jdbc.Driver");
+		ds.setUrl("jdbc:mysql://localhost:3306/test");
+		ds.setUsername("user");
+		ds.setPassword("password");
+		return ds;
+	}
+
+	@Bean
 	SqlSessionFactoryBean sqlSessionFactory() {
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
-		sessionFactoryBean.setDataSource(dataSourceTest());
+		sessionFactoryBean.setDataSource(dataSourceTest2());
 		sessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
 		return sessionFactoryBean;
 	}

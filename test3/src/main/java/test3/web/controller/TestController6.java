@@ -19,7 +19,7 @@ public class TestController6 extends WebApplicationObjectSupport {
 	@RequestMapping("/MybatisTest1")
 	public List<Map<String,Object>> restTest1_1() {
 
-		List<Map<String, Object>> ret = testMapper.query("select * from test");
+		List<Map<String, Object>> ret = testMapper.query("select * from test1");
 		return ret;
 	}
 }
