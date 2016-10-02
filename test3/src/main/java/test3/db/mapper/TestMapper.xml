@@ -3,7 +3,28 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="test3.db.mapper.TestMapper">
-	<select id="selectTest" resultType="test3.app.dto.bs.Test1EntityDto">
+
+	<select id="selectTest1" resultType="test3.app.dto.bs.Test1EntityDto">
 		select * from test1
 	</select>
+
+	<resultMap id="test1test2Map" type="test3.app.dto.ex.Test1Test2EntityDto">
+		<association property="test1" javaType="test3.app.dto.bs.Test1EntityDto">
+			<result property="id" column="id" />
+			<result property="test1Col1" column="test1_col1" />
+			<result property="test1Col2" column="test1_col2" />
+		</association>
+		<collection property="test2List" ofType="test3.app.dto.bs.Test2EntityDto" >
+					<result property="test1Id" column="test1_id" />
+					<result property="test2Col1" column="test2_col1" />
+			<result property="test2Col2" column="test2_col2" />
+			</collection>
+
+	</resultMap>
+
+	<select id="selectTest1Test2" resultMap="test1test2Map">
+		select * from test1 as a
+		join test2 as b on a.id = b.test1_id
+	</select>
+
 </mapper>

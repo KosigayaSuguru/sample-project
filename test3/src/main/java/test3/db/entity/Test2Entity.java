@@ -2,28 +2,43 @@ package test3.db.entity;
 
 public class Test2Entity {
 
-	private String col1;
+	private int id;
 
-	private String col2;
+	private int test1Id;
 
-	public String getCol1() {
-		return col1;
+	private int test2Col1;
+
+	private int test2Col2;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setCol1(String col1) {
-		this.col1 = col1;
+	public int getTest1Id() {
+		return test1Id;
 	}
 
-	public String getCol2() {
-		return col2;
+	public int getTest2Col1() {
+		return test2Col1;
 	}
 
-	public void setCol2(String col2) {
-		this.col2 = col2;
+	public int getTest2Col2() {
+		return test2Col2;
 	}
 
-	@Override
-	public String toString(){
-		return "col1:" + col1 + " col2:" + col2;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setTest1Id(int test1Id) {
+		this.test1Id = test1Id;
+	}
+
+	public void setTest2Col1(int test2Col1) {
+		this.test2Col1 = test2Col1;
+	}
+
+	public void setTest2Col2(int test2Col2) {
+		this.test2Col2 = test2Col2;
 	}
 }
