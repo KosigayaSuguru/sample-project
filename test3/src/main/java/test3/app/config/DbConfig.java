@@ -1,8 +1,11 @@
 package test3.app.config;
 
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -10,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+@MapperScan("test3.db.mapper")
 public class DbConfig {
 
 	// tomcatのシステムプロパティで環境を指定する(-Drunning.mode="release"見たいな感じ)
@@ -77,14 +81,22 @@ public class DbConfig {
 	}
 
 	@Bean
-	public DataSourceTransactionManager transactionManager(){
+	public DataSourceTransactionManager transactionManager() {
 		DataSourceTransactionManager tran = new DataSourceTransactionManager();
 		tran.setDataSource(dataSourceTest());
 		return tran;
 	}
 
 	@Bean
-	public JdbcTemplate jdbcTemplate(){
+	public JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSourceTest());
+	}
+
+	@Bean
+	SqlSessionFactoryBean sqlSessionFactory() {
+		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+		sessionFactoryBean.setDataSource(dataSourceTest());
+		sessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+		return sessionFactoryBean;
 	}
 }
