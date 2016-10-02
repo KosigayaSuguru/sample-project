@@ -31,4 +31,9 @@ public class Test1Entity {
 	public void setTest1Col2(int test1Col2) {
 		this.test1Col2 = test1Col2;
 	}
+
+	@Override
+	public String toString() {
+		return "Test1Entity [id=" + id + ", test1Col1=" + test1Col1 + ", test1Col2=" + test1Col2 + "]";
+	}
 }

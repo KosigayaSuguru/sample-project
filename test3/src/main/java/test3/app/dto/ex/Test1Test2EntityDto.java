@@ -25,4 +25,9 @@ public class Test1Test2EntityDto {
 	public void setTest2List(List<Test2EntityDto> test2List) {
 		this.test2List = test2List;
 	}
+
+	@Override
+	public String toString() {
+		return "Test1Test2EntityDto [test1=" + test1 + ", test2List=" + test2List + "]";
+	}
 }
