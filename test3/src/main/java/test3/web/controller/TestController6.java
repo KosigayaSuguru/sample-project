@@ -18,21 +18,21 @@ public class TestController6 extends WebApplicationObjectSupport {
 	@Autowired
 	TestMapper testMapper;
 
-	@RequestMapping("/MybatisTest1")
+	@RequestMapping("/MybatisTest")
 	public List<Map<String,Object>> myBatisTest() {
 
 		List<Map<String, Object>> ret = testMapper.query("select * from test1");
 		return ret;
 	}
 
-	@RequestMapping("/MybatisTest2")
+	@RequestMapping("/MybatisTest1")
 	public List<Test1EntityDto> myBatisTest1() {
 
 		List<Test1EntityDto> ret = testMapper.selectTest1();
 		return ret;
 	}
 
-	@RequestMapping("/MybatisTest3")
+	@RequestMapping("/MybatisTest2")
 	public List<Test1Test2EntityDto> myBatisTest2() {
 
 		List<Test1Test2EntityDto> ret = testMapper.selectTest1Test2();
