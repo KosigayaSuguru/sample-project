@@ -1,6 +1,6 @@
-package test3;
+package test3.db.entity;
 
-public class TestEntity {
+public class Test1Entity {
 
 	private String col1;
 

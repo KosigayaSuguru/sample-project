@@ -1,6 +1,9 @@
-package test3;
+package test3.bean;
 
 import java.util.function.Consumer;
+
+import test3.TestEnumStatus;
+import test3.TestIf;
 
 public class TestBean {
 

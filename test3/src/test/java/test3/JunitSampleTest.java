@@ -14,6 +14,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import test3.bean.TestBean;
+import test3.db.entity.Test1Entity;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring-servlet.xml")
 // @ContextConfiguration("test.xml")
@@ -39,8 +42,8 @@ public class JunitSampleTest {
 	public void testSample() {
 
 		System.out.println(test);
-		RowMapper<TestEntity> mapper = new BeanPropertyRowMapper<TestEntity>(TestEntity.class);
-		List<TestEntity> dtoList = jdbcTemplate.query("select * from test", mapper);
+		RowMapper<Test1Entity> mapper = new BeanPropertyRowMapper<Test1Entity>(Test1Entity.class);
+		List<Test1Entity> dtoList = jdbcTemplate.query("select * from test", mapper);
 		dtoList.forEach(aaa -> System.out.println(aaa));
 	}
 }

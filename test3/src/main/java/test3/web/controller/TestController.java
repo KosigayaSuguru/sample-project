@@ -28,12 +28,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import test3.TestBean;
-import test3.TestEntity;
 import test3.TestEnumStatus;
-import test3.TestSession;
 import test3.app.service.TestService;
+import test3.bean.TestBean;
+import test3.db.entity.Test1Entity;
 import test3.web.form.TestForm;
+import test3.web.sesstion.TestSession;
 import test3.web.view.EnumViewName;
 
 // Sessionの確認はTestController2で出来る
@@ -112,8 +112,8 @@ public class TestController extends WebApplicationObjectSupport {
 				// Test spring DI getBean ->
 
 		// Test spring jdbcTemplete <-
-		RowMapper<TestEntity> mapper = new BeanPropertyRowMapper<TestEntity>(TestEntity.class);
-		List<TestEntity> dtoList = jdbcTemplate.query("select * from test", mapper);
+		RowMapper<Test1Entity> mapper = new BeanPropertyRowMapper<Test1Entity>(Test1Entity.class);
+		List<Test1Entity> dtoList = jdbcTemplate.query("select * from test", mapper);
 		// Test spring jdbcTemplete ->
 
 		transactional();
@@ -253,7 +253,7 @@ public class TestController extends WebApplicationObjectSupport {
 	@Transactional
 	public void transactional() {
 		System.out.println("transactional()");
-		RowMapper<TestEntity> mapper = new BeanPropertyRowMapper<TestEntity>(TestEntity.class);
-		List<TestEntity> dtoList = jdbcTemplate.query("select * from test", mapper);
+		RowMapper<Test1Entity> mapper = new BeanPropertyRowMapper<Test1Entity>(Test1Entity.class);
+		List<Test1Entity> dtoList = jdbcTemplate.query("select * from test", mapper);
 	}
 }

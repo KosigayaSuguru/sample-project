@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import test3.TestBean;
 import test3.TestEnumStatus;
+import test3.bean.TestBean;
 
 @Configuration
 public class AppConfig {

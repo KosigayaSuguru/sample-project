@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
-import test3.TestBean;
+import test3.bean.TestBean;
 
 @RestController
 public class TestController4 extends WebApplicationObjectSupport {

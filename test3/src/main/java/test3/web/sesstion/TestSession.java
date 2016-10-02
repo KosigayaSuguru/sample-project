@@ -1,4 +1,4 @@
-package test3;
+package test3.web.sesstion;
 
 import java.io.Serializable;
 
