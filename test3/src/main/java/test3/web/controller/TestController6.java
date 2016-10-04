@@ -10,17 +10,26 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import test3.app.dto.bs.Test1EntityDto;
 import test3.app.dto.ex.Test1Test2EntityDto;
+import test3.bean.TestScopeBean;
 import test3.db.mapper.TestMapper;
 
 @RestController
 public class TestController6 extends WebApplicationObjectSupport {
 
+	int a = 0;
 	@Autowired
 	TestMapper testMapper;
 
-	@RequestMapping("/MybatisTest")
-	public List<Map<String,Object>> myBatisTest() {
+	@Autowired
+	TestScopeBean test;
 
+	@RequestMapping("/MybatisTest")
+	public List<Map<String, Object>> myBatisTest() {
+
+		System.out.println(test.toString());
+		test.setHoge("hogehogehoge" + a++);
+		test.setMoge("mogemogemoge" + a++);
+		System.out.println(test.toString());
 		List<Map<String, Object>> ret = testMapper.query("select * from test1");
 		return ret;
 	}
