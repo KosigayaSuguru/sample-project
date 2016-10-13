@@ -8,6 +8,7 @@ import test3.Exception.BaseException;
 import test3.Exception.BaseRuntimeException;
 import test3.Exception.EnumExceptionLevel;
 import test3.Exception.TestException;
+import test3.Exception.TestRuntimeException;
 
 @Controller
 public class TestController5 extends WebApplicationObjectSupport {
@@ -40,5 +41,16 @@ public class TestController5 extends WebApplicationObjectSupport {
 			throw new TestException(EnumExceptionLevel.DEBUG);
 		}
 		return "";
+	}
+
+	@RequestMapping("/ExceptionTest4")
+	public String test4() {
+
+		try {
+			throw new TestException();
+
+		} catch (TestException e) {
+			throw new TestRuntimeException(e);
+		}
 	}
 }

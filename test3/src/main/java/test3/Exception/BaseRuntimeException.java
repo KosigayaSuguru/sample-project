@@ -10,6 +10,10 @@ public class BaseRuntimeException extends RuntimeException {
 		super(message);
 	}
 
+	public BaseRuntimeException(Throwable t) {
+		super(t);
+	}
+
 	public BaseRuntimeException(String message, EnumExceptionLevel level) {
 		super(message);
 		setLevel(level);

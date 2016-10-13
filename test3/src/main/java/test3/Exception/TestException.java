@@ -10,6 +10,10 @@ public class TestException extends BaseException {
 		super(defaultMessage);
 	}
 
+	public TestException(Throwable t) {
+		super(t);
+	}
+
 	public TestException(EnumExceptionLevel level) {
 		super(defaultMessage, level);
 	}

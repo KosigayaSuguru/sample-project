@@ -10,6 +10,10 @@ public class BaseException extends Exception {
 		super(message);
 	}
 
+	public BaseException(Throwable t) {
+		super(t);
+	}
+
 	public BaseException(String message, EnumExceptionLevel level) {
 		super(message);
 		setLevel(level);
