@@ -5,8 +5,11 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.Properties;
 
+import javax.jms.Session;
+
 import org.hornetq.api.core.TransportConfiguration;
 import org.hornetq.jms.client.HornetQJMSConnectionFactory;
+import org.hornetq.jms.client.HornetQQueue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.MessageSource;
@@ -92,6 +95,8 @@ public class AppConfig {
 	JmsTemplate jmsTemplate() {
 		JmsTemplate tmp = new JmsTemplate();
 		tmp.setConnectionFactory(cachingConnectionFactory());
+		tmp.setDefaultDestination(defaultDestination());
+		tmp.setSessionAcknowledgeMode(Session.AUTO_ACKNOWLEDGE);
 		return tmp;
 	}
 
@@ -102,12 +107,19 @@ public class AppConfig {
 		return tmp;
 	}
 
+	@Bean
+	HornetQQueue defaultDestination(){
+		HornetQQueue tmp = new HornetQQueue("ExpiryQueue");
+		return tmp;
+	}
+
 	// http://docs.spring.io/spring/docs/4.2.7.RELEASE/spring-framework-reference/html/jms.html#jms-annotated-support
 	@Bean
 	DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
 		DefaultJmsListenerContainerFactory tmp = new DefaultJmsListenerContainerFactory();
 		tmp.setConnectionFactory(cachingConnectionFactory());
 		tmp.setDestinationResolver(jmsTemplate().getDestinationResolver());
+		tmp.setRecoveryInterval((long) 10000);
 		tmp.setConcurrency("1-10");
 		return tmp;
 	}

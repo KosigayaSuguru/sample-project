@@ -8,9 +8,9 @@ import test3.bean.TestBean;
 @Component
 public class TestJmsListener {
 
-	@JmsListener(destination = "jms/queue/TodoMessageQueue")
-	public void receive(TestBean todo) {
-		// omitted
-		System.err.println("JMS TEST");
-	}
+//	@JmsListener(destination = "testQueue")
+//	public void receive(TestBean todo) {
+//		// omitted
+//		System.err.println("JMS TEST");
+//	}
 }
