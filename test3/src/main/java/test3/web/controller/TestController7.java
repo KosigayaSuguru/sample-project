@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
+import test3.bean.TestBean;
 import test3.bean.TestScopeBean;
 
 @RestController
@@ -29,6 +30,18 @@ public class TestController7 extends WebApplicationObjectSupport {
 		test.setHoge("hogehogehoge" + a++);
 		test.setMoge("mogemogemoge" + a++);
 		System.out.println(test.toString());
+		return test.toString();
+	}
+
+	@RequestMapping("/JmsTest")
+	public String jmsTest() {
+
+		TestBean test = new TestBean();
+		test.setHoge("jms hoge");
+		test.setMoge("jms moge");
+
+		jmsMessagingTemplate.convertAndSend("jms/queue/TodoMessageQueue", test);
+
 		return test.toString();
 	}
 }

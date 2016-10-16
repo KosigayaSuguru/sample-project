@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.core.JmsTemplate;
@@ -61,7 +62,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	PropertyPlaceholderConfigurer propertyPlaceholder() throws Exception{
+	PropertyPlaceholderConfigurer propertyPlaceholder() throws Exception {
 		PropertyPlaceholderConfigurer holder = new PropertyPlaceholderConfigurer();
 		holder.setLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/*.properties"));
 		holder.setFileEncoding("UTF-8");
@@ -69,7 +70,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	HornetQJMSConnectionFactory hornetConnectionFactory(){
+	HornetQJMSConnectionFactory hornetConnectionFactory() {
 
 		String factoryClass = "org.hornetq.core.remoting.impl.netty.NettyConnectorFactory";
 		HashMap<String, Object> map = new HashMap<>();
@@ -82,21 +83,32 @@ public class AppConfig {
 	}
 
 	@Bean
-	CachingConnectionFactory cachingConnectionFactory(){
-		return new CachingConnectionFactory(hornetConnectionFactory());
+	CachingConnectionFactory cachingConnectionFactory() {
+		CachingConnectionFactory ret = new CachingConnectionFactory(hornetConnectionFactory());
+		return ret;
 	}
 
 	@Bean
-	JmsTemplate jmsTemplate(){
+	JmsTemplate jmsTemplate() {
 		JmsTemplate tmp = new JmsTemplate();
 		tmp.setConnectionFactory(cachingConnectionFactory());
 		return tmp;
 	}
 
 	@Bean
-	JmsMessagingTemplate jmsMessagingTemplate(){
+	JmsMessagingTemplate jmsMessagingTemplate() {
 		JmsMessagingTemplate tmp = new JmsMessagingTemplate();
 		tmp.setJmsTemplate(jmsTemplate());
+		return tmp;
+	}
+
+	// http://docs.spring.io/spring/docs/4.2.7.RELEASE/spring-framework-reference/html/jms.html#jms-annotated-support
+	@Bean
+	DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
+		DefaultJmsListenerContainerFactory tmp = new DefaultJmsListenerContainerFactory();
+		tmp.setConnectionFactory(cachingConnectionFactory());
+		tmp.setDestinationResolver(jmsTemplate().getDestinationResolver());
+		tmp.setConcurrency("1-10");
 		return tmp;
 	}
 }

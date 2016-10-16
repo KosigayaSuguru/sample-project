@@ -58,4 +58,10 @@ public class TestBean implements Serializable {
 	public void setTestStatus(TestEnumStatus testStatus) {
 		this.testStatus = testStatus;
 	}
+
+	@Override
+	public String toString() {
+		return "TestBean [hoge=" + hoge + ", moge=" + moge + ", catalinaHome=" + catalinaHome + ", testStatus="
+				+ testStatus + "]";
+	}
 }
