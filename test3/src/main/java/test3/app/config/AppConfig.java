@@ -2,8 +2,11 @@ package test3.app.config;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.Properties;
 
+import org.hornetq.api.core.TransportConfiguration;
+import org.hornetq.jms.client.HornetQJMSConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.MessageSource;
@@ -11,11 +14,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.connection.CachingConnectionFactory;
+import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.jms.core.JmsTemplate;
 
 import test3.TestEnumStatus;
 import test3.bean.TestBean;
 
 @Configuration
+@EnableJms
 public class AppConfig {
 
 	@Value(value = "${catalina.home}")
@@ -60,4 +68,35 @@ public class AppConfig {
 		return holder;
 	}
 
+	@Bean
+	HornetQJMSConnectionFactory hornetConnectionFactory(){
+
+		String factoryClass = "org.hornetq.core.remoting.impl.netty.NettyConnectorFactory";
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("host", "localhost");
+		map.put("port", "5445");
+		TransportConfiguration config = new TransportConfiguration(factoryClass, map);
+
+		HornetQJMSConnectionFactory hoge = new HornetQJMSConnectionFactory(false, config);
+		return hoge;
+	}
+
+	@Bean
+	CachingConnectionFactory cachingConnectionFactory(){
+		return new CachingConnectionFactory(hornetConnectionFactory());
+	}
+
+	@Bean
+	JmsTemplate jmsTemplate(){
+		JmsTemplate tmp = new JmsTemplate();
+		tmp.setConnectionFactory(cachingConnectionFactory());
+		return tmp;
+	}
+
+	@Bean
+	JmsMessagingTemplate jmsMessagingTemplate(){
+		JmsMessagingTemplate tmp = new JmsMessagingTemplate();
+		tmp.setJmsTemplate(jmsTemplate());
+		return tmp;
+	}
 }

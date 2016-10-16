@@ -1,6 +1,7 @@
 package test3.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
@@ -14,6 +15,9 @@ public class TestController7 extends WebApplicationObjectSupport {
 
 	@Autowired
 	TestScopeBean test;
+
+	@Autowired
+	JmsMessagingTemplate jmsMessagingTemplate;
 
 	// SingletonなBeanにrequestスコープのBeanをDIする
 	// ※実装はTestScopeBean参照

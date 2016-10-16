@@ -1,11 +1,14 @@
 package test3.bean;
 
+import java.io.Serializable;
 import java.util.function.Consumer;
 
 import test3.TestEnumStatus;
 import test3.TestIf;
 
-public class TestBean {
+public class TestBean implements Serializable {
+
+	private static final long serialVersionUID = 2025697321479170588L;
 
 	private String hoge;
 	private String moge;
