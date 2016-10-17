@@ -1,9 +1,6 @@
 package test3.web.controller;
 
-import javax.jms.Connection;
 import javax.jms.JMSException;
-
-import test3.jms.HornetQClient;
 
 import org.hornetq.jms.server.embedded.EmbeddedJMS;
 import org.springframework.beans.factory.annotation.Autowired;
