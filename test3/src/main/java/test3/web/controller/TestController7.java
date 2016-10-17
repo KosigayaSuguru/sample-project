@@ -1,7 +1,11 @@
 package test3.web.controller;
 
+import javax.jms.Connection;
 import javax.jms.JMSException;
 
+import test3.jms.HornetQClient;
+
+import org.hornetq.jms.server.embedded.EmbeddedJMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.connection.CachingConnectionFactory;
@@ -32,7 +36,7 @@ public class TestController7 extends WebApplicationObjectSupport {
 	// ※実装はTestScopeBean参照
 	// ※値はちゃんとリクエスト毎になるが、デバッガから中身が見れないので注意
 	@RequestMapping("/BeanTest")
-	public String myBatisTest() {
+	public String myBatisTest() throws Exception {
 
 		System.out.println(test.toString());
 		test.setHoge("hogehogehoge" + a++);
@@ -67,5 +71,14 @@ public class TestController7 extends WebApplicationObjectSupport {
 		System.err.println("bbbbbbbbbbbbbbbbbbb" + message.toString());
 
 		jmsMessagingTemplate.convertAndSend("DLQ", message);
+	}
+
+	@RequestMapping("/JmsTest2")
+	public String jmsTest2() throws Exception {
+
+		EmbeddedJMS hoge = new EmbeddedJMS();
+		hoge.start();
+
+		return test.toString();
 	}
 }
