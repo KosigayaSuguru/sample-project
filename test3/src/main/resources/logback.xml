@@ -6,11 +6,11 @@
     <if condition='isDefined("spring.profiles.active")'>
         <then>
             <property name="logpath" value="d:/java/workspace" />
-            <include resource="logback/logback-${spring.profiles.active}.xml" />
+            <include resource="config/${spring.profiles.active}/logback.xml" />
         </then>
         <else>
             <property name="logpath" value="d:/java/workspace" />
-            <include resource="logback/logback-default.xml" />
+            <include resource="config/logback-default.xml" />
         </else>
     </if>
 </configuration>

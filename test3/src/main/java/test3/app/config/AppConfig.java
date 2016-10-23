@@ -1,5 +1,6 @@
 package test3.app.config;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.Properties;
 
 import javax.jms.Session;
 
+import org.apache.commons.lang.StringUtils;
 import org.hornetq.api.core.TransportConfiguration;
 import org.hornetq.jms.client.HornetQJMSConnectionFactory;
 import org.hornetq.jms.client.HornetQQueue;
@@ -16,6 +18,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -66,8 +70,24 @@ public class AppConfig {
 
 	@Bean
 	PropertyPlaceholderConfigurer propertyPlaceholder() throws Exception {
+
+		String profile = System.getProperty("spring.profiles.active");
+
+		// profileが指定されているかどうか（-Dspring.profiles.active="local"）
+		if (StringUtils.isBlank(profile)) {
+			System.err.println("set profile ex:-Dspring.profiles.active=local");
+			System.exit(1);
+		}
+
+		// resourcesにprofile用のパスがあるかどうか
+		ClassPathResource config = new ClassPathResource("classpath:/config/" + profile);
+		if (config.exists()) {
+			System.err.println("not exists config path : " + config.getPath());
+			System.exit(1);
+		}
+
 		PropertyPlaceholderConfigurer holder = new PropertyPlaceholderConfigurer();
-		holder.setLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/*.properties"));
+		holder.setLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/config/" + profile + "/*.properties"));
 		holder.setFileEncoding("UTF-8");
 		return holder;
 	}
@@ -108,7 +128,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	HornetQQueue defaultDestination(){
+	HornetQQueue defaultDestination() {
 		HornetQQueue tmp = new HornetQQueue("ExpiryQueue");
 		return tmp;
 	}

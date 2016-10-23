@@ -16,33 +16,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("test3.db.mapper")
 public class DbConfig {
 
-	// tomcatのシステムプロパティで環境を指定する(-Drunning.mode="release"見たいな感じ)
-	@Value("${running.mode:local}")
-	public String runningMode;
+	// tomcatのシステムプロパティで環境を指定する(-Dspring.profiles.active="release"見たいな感じ)
+	@Value("${spring.profiles.active}")
+	public String profile;
 
-	@Value("${url.release}")
-	public String urlRelease;
-	@Value("${username.release}")
-	public String usernameRelease;
-	@Value("${password.release}")
-	public String passwordRelease;
-
-	@Value("${url.test}")
-	public String urlTest;
-	@Value("${username.test}")
-	public String usernameTest;
-	@Value("${password.test}")
-	public String passwordTest;
-
-	@Value("${url.local}")
-	public String urlLocal;
-	@Value("${username.local}")
-	public String usernameLocal;
-	@Value("${password.local}")
-	public String passwordLocal;
+	@Value("${database.h2.url}")
+	public String url;
+	@Value("${database.h2.username}")
+	public String username;
+	@Value("${database.h2.password}")
+	public String password;
 
 	@Bean
-	DriverManagerDataSource dataSourceTest() {
+	DriverManagerDataSource dataSourceH2() {
 		return createDataSource();
 	}
 
@@ -51,31 +37,9 @@ public class DbConfig {
 		DriverManagerDataSource tmp = new DriverManagerDataSource();
 		tmp.setDriverClassName("org.h2.Driver");
 
-		switch (runningMode) {
-		case "release":
-			tmp.setUrl(urlRelease);
-			tmp.setUsername(usernameRelease);
-			tmp.setPassword(passwordRelease);
-			break;
-
-		case "test":
-			tmp.setUrl(urlTest);
-			tmp.setUsername(usernameTest);
-			tmp.setPassword(passwordTest);
-			break;
-
-		case "local":
-			tmp.setUrl(urlLocal);
-			tmp.setUsername(usernameLocal);
-			tmp.setPassword(passwordLocal);
-			break;
-
-		default:
-			tmp.setUrl(urlLocal);
-			tmp.setUsername(usernameLocal);
-			tmp.setPassword(passwordLocal);
-			break;
-		}
+		tmp.setUrl(url);
+		tmp.setUsername(username);
+		tmp.setPassword(password);
 
 		return tmp;
 	}
@@ -83,20 +47,20 @@ public class DbConfig {
 	@Bean
 	public DataSourceTransactionManager transactionManager() {
 		DataSourceTransactionManager tran = new DataSourceTransactionManager();
-		tran.setDataSource(dataSourceTest());
+		tran.setDataSource(dataSourceH2());
 		return tran;
 	}
 
 	@Bean
 	public JdbcTemplate jdbcTemplate() {
-		return new JdbcTemplate(dataSourceTest());
+		return new JdbcTemplate(dataSourceH2());
 	}
 
 	@Bean
 	DriverManagerDataSource dataSourceTest2() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/test");
+		ds.setUrl("jdbc:mysql://host:3306/test");
 		ds.setUsername("user");
 		ds.setPassword("password");
 		return ds;
@@ -106,7 +70,7 @@ public class DbConfig {
 	SqlSessionFactoryBean sqlSessionFactory() {
 		SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSourceTest2());
-		sessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+		sessionFactoryBean.setConfigLocation(new ClassPathResource("/config/" + profile + "/mybatis-config.xml"));
 		return sessionFactoryBean;
 	}
 }
