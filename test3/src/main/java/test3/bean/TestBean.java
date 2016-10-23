@@ -10,10 +10,19 @@ public class TestBean implements Serializable {
 
 	private static final long serialVersionUID = 2025697321479170588L;
 
+	private int id;
 	private String hoge;
 	private String moge;
 	private String catalinaHome;
 	private TestEnumStatus testStatus;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getHoge() {
 		return hoge;
@@ -61,7 +70,7 @@ public class TestBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TestBean [hoge=" + hoge + ", moge=" + moge + ", catalinaHome=" + catalinaHome + ", testStatus="
-				+ testStatus + "]";
+		return "TestBean [id=" + id + ", hoge=" + hoge + ", moge=" + moge + ", catalinaHome=" + catalinaHome
+				+ ", testStatus=" + testStatus + "]";
 	}
 }

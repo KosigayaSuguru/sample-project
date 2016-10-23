@@ -1,6 +1,7 @@
 package test3.web.controller;
 
 import javax.jms.JMSException;
+import javax.jms.TextMessage;
 
 import org.hornetq.jms.server.embedded.EmbeddedJMS;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
@@ -43,7 +46,8 @@ public class TestController7 extends WebApplicationObjectSupport {
 	}
 
 	// HornetQの起動→の普通に起動するだけ:"D:\java\hornetq-2.4.0.Final\bin\run.bat"
-	// D:\java\hornetq-2.4.0.Final\config\stand-alone\non-clustered\hornetq-jms.xml 内の queue で指定されているキューを使う必要がある
+	// D:\java\hornetq-2.4.0.Final\config\stand-alone\non-clustered\hornetq-jms.xml
+	// 内の queue で指定されているキューを使う必要がある
 	// 先に /JmsTest へExpiryQueueへ メッセージを投げて、DLQを待ち受けする。
 	// @JmsListener(destination = "ExpiryQueue")がメッセージを受け取って処理を始める。
 	// 処理が終わると DLQ へメッセージを投げて、/JmsTestの方が処理始める。
@@ -51,23 +55,42 @@ public class TestController7 extends WebApplicationObjectSupport {
 	public String jmsTest() throws JMSException {
 
 		TestBean test = new TestBean();
-		test.setHoge("jms hoge" + a++);
-		test.setMoge("jms moge" + a++);
+		test.setId(a);
+		test.setHoge("jms1 hoge" + a);
+		test.setMoge("jms1 moge" + a++);
 
-		jmsMessagingTemplate.convertAndSend("ExpiryQueue", test);
+		MessageHeaderAccessor accessor = new MessageHeaderAccessor();
+		accessor.setHeader("jms_priority", 5);
+		Message<TestBean> testMessage = MessageBuilder.withPayload(test).setHeaders(accessor).build();
 
+		jmsMessagingTemplate.convertAndSend("ExpiryQueue", testMessage);
+
+		// javax.jms.Message message = jmsMessagingTemplate.getJmsTemplate().receive("DLQ");
+		// javax.jms.Message message = jmsMessagingTemplate.getJmsTemplate().receiveSelected("DLQ", "priority > 3");
 		Message<?> message = jmsMessagingTemplate.receive("DLQ");
 		System.err.println("aaaaaaaaaaaaaaaaaaaaaa" + message.toString());
+		System.err.println("aaaaaaaaaaaaaaaaaaaaaa" + message.getPayload().toString());
 
 		return test.toString();
 	}
 
 	@JmsListener(destination = "ExpiryQueue")
-	public void receive(TestBean message) {
-		// omitted
-		System.err.println("bbbbbbbbbbbbbbbbbbb" + message.toString());
+	public void receive(Message<TestBean> message) {
 
-		jmsMessagingTemplate.convertAndSend("DLQ", message);
+		// omitted
+		System.err.println("bbbbbbbbbbbbbbbbbbb" + message.getPayload().toString());
+
+		// jmsMessagingTemplate.convertAndSend("DLQ", message);
+
+		TestBean test = new TestBean();
+		test.setId(a);
+		test.setHoge("jms2 hoge" + a);
+		test.setMoge("jms2 moge" + a++);
+
+		MessageHeaderAccessor accessor = new MessageHeaderAccessor();
+		accessor.setHeader("jms_priority", 5);
+		Message<TestBean> testMessage = MessageBuilder.withPayload(test).setHeaders(accessor).build();
+		jmsMessagingTemplate.convertAndSend("DLQ", testMessage);
 	}
 
 	@RequestMapping("/JmsTest2")
