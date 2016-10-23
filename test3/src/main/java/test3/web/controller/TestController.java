@@ -98,6 +98,7 @@ public class TestController extends WebApplicationObjectSupport {
 
 	@RequestMapping(value = "/Test")
 	public String test(Locale locale, Model model) {
+
 		System.out.println("TEST1");
 		System.out.println("TEST2");
 

@@ -17,6 +17,7 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import test3.bean.TestBean;
 import test3.bean.TestScopeBean;
+import test3.module1.TestParentBean;
 
 @RestController
 public class TestController7 extends WebApplicationObjectSupport {
@@ -37,6 +38,9 @@ public class TestController7 extends WebApplicationObjectSupport {
 	// ※値はちゃんとリクエスト毎になるが、デバッガから中身が見れないので注意
 	@RequestMapping("/BeanTest")
 	public String myBatisTest() throws Exception {
+
+		TestParentBean tpb = new TestParentBean();
+		tpb.test();
 
 		System.out.println(test.toString());
 		test.setHoge("hogehogehoge" + a++);
