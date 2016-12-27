@@ -6,12 +6,17 @@ public class BaseException extends Exception {
 
 	private EnumExceptionLevel level = EnumExceptionLevel.ERROR;
 
-	public BaseException(String message) {
-		super(message);
-	}
-
 	public BaseException(Throwable t) {
 		super(t);
+	}
+
+	public BaseException(Throwable t, EnumExceptionLevel level) {
+		super(t);
+		setLevel(level);
+	}
+
+	public BaseException(String message) {
+		super(message);
 	}
 
 	public BaseException(String message, EnumExceptionLevel level) {

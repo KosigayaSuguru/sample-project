@@ -6,12 +6,17 @@ public class BaseRuntimeException extends RuntimeException {
 
 	private EnumExceptionLevel level = EnumExceptionLevel.ERROR;
 
-	public BaseRuntimeException(String message) {
-		super(message);
-	}
-
 	public BaseRuntimeException(Throwable t) {
 		super(t);
+	}
+
+	public BaseRuntimeException(Throwable t, EnumExceptionLevel level) {
+		super(t);
+		setLevel(level);
+	}
+
+	public BaseRuntimeException(String message) {
+		super(message);
 	}
 
 	public BaseRuntimeException(String message, EnumExceptionLevel level) {
