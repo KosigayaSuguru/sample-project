@@ -8,17 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
-import test3.app.dto.bs.Test1EntityDto;
-import test3.app.dto.ex.Test1Test2EntityDto;
 import test3.bean.TestScopeBean;
-import test3.db.mapper.TestMapper;
+import test3.db.entity.Test1;
+import test3.db.entity.Test3;
+import test3.db.entity.dto.Test1Test2Dto;
+import test3.db.mapper.Test1Mapper;
+import test3.db.mapper.Test3Mapper;
 
 @RestController
 public class TestController6 extends WebApplicationObjectSupport {
 
 	int a = 0;
 	@Autowired
-	TestMapper testMapper;
+	Test1Mapper testMapper;
+
+	@Autowired
+	Test3Mapper test3Mapper;
 
 	@Autowired
 	TestScopeBean test;
@@ -35,16 +40,23 @@ public class TestController6 extends WebApplicationObjectSupport {
 	}
 
 	@RequestMapping("/MybatisTest1")
-	public List<Test1EntityDto> myBatisTest1() {
+	public List<Test1> myBatisTest1() {
 
-		List<Test1EntityDto> ret = testMapper.selectTest1();
+		List<Test1> ret = testMapper.selectTest1();
 		return ret;
 	}
 
 	@RequestMapping("/MybatisTest2")
-	public List<Test1Test2EntityDto> myBatisTest2() {
+	public List<Test1Test2Dto> myBatisTest2() {
 
-		List<Test1Test2EntityDto> ret = testMapper.selectTest1Test2();
+		List<Test1Test2Dto> ret = testMapper.selectTest1Test2();
+		return ret;
+	}
+
+	@RequestMapping("/MybatisTest3")
+	public Test3 myBatisTest3() {
+
+		Test3 ret = test3Mapper.selectByPrimaryKey(0);
 		return ret;
 	}
 }

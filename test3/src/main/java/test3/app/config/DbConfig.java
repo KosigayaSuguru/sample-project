@@ -60,7 +60,7 @@ public class DbConfig {
 	DriverManagerDataSource dataSourceTest2() {
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://host:3306/test");
+		ds.setUrl("jdbc:mysql://localhost:3306/test");
 		ds.setUsername("user");
 		ds.setPassword("password");
 		return ds;

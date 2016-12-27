@@ -8,6 +8,12 @@
 	</settings>
 
 	<typeAliases>
-		<package name="test3.app.dto" />
+		<package name="test3.db.entity" />
 	</typeAliases>
+
+	<!-- https://github.com/javaplugs/mybatis-types -->
+	<typeHandlers>
+		<package name="test3.db.entity.typeHandler" />
+	</typeHandlers>
+
 </configuration>
