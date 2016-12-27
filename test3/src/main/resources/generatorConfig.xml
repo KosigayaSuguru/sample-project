@@ -16,7 +16,7 @@
 
 		<sqlMapGenerator
 			targetPackage="test3.db.mapper"
-			targetProject="test3" />
+			targetProject="test3/src/main/resources" />
 
 		<javaClientGenerator
 			targetPackage="test3.db.mapper"
