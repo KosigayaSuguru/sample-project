@@ -115,6 +115,7 @@
 		select * from test1
 	</select>
 
+	<!-- HasMany sample -->
 	<resultMap autoMapping="true" id="test1test2Map" type="Test1Test2Dto">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<collection ofType="Test2" property="test2List" columnPrefix="prefix_" autoMapping="true" />
@@ -131,9 +132,11 @@
 		join test2 as b on a.id = b.test1_id
 	</select>
 
+	<!-- SQLの結果を1行ごとに全部マッピング sample -->
+	<!-- ※HasManyの方を推奨 -->
 	<resultMap autoMapping="true" id="test1test2Map2" type="Test1Test2Dto2">
 		<association javaType="Test1" property="test1" autoMapping="true" />
-		<collection ofType="Test2" property="test2List" autoMapping="true" />
+		<association javaType="Test2" property="test2" autoMapping="true" />
 	</resultMap>
 
 	<select id="selectTest1Test2b" resultMap="test1test2Map2">
