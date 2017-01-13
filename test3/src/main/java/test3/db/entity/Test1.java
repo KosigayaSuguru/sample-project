@@ -71,4 +71,9 @@ public class Test1 {
 	public void setTest1Col2(Integer test1Col2) {
 		this.test1Col2 = test1Col2;
 	}
+
+	@Override
+	public String toString() {
+		return "Test1 [id=" + id + ", test1Col1=" + test1Col1 + ", test1Col2=" + test1Col2 + "]";
+	}
 }

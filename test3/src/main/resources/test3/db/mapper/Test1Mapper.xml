@@ -116,21 +116,29 @@
 	</select>
 
 	<resultMap autoMapping="true" id="test1test2Map" type="Test1Test2Dto">
-		<association javaType="Test1" property="test1">
-			<result column="id" property="id" />
-			<result column="test1_col1" property="test1Col1" />
-			<result column="test1_col2" property="test1Col2" />
-		</association>
-		<collection ofType="Test2" property="test2List">
-			<result column="test1_id" property="test1Id" />
-			<result column="test2_col1" property="test2Col1" />
-			<result column="test2_col2" property="test2Col2" />
-		</collection>
-
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<collection ofType="Test2" property="test2List" columnPrefix="prefix_" autoMapping="true" />
 	</resultMap>
 
 	<select id="selectTest1Test2" resultMap="test1test2Map">
-		select * from test1 as a
+		select
+		a.id, a.test1_col1, a.test1_col2,
+		b.id as prefix_id,
+		b.test1_id as prefix_test1_id,
+		b.test2_col1 as prefix_test2_col1,
+		b.test2_col2 as prefix_test2_col2
+		from test1 as a
+		join test2 as b on a.id = b.test1_id
+	</select>
+
+	<resultMap autoMapping="true" id="test1test2Map2" type="Test1Test2Dto2">
+		<association javaType="Test1" property="test1" autoMapping="true" />
+		<collection ofType="Test2" property="test2List" autoMapping="true" />
+	</resultMap>
+
+	<select id="selectTest1Test2b" resultMap="test1test2Map2">
+		select *
+		from test1 as a
 		join test2 as b on a.id = b.test1_id
 	</select>
 </mapper>

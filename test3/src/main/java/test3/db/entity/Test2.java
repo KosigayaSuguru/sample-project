@@ -94,4 +94,9 @@ public class Test2 {
 	public void setTest2Col2(Integer test2Col2) {
 		this.test2Col2 = test2Col2;
 	}
+
+	@Override
+	public String toString() {
+		return "Test2 [id=" + id + ", test1Id=" + test1Id + ", test2Col1=" + test2Col1 + ", test2Col2=" + test2Col2 + "]";
+	}
 }

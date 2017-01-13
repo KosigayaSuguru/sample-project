@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 import test3.db.entity.Test1;
 import test3.db.entity.dto.Test1Test2Dto;
+import test3.db.entity.dto.Test1Test2Dto2;
 
 public interface Test1Mapper {
 
@@ -53,4 +54,6 @@ public interface Test1Mapper {
 	List<Test1> selectTest1();
 
 	List<Test1Test2Dto> selectTest1Test2();
+
+	List<Test1Test2Dto2> selectTest1Test2b();
 }

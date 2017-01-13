@@ -73,4 +73,9 @@ public class Test3 {
 	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Test3 [id=" + id + ", enumTest=" + enumTest + ", updateDate=" + updateDate + "]";
+	}
 }
