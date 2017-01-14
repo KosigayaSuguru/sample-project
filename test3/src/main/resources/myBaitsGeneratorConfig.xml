@@ -7,11 +7,16 @@
 
         <plugin type="test3.db.mybatis.generator.plugin.FieldVisibilityProtectedPlugin"></plugin>
 
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
 		<jdbcConnection
 			connectionURL="jdbc:mysql://localhost:3306/test"
 			driverClass="com.mysql.jdbc.Driver"
 			password="password"
 			userId="root" />
+
 
 		<javaModelGenerator
 			targetPackage="test3.db.entity"
