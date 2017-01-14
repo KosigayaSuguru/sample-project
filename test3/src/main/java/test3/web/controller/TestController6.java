@@ -10,6 +10,7 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import test3.bean.TestScopeBean;
 import test3.db.entity.Test1;
+import test3.db.entity.Test2;
 import test3.db.entity.Test3;
 import test3.db.entity.dto.Test1Test2Dto;
 import test3.db.entity.dto.Test1Test2Dto2;
@@ -65,6 +66,13 @@ public class TestController6 extends WebApplicationObjectSupport {
 	public List<Test1> myBatisTest2c() {
 
 		List<Test1> ret = testMapper.selectTest1Test2c();
+		return ret;
+	}
+
+	@RequestMapping("/MybatisTest2d")
+	public List<Test1> myBatisTest2d() {
+
+		List<Test1> ret = testMapper.selectTest1Test2d();
 		return ret;
 	}
 
