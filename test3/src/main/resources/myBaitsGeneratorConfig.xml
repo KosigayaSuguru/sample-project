@@ -3,7 +3,10 @@
 <generatorConfiguration>
 	<classPathEntry location="D:/java/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar" />
 
-	<context id="context1">
+	<context id="context1"  targetRuntime="MyBatis3">
+
+        <plugin type="test3.db.mybatis.generator.plugin.FieldVisibilityProtectedPlugin"></plugin>
+
 		<jdbcConnection
 			connectionURL="jdbc:mysql://localhost:3306/test"
 			driverClass="com.mysql.jdbc.Driver"

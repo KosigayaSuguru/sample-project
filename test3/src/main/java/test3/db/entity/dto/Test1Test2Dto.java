@@ -19,6 +19,6 @@ public class Test1Test2Dto extends Test1 {
 
 	@Override
 	public String toString() {
-		return "Test1Test2Dto [test2List=" + test2List + ", toString()=" + super.toString() + "]";
+		return "Test1Test2Dto [test2List=" + test2List + ", id=" + id + ", test1Col1=" + test1Col1 + ", test1Col2=" + test1Col2 + "]";
 	}
 }
