@@ -1,5 +1,7 @@
 package test3.db.entity;
 
+import java.util.List;
+
 public class Test1 {
 
 	/**
@@ -72,8 +74,18 @@ public class Test1 {
 		this.test1Col2 = test1Col2;
 	}
 
+	protected List<Test2> test2;
+
+	public List<Test2> getTest2() {
+		return test2;
+	}
+
+	public void setTest2(List<Test2> test2) {
+		this.test2 = test2;
+	}
+
 	@Override
 	public String toString() {
-		return "Test1 [id=" + id + ", test1Col1=" + test1Col1 + ", test1Col2=" + test1Col2 + "]";
+		return "Test1 [id=" + id + ", test1Col1=" + test1Col1 + ", test1Col2=" + test1Col2 + ", test2=" + test2 + "]";
 	}
 }

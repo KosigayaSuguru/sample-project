@@ -61,6 +61,13 @@ public class TestController6 extends WebApplicationObjectSupport {
 		return ret;
 	}
 
+	@RequestMapping("/MybatisTest2c")
+	public List<Test1> myBatisTest2c() {
+
+		List<Test1> ret = testMapper.selectTest1Test2c();
+		return ret;
+	}
+
 	@RequestMapping("/MybatisTest3")
 	public Test3 myBatisTest3() {
 

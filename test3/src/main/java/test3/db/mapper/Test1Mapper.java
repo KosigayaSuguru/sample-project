@@ -56,4 +56,7 @@ public interface Test1Mapper {
 	List<Test1Test2Dto> selectTest1Test2();
 
 	List<Test1Test2Dto2> selectTest1Test2b();
+
+	List<Test1> selectTest1Test2c();
+
 }

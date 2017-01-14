@@ -144,4 +144,23 @@
 		from test1 as a
 		join test2 as b on a.id = b.test1_id
 	</select>
+
+	<resultMap id="Test1Entity" type="Test1" autoMapping="true">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<collection property="test2" ofType="Test2" columnPrefix="prefix_" autoMapping="true" />
+	</resultMap>
+
+	<select id="selectTest1Test2c" resultMap="Test1Entity">
+		select
+		a.id,
+		a.test1_col1,
+		a.test1_col2,
+		b.id as prefix_id,
+		b.test1_id as prefix_test1_id,
+		b.test2_col1 as prefix_test2_col1,
+		b.test2_col2 as prefix_test2_col2
+		from test1 as a
+		join test2 as b on a.id = b.test1_id
+	</select>
+
 </mapper>
