@@ -133,6 +133,7 @@
 	</select>
 
 	<!-- SQLの結果を1行ごとに全部マッピング sample -->
+	<!-- selectに * を使うと別テーブルでカラム名が異なる場合、テーブルに対応したカラム値が入らないため注意 -->
 	<!-- ※HasManyの方を推奨 -->
 	<resultMap autoMapping="true" id="test1test2Map2" type="Test1Test2Dto2">
 		<association autoMapping="true" javaType="Test1" property="test1" />
@@ -145,12 +146,12 @@
 		join test2 as b on a.id = b.test1_id
 	</select>
 
-	<resultMap autoMapping="true" id="Test1Entity" type="Test1">
+	<resultMap autoMapping="true" id="selectTest1Test2c" type="Test1">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<collection autoMapping="true" columnPrefix="prefix_" ofType="Test2" property="test2" />
 	</resultMap>
 
-	<select id="selectTest1Test2c" resultMap="Test1Entity">
+	<select id="selectTest1Test2c" resultMap="selectTest1Test2c">
 		select
 		a.id,
 		a.test1_col1,
@@ -163,7 +164,8 @@
 		join test2 as b on a.id = b.test1_id
 	</select>
 
-	<resultMap extends="BaseResultMap" id="Test1d" type="Test1">
+	<!-- コレクションの中にコレクションを入れる -->
+	<resultMap extends="BaseResultMap" id="selectTest1Test2d" type="Test1">
 		<collection columnPrefix="b_" ofType="Test2" property="test2">
 			<id column="id" jdbcType="INTEGER" property="id" />
 			<result column="test1_id" jdbcType="INTEGER" property="test1Id" />
@@ -179,7 +181,7 @@
 		</collection>
 	</resultMap>
 
-	<select id="selectTest1Test2d" resultMap="Test1d">
+	<select id="selectTest1Test2d" resultMap="selectTest1Test2d">
 		select
 		a.id,
 		a.test1_col1,
@@ -192,6 +194,39 @@
 		c.test2_id as b_c_test2_id,
 		c.enum_test as b_c_enum_test,
 		c.update_date as b_c_update_date
+		from test1 as a
+		join test2 as b on a.id = b.test1_id
+		join test3 as c on b.id = c.test2_id
+	</select>
+
+	<!-- 一番原始的な方法 -->
+	<resultMap id="selectTest1Test2e" type="Test1Test2Dto3">
+		<result column="id" jdbcType="INTEGER" property="aid" />
+		<result column="test1_col1" jdbcType="INTEGER" property="test1Col1" />
+		<result column="test1_col2" jdbcType="INTEGER" property="test1Col2" />
+		<result column="id" jdbcType="INTEGER" property="bid" />
+		<result column="test1_id" jdbcType="INTEGER" property="test1Id" />
+		<result column="test2_col1" jdbcType="INTEGER" property="test2Col1" />
+		<result column="test2_col2" jdbcType="INTEGER" property="test2Col2" />
+		<result column="id" jdbcType="INTEGER" property="cid" />
+		<result column="test2_id" jdbcType="INTEGER" property="test2Id" />
+		<result column="enum_test" jdbcType="CHAR" property="enumTest" />
+		<result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+	</resultMap>
+
+	<select id="selectTest1Test2e" resultMap="selectTest1Test2e">
+		select
+		a.id as aid,
+		a.test1_col1,
+		a.test1_col2,
+		b.id as bid,
+		b.test1_id as test1_id,
+		b.test2_col1 as test2_col1,
+		b.test2_col2 as test2_col2,
+		c.id as cid,
+		c.test2_id as test2_id,
+		c.enum_test as enum_test,
+		c.update_date as update_date
 		from test1 as a
 		join test2 as b on a.id = b.test1_id
 		join test3 as c on b.id = c.test2_id

@@ -10,6 +10,7 @@ import test3.db.entity.Test1;
 import test3.db.entity.Test2;
 import test3.db.entity.dto.Test1Test2Dto;
 import test3.db.entity.dto.Test1Test2Dto2;
+import test3.db.entity.dto.Test1Test2Dto3;
 
 public interface Test1Mapper {
 
@@ -61,5 +62,7 @@ public interface Test1Mapper {
 	List<Test1> selectTest1Test2c();
 
 	List<Test1> selectTest1Test2d();
+
+	List<Test1Test2Dto3> selectTest1Test2e();
 
 }
