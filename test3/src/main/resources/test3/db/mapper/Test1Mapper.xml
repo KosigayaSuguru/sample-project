@@ -204,6 +204,31 @@
 		join test3 as c on b.id = c.test2_id
 	</select>
 
+	<!-- コレクションの中にコレクションを入れる -->
+	<resultMap id="selectTest1Test2d2" type="ForD2Test1Dto" autoMapping="true">
+		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List" autoMapping="true">
+			<collection columnPrefix="c_" ofType="Test3" property="test3List" autoMapping="true" />
+		</collection>
+	</resultMap>
+
+	<select id="selectTest1Test2d2" resultMap="selectTest1Test2d2">
+		select
+		a.id,
+		a.test1_col1,
+		a.test1_col2,
+		b.id as b_id,
+		b.test1_id as b_test1_id,
+		b.test2_col1 as b_test2_col1,
+		b.test2_col2 as b_test2_col2,
+		c.id as b_c_id,
+		c.test2_id as b_c_test2_id,
+		c.enum_test as b_c_enum_test,
+		c.update_date as b_c_update_date
+		from test1 as a
+		join test2 as b on a.id = b.test1_id
+		join test3 as c on b.id = c.test2_id
+	</select>
+
 	<!-- 一番原始的な方法 -->
 	<resultMap id="selectTest1Test2e" type="Test1Test2Dto3">
 		<result column="aid" jdbcType="INTEGER" property="aid" />
