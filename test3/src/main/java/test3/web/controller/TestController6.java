@@ -12,6 +12,7 @@ import test3.bean.TestScopeBean;
 import test3.db.entity.Test1;
 import test3.db.entity.Test2;
 import test3.db.entity.Test3;
+import test3.db.entity.dto.ForD2Test1Dto;
 import test3.db.entity.dto.Test1Test2Dto;
 import test3.db.entity.dto.Test1Test2Dto2;
 import test3.db.entity.dto.Test1Test2Dto3;
@@ -78,9 +79,9 @@ public class TestController6 extends WebApplicationObjectSupport {
 	}
 
 	@RequestMapping("/MybatisTest2d2")
-	public List<Test1> myBatisTest2d2() {
+	public List<ForD2Test1Dto> myBatisTest2d2() {
 
-		List<Test1> ret = testMapper.selectTest1Test2d2();
+		List<ForD2Test1Dto> ret = testMapper.selectTest1Test2d2();
 		return ret;
 	}
 

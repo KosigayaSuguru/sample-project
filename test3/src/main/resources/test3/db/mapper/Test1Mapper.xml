@@ -204,10 +204,19 @@
 		join test3 as c on b.id = c.test2_id
 	</select>
 
-	<!-- コレクションの中にコレクションを入れる -->
-	<resultMap id="selectTest1Test2d2" type="ForD2Test1Dto" autoMapping="true">
-		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List" autoMapping="true">
-			<collection columnPrefix="c_" ofType="Test3" property="test3List" autoMapping="true" />
+	<resultMap extends="BaseResultMap" id="selectTest1Test2d2" type="ForD2Test1Dto">
+		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List" >
+			<id column="id" jdbcType="INTEGER" property="id" />
+			<result column="test1_id" jdbcType="INTEGER" property="test1Id" />
+			<result column="test2_col1" jdbcType="INTEGER" property="test2Col1" />
+			<result column="test2_col2" jdbcType="INTEGER" property="test2Col2" />
+
+			<collection columnPrefix="c_" ofType="Test3" property="test3List">
+				<id column="id" jdbcType="INTEGER" property="id" />
+				<result column="test2_id" jdbcType="INTEGER" property="test2Id" />
+				<result column="enum_test" jdbcType="CHAR" property="enumTest" />
+				<result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+			</collection>
 		</collection>
 	</resultMap>
 

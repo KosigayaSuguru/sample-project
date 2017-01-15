@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import test3.db.entity.Test1;
-import test3.db.entity.Test2;
+import test3.db.entity.dto.ForD2Test1Dto;
 import test3.db.entity.dto.Test1Test2Dto;
 import test3.db.entity.dto.Test1Test2Dto2;
 import test3.db.entity.dto.Test1Test2Dto3;
@@ -69,7 +69,7 @@ public interface Test1Mapper {
 
 	List<Test1> selectTest1Test2d();
 
-	List<Test1> selectTest1Test2d2();
+	List<ForD2Test1Dto> selectTest1Test2d2();
 
 	List<Test1Test2Dto3> selectTest1Test2e();
 
