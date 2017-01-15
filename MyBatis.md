@@ -278,12 +278,20 @@ Test1
 	<!-- autoMappingを指定するとListの部分がバインドされないため、マッピング部分は自動生成ソースからextendsする -->
 	<resultMap extends="BaseResultMap" id="selectTest1Test2d2" type="ForD2Test1Dto">
 
+		<!-- Test2をコレクションで格納するための定義 -->
 		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List" >
+
+			<!-- Test2用のバインドの定義 -->
 			<!-- autoMapping、別ネームスペースのresultMap参照を指定するとListの部分がバインドされないため、仕方ないので自力で書く -->
+			<!-- ※といっても、Test2Mapper.xmlの BaseResultMap からコピペするだけ -->
 			<id column="id" jdbcType="INTEGER" property="id" />
 			<result column="test1_id" jdbcType="INTEGER" property="test1Id" />
 
+			<!-- Test3をコレクションで格納するための定義 -->
 			<collection columnPrefix="c_" ofType="Test3" property="test3List">
+
+				<!-- Test3用のバインドの定義 -->
+				<!-- Test3Mapper.xmlの BaseResultMap をコピペする -->
 				<id column="id" jdbcType="INTEGER" property="id" />
 			</collection>
 		</collection>
