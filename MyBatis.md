@@ -27,28 +27,28 @@ http://qiita.com/YAKINIKU/items/9d7886a456e533555f80
 難しく感じがちですが、基本的な思想は至極シンプルです。  
 columnで指定したSQLのカラムが、propetyで指定したjavaのプロパティにバインドされるだけです。  
 ここでは下記のテーブルの構成をすべて結合し、その結果が欲しい場合をサンプルに考えます。  
-※SQLの実行結果の1レコードにつき、1Dtoインスタンスが生成されるパターン。  
+※SQLの実行結果の1行につき1DTOインスタンスが生成されるパターン。  
 
-test1
+test1テーブル
 
 |id|
 |:--:|
 |1|
 |2|
 
-test2
+test2テーブル
 
 |id|test1_id|
-|:--:||
+|:--:|--:|
 |1|1|
 |2|1|
 |3|2|
 |4|2|
 
-test3
+test3テーブル
 
 |id|test2_id|
-|:--:||
+|:--:|--:|
 |1|1|
 |2|1|
 |3|2|
@@ -170,6 +170,7 @@ public class Test1Test2Dto3 { --(4)で指定されるJavaクラスの定義
 いちいちコピペしてDTOつくるのめんどくさい。。となると思います。  
 この場合、自動生成されるエンティティクラスと、Mybatisのassociateを使ってマッピングします。  
 凄くシンプルになります。  
+※SQLの実行結果の1行につき1DTOインスタンスが生成されるパターン。  
 
 サンプルとして、Test1Test2Dto2.javaの中で、Test1,2,3用のプロパティをそれぞれ用意し、  
 SQLのカラムの先頭に
@@ -264,3 +265,70 @@ public class Test1Test2Dto2 {
 		</association>
 	</resultMap>
 ```
+
+## マッピングの応用(1行1DTOではなく、重複部分をコレクションにする)
+
+### 記載手順
+
+バインドされた結果が下記の構成になるようにマッピングする。  
+説明しづらいので見てわかる人だけ頑張る。  
+
+Test1  
+　+Test2のリスト  
+　　+Test3のリスト  
+
+```xml
+<!-- Test1Mapper.xml (マッパーxmlファイル) -->
+
+	<select id="selectTest1Test2d2" resultMap="selectTest1Test2d2">
+		select
+		a.id,
+		a.test1_col1,
+		a.test1_col2,
+		b.id as b_id,
+		b.test1_id as b_test1_id,
+		b.test2_col1 as b_test2_col1,
+		b.test2_col2 as b_test2_col2,
+		c.id as b_c_id,
+		c.test2_id as b_c_test2_id,
+		c.enum_test as b_c_enum_test,
+		c.update_date as b_c_update_date
+		from test1 as a
+		join test2 as b on a.id = b.test1_id
+		join test3 as c on b.id = c.test2_id
+	</select>
+
+	<!-- コレクションの中にコレクションを入れる -->
+	<!-- autoMappingを指定するとListの部分がバインドされないため、マッピング部分は自動生成ソースからextendsする -->
+	<resultMap extends="BaseResultMap" id="selectTest1Test2d2" type="ForD2Test1Dto">
+
+		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List" >
+			<!-- autoMapping、別ネームスペースのresultMap参照を指定するとListの部分がバインドされないため、仕方ないので自力で書く -->
+			<id column="id" jdbcType="INTEGER" property="id" />
+			<result column="test1_id" jdbcType="INTEGER" property="test1Id" />
+
+			<collection columnPrefix="c_" ofType="Test3" property="test3List">
+				<id column="id" jdbcType="INTEGER" property="id" />
+			</collection>
+		</collection>
+	</resultMap>
+```
+
+```java
+//settger,getterは省略
+
+//Test1のエンティティを継承して、Test2のコレクション用のフィールドを作る。
+public class Test1Dto extends Test1 {
+
+	private List<Test2Dto> test2List;
+}
+
+//Test2のエンティティを継承して、Test3のコレクション用のフィールドを作る。
+public class Test2Dto extends Test2 {
+
+	private List<Test3> test3List;
+}
+
+//Test3はエンティティクラスをそのまま使うので省略
+```
+
