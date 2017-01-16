@@ -25,7 +25,7 @@ http://qiita.com/YAKINIKU/items/9d7886a456e533555f80
 ## マッピングの基本(一番シンプルで一番力技)
 
 難しく感じがちですが、基本的な思想は至極シンプルです。  
-columnで指定したSQLのカラムが、propetyで指定したjavaのプロパティにバインドされるだけです。  
+resultタグのcolumnで指定したSQLのカラムが、propetyで指定したjavaのプロパティにバインドされるだけです。  
 ここでは下記のテーブルの構成をすべて結合し、その結果が欲しい場合をサンプルに考えます。  
 ※SQLの実行結果の1行につき1DTOインスタンスが生成されるパターン。  
 
@@ -282,7 +282,7 @@ Test1
 		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List" >
 
 			<!-- Test2用のバインドの定義 -->
-			<!-- autoMapping、別ネームスペースのresultMap参照を指定するとListの部分がバインドされないため、仕方ないので自力で書く -->
+			<!-- autoMapping、別ネームスペースのresultMap参照を指定するとListの部分がバインドされないため、自力で書く -->
 			<!-- ※といっても、Test2Mapper.xmlの BaseResultMap からコピペするだけ -->
 			<id column="id" jdbcType="INTEGER" property="id" />
 			<result column="test1_id" jdbcType="INTEGER" property="test1Id" />
