@@ -12,3 +12,5 @@
 ###### module.exportsのお話
 * http://memo.sugyan.com/entry/20120110/1326197416
 * http://fernweh.jp/b/nodejs-require-exports/
+
+test
