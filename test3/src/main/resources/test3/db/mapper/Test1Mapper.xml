@@ -128,9 +128,9 @@
 	<!-- selectに * を使うと別テーブルでカラム名が異なる場合、テーブルに対応したカラム値が入らないため注意 -->
 	<!-- ※HasManyの方を推奨 -->
 	<resultMap autoMapping="true" id="test1test2Map2" type="Test1Test2Dto2">
-		<association columnPrefix="a_" javaType="Test1" property="test1" autoMapping="true" />
+		<association autoMapping="true" columnPrefix="a_" javaType="Test1" property="test1" />
 		<association columnPrefix="b_" javaType="Test2" property="test2" resultMap="test3.db.mapper.Test2Mapper.BaseResultMap" />
-		<association columnPrefix="c_" javaType="Test3" property="test3" autoMapping="true" />
+		<association autoMapping="true" columnPrefix="c_" javaType="Test3" property="test3" />
 	</resultMap>
 
 	<select id="selectTest1Test2b" resultMap="test1test2Map2">
@@ -205,7 +205,7 @@
 	</select>
 
 	<resultMap extends="BaseResultMap" id="selectTest1Test2d2" type="ForD2Test1Dto">
-		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List" >
+		<collection columnPrefix="b_" ofType="ForD2Test2Dto" property="test2List">
 			<id column="id" jdbcType="INTEGER" property="id" />
 			<result column="test1_id" jdbcType="INTEGER" property="test1Id" />
 			<result column="test2_col1" jdbcType="INTEGER" property="test2Col1" />

@@ -5,6 +5,8 @@
 
 	<context id="context1"  targetRuntime="MyBatis3">
 
+		<property name="javaFileEncoding" value="UTF-8" />
+
         <plugin type="test3.db.mybatis.generator.plugin.FieldVisibilityProtectedPlugin"></plugin>
 
 		<commentGenerator>
