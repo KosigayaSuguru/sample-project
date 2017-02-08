@@ -10,7 +10,6 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import test3.bean.TestScopeBean;
 import test3.db.entity.Test1;
-import test3.db.entity.Test2;
 import test3.db.entity.Test3;
 import test3.db.entity.dto.ForD2Test1Dto;
 import test3.db.entity.dto.Test1Test2Dto;
