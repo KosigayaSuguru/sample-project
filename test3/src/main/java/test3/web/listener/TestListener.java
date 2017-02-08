@@ -1,5 +1,7 @@
 package test3.web.listener;
 
+import test3.web.controller.ListenerController;
+
 public class TestListener extends Thread {
 
 	private String listenerName = "";
@@ -16,9 +18,15 @@ public class TestListener extends Thread {
 
 		while (true) {
 			try {
-				String hoge = myQueue.take();
+				String queueKey = myQueue.take();
 
-				System.out.println(getClass() + "," + listenerName + "," + "get_message " + cnt++ + " -> " + hoge);
+				TestQueue responseQueue = ListenerController.responseQueueMapper.get(queueKey);
+
+				Thread.sleep(2000);
+
+				System.out.println(getClass() + "," + listenerName + "," + "get_message " + cnt++ + " -> " + queueKey);
+
+				responseQueue.put("ListenerReturn:" + queueKey);
 
 			} catch (InterruptedException e1) {
 				// TODO 自動生成された catch ブロック

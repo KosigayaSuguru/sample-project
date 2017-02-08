@@ -28,7 +28,11 @@ public class TestListenerConfig extends WebApplicationObjectSupport {
 		System.out.println(getClass() + ":listener startup");
 
 		threadPool = Executors.newFixedThreadPool(10);
-		threadPool.execute(testListener());
+
+		// リスナーを３スレッド立ち上げる
+		for (int cnt = 0; cnt < 3; cnt++) {
+			threadPool.execute(testListener());
+		}
 	}
 
 	@PreDestroy
