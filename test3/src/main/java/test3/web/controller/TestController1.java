@@ -45,7 +45,7 @@ import test3.web.view.EnumViewName;
 
 @Controller
 @SessionAttributes(types = { TestSession.class, TestForm.class })
-public class TestController extends WebApplicationObjectSupport {
+public class TestController1 extends WebApplicationObjectSupport {
 
 	private TestService testService;
 

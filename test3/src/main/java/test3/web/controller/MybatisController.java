@@ -19,7 +19,7 @@ import test3.db.mapper.Test1Mapper;
 import test3.db.mapper.Test3Mapper;
 
 @RestController
-public class TestController6 extends WebApplicationObjectSupport {
+public class MybatisController extends WebApplicationObjectSupport {
 
 	int a = 0;
 	@Autowired

@@ -11,7 +11,7 @@ import test3.Exception.TestException;
 import test3.Exception.TestRuntimeException;
 
 @Controller
-public class TestController5 extends WebApplicationObjectSupport {
+public class ExceptionController extends WebApplicationObjectSupport {
 
 	@SuppressWarnings("unused")
 	@RequestMapping("/ExceptionTest1")

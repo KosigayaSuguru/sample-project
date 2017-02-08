@@ -9,7 +9,7 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 import test3.bean.TestBean;
 
 @RestController
-public class TestController4 extends WebApplicationObjectSupport {
+public class ApiController extends WebApplicationObjectSupport {
 
 	@RequestMapping("/RestTest1")
 	public TestBean restTest1_1() {
