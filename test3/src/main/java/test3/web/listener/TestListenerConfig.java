@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
@@ -16,7 +15,6 @@ public class TestListenerConfig extends WebApplicationObjectSupport {
 
 	ExecutorService threadPool;
 
-	@Bean
 	TestListener testListener() {
 		ApplicationContext appContext = getApplicationContext();
 		TestListener ret = new TestListener("TestListner", appContext.getBean("testQueue", TestQueue.class));
@@ -31,12 +29,17 @@ public class TestListenerConfig extends WebApplicationObjectSupport {
 
 		// リスナーを３スレッド立ち上げる
 		for (int cnt = 0; cnt < 3; cnt++) {
-			threadPool.execute(testListener());
+			threadPool.submit(testListener());
 		}
 	}
 
 	@PreDestroy
 	void listenerShutdown() {
 		System.out.println(getClass() + ":listener shutdown");
+
+		if (!threadPool.isShutdown()) {
+			// TestListenerでInterruptedExceptionが発生する
+			threadPool.shutdownNow();
+		}
 	}
 }

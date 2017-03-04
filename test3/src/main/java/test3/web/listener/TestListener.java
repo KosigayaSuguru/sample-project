@@ -28,9 +28,9 @@ public class TestListener extends Thread {
 
 				responseQueue.put("ListenerReturn:" + queueKey);
 
+				// 現状、アプリが停止する時以外、割り込みはないので例外処理は不要
+				// ※ExecutorService(tTestListenerConfig.listenerShutdown())からshutdownNow()された場合にしかこない
 			} catch (InterruptedException e1) {
-				// TODO 自動生成された catch ブロック
-				e1.printStackTrace();
 			}
 		}
 	}
