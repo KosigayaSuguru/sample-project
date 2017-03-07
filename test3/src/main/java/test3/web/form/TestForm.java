@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import test3.app.annotation.TestAnnotation;
 
+@SuppressWarnings("serial")
 public class TestForm extends AbstractForm {
 
 	@NotEmpty
@@ -18,7 +19,7 @@ public class TestForm extends AbstractForm {
 	@NotBlank(message = "{Error.validate.message.blank}")
 	public String name3;
 
-	@TestAnnotation(message = "{Error.validate.message.testAnnotation}", field="FIELD_TEST")
+	@TestAnnotation(message = "{Error.validate.message.testAnnotation}", field = "FIELD_TEST")
 	@NotEmpty
 	public String name4;
 

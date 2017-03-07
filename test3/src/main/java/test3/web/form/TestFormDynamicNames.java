@@ -2,6 +2,7 @@ package test3.web.form;
 
 import javax.validation.constraints.Pattern;
 
+@SuppressWarnings("serial")
 public class TestFormDynamicNames extends AbstractForm {
 
 	@Pattern(regexp = "[a-z]")
@@ -27,8 +28,8 @@ public class TestFormDynamicNames extends AbstractForm {
 	}
 
 	@Override
-	public String toString(){
-		return "[name1]:"+name1 + " " + "[name2]:"+name2;
+	public String toString() {
+		return "[name1]:" + name1 + " " + "[name2]:" + name2;
 	}
 
 }

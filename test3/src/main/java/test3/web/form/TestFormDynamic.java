@@ -5,9 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
+@SuppressWarnings("serial")
 public class TestFormDynamic extends AbstractForm {
 
-	@Pattern(regexp ="[A-Z]")
+	@Pattern(regexp = "[A-Z]")
 	String test;
 
 	@Valid
