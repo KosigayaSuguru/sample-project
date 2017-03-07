@@ -2,6 +2,8 @@ package test3.web.controller;
 
 import java.util.HashMap;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
@@ -37,17 +39,34 @@ public class ApiController extends WebApplicationObjectSupport {
 	public HashMap<String, Object> restTest2() {
 
 		HashMap<String, Object> moge = new HashMap<>();
-		moge.put("moge1","mogee1");
-		String[] array = {"array1","array2","array3","array4"};
-
+		moge.put("moge1", "mogee1");
+		String[] array = { "array1", "array2", "array3", "array4" };
 
 		HashMap<String, Object> hoge = new HashMap<>();
-		hoge.put("aaaa","aaaa1");
-		hoge.put("bbbb",moge);
-		hoge.put("cccc","aaaa3");
-		hoge.put("dddd","aaaa4");
-		hoge.put("eeee","aaaa5");
-		hoge.put("ffff",array);
+		hoge.put("aaaa", "aaaa1");
+		hoge.put("bbbb", moge);
+		hoge.put("cccc", "aaaa3");
+		hoge.put("dddd", "aaaa4");
+		hoge.put("eeee", "aaaa5");
+		hoge.put("ffff", array);
+		return hoge;
+	}
+
+	// producesにjsonを指定すると、json形式で返却するようになる
+	@GetMapping(value = "/RestJson", produces = MediaType.APPLICATION_JSON_VALUE)
+	public HashMap<String, Object> restJson() {
+
+		HashMap<String, Object> moge = new HashMap<>();
+		moge.put("moge1", "mogee1");
+		String[] array = { "array1", "array2", "array3", "array4" };
+
+		HashMap<String, Object> hoge = new HashMap<>();
+		hoge.put("aaaa", "aaaa1");
+		hoge.put("bbbb", moge);
+		hoge.put("cccc", "aaaa3");
+		hoge.put("dddd", "aaaa4");
+		hoge.put("eeee", "aaaa5");
+		hoge.put("ffff", array);
 		return hoge;
 	}
 }
