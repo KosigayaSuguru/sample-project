@@ -3,12 +3,16 @@ package test3.web.controller;
 import java.util.HashMap;
 
 import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import test3.bean.TestBean;
+import test3.web.form.JsonRequestForm;
 
 @RestController
 public class ApiController extends WebApplicationObjectSupport {
@@ -53,6 +57,8 @@ public class ApiController extends WebApplicationObjectSupport {
 	}
 
 	// producesにjsonを指定すると、json形式で返却するようになる
+	//
+	// http://localhost:8080/hoge/RestJson
 	@GetMapping(value = "/RestJson", produces = MediaType.APPLICATION_JSON_VALUE)
 	public HashMap<String, Object> restJson() {
 
@@ -68,5 +74,18 @@ public class ApiController extends WebApplicationObjectSupport {
 		hoge.put("eeee", "aaaa5");
 		hoge.put("ffff", array);
 		return hoge;
+	}
+
+	// producesにjsonを指定すると、json形式で返却するようになる
+	// @ModelAttributeを使うとGetのパラメータがformに格納される
+	// BindingResultを指定すると、form.numに文字列が指定されても例外で落ちず、バインドエラー結果がBindingResultに格納される
+	// ※BindingResultがないと例外を出力し、クライアントには400エラーを返す
+	//
+	// http://localhost:8080/hoge/RestJson2?str=test&num=77
+	// http://localhost:8080/hoge/RestJson2?str=test&num=hoge
+	@GetMapping(value = "/RestJson2", produces = MediaType.APPLICATION_JSON_VALUE)
+	public JsonRequestForm restJson2(@Validated @ModelAttribute JsonRequestForm form, BindingResult bindingResult) {
+
+		return form;
 	}
 }
