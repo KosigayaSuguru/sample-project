@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 
 import test3.bean.TestBean;
 import test3.web.form.JsonRequestForm;
+import test3.web.form.JsonRequestForm.ErrorMessageObj;
 
 @RestController
 public class ApiController extends WebApplicationObjectSupport {
@@ -85,6 +87,14 @@ public class ApiController extends WebApplicationObjectSupport {
 	// http://localhost:8080/hoge/RestJson2?str=test&num=hoge
 	@GetMapping(value = "/RestJson2", produces = MediaType.APPLICATION_JSON_VALUE)
 	public JsonRequestForm restJson2(@Validated @ModelAttribute JsonRequestForm form, BindingResult bindingResult) {
+
+		for (FieldError err : bindingResult.getFieldErrors()) {
+			ErrorMessageObj aaa = form.new ErrorMessageObj();
+			aaa.field = err.getField();
+			aaa.message = err.getDefaultMessage();
+
+			form.getErrors().add(aaa);
+		}
 
 		return form;
 	}
