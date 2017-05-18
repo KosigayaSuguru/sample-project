@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Properties;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import test3.TestEnumStatus;
@@ -73,7 +75,10 @@ public class AppConfig {
 		}
 
 		PropertyPlaceholderConfigurer holder = new PropertyPlaceholderConfigurer();
-		holder.setLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/config/" + profile + "/*.properties"));
+		Resource[] resources1 = new PathMatchingResourcePatternResolver().getResources("classpath:/config/common/*.properties");
+		Resource[] resources2 = new PathMatchingResourcePatternResolver().getResources("classpath:/config/" + profile + "/*.properties");
+		Resource[] addAll = (Resource[]) ArrayUtils.addAll(resources2, resources1);
+		holder.setLocations(addAll);
 		holder.setFileEncoding("UTF-8");
 		return holder;
 	}
