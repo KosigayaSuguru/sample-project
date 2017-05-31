@@ -23,6 +23,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 	<!-- <aop:config proxy-target-class="true" /> -->
 	<aop:aspectj-autoproxy proxy-target-class="false" />
 	<tx:annotation-driven proxy-target-class="false" />
+	<context:load-time-weaver aspectj-weaving="on" />
 
 	<!-- 設定は WebMvcConfig.java へ -->
 	<!-- <bean id="validator" -->
