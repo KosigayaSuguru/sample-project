@@ -5,23 +5,14 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-// SpringAOPではなくAspectJを使う
-// resourcesの下にMETA-INF/aop.xmlを置く
-// spring-servlet.xmlに<context:load-time-weaver aspectj-weaving="on" />を追加
-// tomcatの起動VMオプションに -javaagent:"D:\java\.m2\repository\org\aspectj\aspectjweaver\1.8.7\aspectjweaver-1.8.7.jar"
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class TestAspectSpringAOP {
 
-	@Around("execution(public * test3..AsyncController.*(..))")
+	@Around("execution(public * test3..*.*(..))")
 	public Object around1(ProceedingJoinPoint point) throws Throwable {
-
-		return impl(point);
-	}
-
-	@Around("execution(public * test3..TestController1.*(..))")
-	public Object around2(ProceedingJoinPoint point) throws Throwable {
 
 		return impl(point);
 	}
@@ -29,9 +20,9 @@ public class TestAspectSpringAOP {
 	private Object impl(ProceedingJoinPoint point) throws Throwable, Exception {
 		Logger logger = LoggerFactory.getLogger(point.getTarget().getClass());
 		try {
-			logger.info("[AspectJ:BEGIN] " + point.getSignature().toString());
+			logger.info("[SpringAOP:BEGIN] " + point.getSignature().toString());
 			Object obj = point.proceed();
-			logger.info("[AspectJ:END] " + point.getSignature().toString());
+			logger.info("[SpringAOP:END] " + point.getSignature().toString());
 
 			return obj;
 
