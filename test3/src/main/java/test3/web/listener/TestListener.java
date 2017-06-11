@@ -31,6 +31,7 @@ public class TestListener extends Thread {
 				// 現状、アプリが停止する時以外、割り込みはないので例外処理は不要
 				// ※ExecutorService(tTestListenerConfig.listenerShutdown())からshutdownNow()された場合にしかこない
 			} catch (InterruptedException e1) {
+				break;
 			}
 		}
 	}
