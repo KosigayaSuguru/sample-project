@@ -9,6 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
+import javax.annotation.PreDestroy;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -24,10 +26,18 @@ import okhttp3.Request;
 @RestController
 public class AsyncController extends WebApplicationObjectSupport {
 
+	ExecutorService requestExecutor = Executors.newFixedThreadPool(40);
+
+	@PreDestroy
+	void threadShutdown() {
+		if (!requestExecutor.isShutdown()) {
+			requestExecutor.shutdown();
+			requestExecutor.shutdownNow();
+		}
+	}
+
 	@RequestMapping(value = "/Async1", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String async1() throws Exception {
-
-		ExecutorService requestExecutor = Executors.newFixedThreadPool(40);
 
 		ArrayList<FutureTask<String>> list = new ArrayList<>();
 
