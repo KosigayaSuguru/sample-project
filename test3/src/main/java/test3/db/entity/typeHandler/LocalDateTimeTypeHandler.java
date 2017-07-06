@@ -14,6 +14,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 
+/* <!-- https://github.com/javaplugs/mybatis-types --> */
 @MappedTypes(LocalDateTime.class)
 public class LocalDateTimeTypeHandler extends BaseTypeHandler<LocalDateTime> {
 
