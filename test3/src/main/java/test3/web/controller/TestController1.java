@@ -32,6 +32,7 @@ import test3.TestEnumStatus;
 import test3.app.service.TestService;
 import test3.bean.TestBean;
 import test3.db.entity.TestEntity;
+import test3.domain_object.TestDomainObject;
 import test3.web.form.TestForm;
 import test3.web.sesstion.TestSession;
 import test3.web.view.EnumViewName;
@@ -58,7 +59,7 @@ public class TestController1 extends WebApplicationObjectSupport {
 	@Value(value = "${hoge.test}")
 	private String hoge;
 
-	@Value(value ="${spring.profiles.active}")
+	@Value(value = "${spring.profiles.active}")
 	private String spring_profiles_active;
 
 	@Resource
@@ -110,7 +111,7 @@ public class TestController1 extends WebApplicationObjectSupport {
 		ApplicationContext context = getApplicationContext();
 		InternalResourceViewResolver rsl = (InternalResourceViewResolver) context
 				.getBean("org.springframework.web.servlet.view.InternalResourceViewResolver");
-				// Test spring DI getBean ->
+		// Test spring DI getBean ->
 
 		// Test spring jdbcTemplete <-
 		RowMapper<TestEntity> mapper = new BeanPropertyRowMapper<TestEntity>(TestEntity.class);
@@ -160,25 +161,25 @@ public class TestController1 extends WebApplicationObjectSupport {
 		// タイプセーフEnum（たまたま型が同じだった全然関係ない値との比較、代入等を防ぐ） -<
 		String nextView = "";
 		switch (testBean.getTestStatus()) {
-		case TEST_STATUS1:
-			// 列挙に対応したコード値が欲しい場合は↓みたいな感じ
-			System.out.println(TestEnumStatus.TEST_STATUS1.getCode());
+			case TEST_STATUS1:
+				// 列挙に対応したコード値が欲しい場合は↓みたいな感じ
+				System.out.println(TestEnumStatus.TEST_STATUS1.getCode());
 
-			// 処理結果に応じた次画面用のView名を取得する
-			nextView = EnumViewName.TYMELEAF_SAMLE.getViewName();
+				// 処理結果に応じた次画面用のView名を取得する
+				nextView = EnumViewName.TYMELEAF_SAMLE.getViewName();
 
-			break;
-		case TEST_STATUS2:
-			// 取りあえず省略
-			break;
+				break;
+			case TEST_STATUS2:
+				// 取りあえず省略
+				break;
 
-		case TEST_STATUS3:
-			// 取りあえず省略
-			break;
+			case TEST_STATUS3:
+				// 取りあえず省略
+				break;
 
-		default:
-			// 取りあえず省略
-			break;
+			default:
+				// 取りあえず省略
+				break;
 		}
 		// タイプセーフEnum ->
 
@@ -188,6 +189,10 @@ public class TestController1 extends WebApplicationObjectSupport {
 			sess.str1 = "TestSession.str1";
 			model.addAttribute("sessionTest", sess);
 		}
+
+		TestDomainObject domainObject = new TestDomainObject();
+		model.addAttribute("domainObject", domainObject);
+
 		return nextView;
 	}
 
@@ -209,13 +214,14 @@ public class TestController1 extends WebApplicationObjectSupport {
 	public String velocityTestConfirm(@Validated @ModelAttribute("testForm") TestForm form, BindingResult result,
 			Model model) {
 
-		System.out.println("testForm=" + form);;
+		System.out.println("testForm=" + form);
+		;
 
 		// error_message.propertiesからコード値を元にメッセージを引っ張ってくる
 		result.getAllErrors().stream().forEach(System.out::println);
 		FieldError fieldErr = null;
 
-		//name1はコード値を直接指定
+		// name1はコード値を直接指定
 		String errorName1 = messageSource.getMessage("NotEmpty.testForm.name1", null, Locale.getDefault());
 		model.addAttribute("errorName1", errorName1);
 
