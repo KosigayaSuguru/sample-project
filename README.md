@@ -1,4 +1,10 @@
-練習プロジェクト集
+# アプリケーションを起動させる為に必要なtomcatの引数
+
+```
+-Dhoge.test="SYSTEM PROPERTY" -Dspring.profiles.active="local" -javaagent:"D:\java\.m2\repository\org\aspectj\aspectjweaver\1.8.7\aspectjweaver-1.8.7.jar"
+```
+
+# 練習プロジェクト集
 
 ---
 
