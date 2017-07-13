@@ -6,12 +6,12 @@
         <Append>true</Append>
         <encoder>
             <charset>UTF-8</charset>
-            <pattern>[local]${format}</pattern>
+            <pattern><![CDATA[[local]${format}]]></pattern>
         </encoder>
     </appender>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>[local]${format}</pattern>
+            <pattern><![CDATA[[local]${format}]]></pattern>
         </encoder>
     </appender>
     <root>
