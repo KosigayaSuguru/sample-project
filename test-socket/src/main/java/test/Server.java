@@ -1,5 +1,6 @@
 package test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -31,24 +32,29 @@ public class Server {
 				log.debug("getInputstream");
 
 				int a = 0;
-
+				ByteArrayOutputStream bstream = new ByteArrayOutputStream();
 				while (true) {
 					a = stream.read();
 					log.debug("receive data:{}", a);
 
+					bstream.write(a);
+
+					// 終端文字が来てる時の処理
 					if (a == -1) {
-						break;
+						StringBuilder ss = new StringBuilder();
+						for (byte b : bstream.toByteArray()) {
+							ss.append(String.format("[%2d]", b));
+						}
+						log.debug("receive all data:{}", ss);
+
+						// 終端のみが来ている場合、相手にクローズされているのでループを抜ける
+						if (bstream.size() == 1) {
+							break;
+						}
+						bstream.reset();
 					}
 				}
-
-				while (true) {
-					a = stream.read();
-					log.debug("receive data2:{}", a);
-
-					if (a == -1) {
-						break;
-					}
-				}
+				bstream.close();
 
 				socket.close();
 				log.debug("socket close");

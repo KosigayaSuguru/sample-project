@@ -15,6 +15,8 @@ S→即 -1 が返ってくる
 という形になる。  
   
 ### 生ログ
+
+```
 2017-09-10 03:22:10 [main] DEBUG test.Server - server open  
 2017-09-10 03:22:10 [main] DEBUG test.Server - socket accept wait  
 2017-09-10 03:22:12 [main] DEBUG test.Server - socket accept  
@@ -35,3 +37,4 @@ S→即 -1 が返ってくる
 2017-09-10 03:22:27 [main] DEBUG test.Server - socket close  
 2017-09-10 03:22:27 [main] DEBUG test.Server - end  
 2017-09-10 03:22:27 [main] DEBUG test.Server - socket accept wait  
+```
