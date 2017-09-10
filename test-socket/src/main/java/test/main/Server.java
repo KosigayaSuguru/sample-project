@@ -1,6 +1,7 @@
 package test.main;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -86,6 +87,11 @@ public class Server {
 							}
 							bstream.reset();
 							log.debug("receive part of data:{}", ss);
+
+							// 受信確認の応答送信
+							DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+							byte[] b = { 'r', 'e', 's', ' ', 'o', 'k', '\0', '\0' };
+							outputStream.write(b);
 							continue;
 						}
 
@@ -111,8 +117,11 @@ public class Server {
 					log.debug("end");
 					break;
 
+					// socket.close()以外の正規の手順を踏まずに接続が切れた場合、例外が吐かれるっぽい。。
+					// ※例：readブロック中に相手がCtrl+Cでアプリを終わらせたりとか
 				} catch (Exception e) {
 					log.debug(e.getMessage(), e);
+					break;
 				}
 
 			}
