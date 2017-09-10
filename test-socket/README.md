@@ -190,3 +190,47 @@ C→close
 2017-09-10 11:38:17 [main] DEBUG t.受.Client - flush
 2017-09-10 11:38:17 [main] DEBUG t.受.Client - close
 ```
+
+## 受信者が送信者のwriteより先にソケットをcloseする3
+  
+CS→接続  
+S→getInputStream  
+S→socket.close  
+C→getOutputsream  
+C→write  
+C→flush  
+C→close  
+C→getInputStream  
+C→read  
+C→例外  
+  
+2の亜種で、2で送信者がflushした後、getInputStream,とreadする。  
+readのタイミングで例外が発生する。  
+
+### 生ログ
+
+```
+2017-09-10 21:29:24 [main] DEBUG t.受.Server - server open
+2017-09-10 21:29:24 [main] DEBUG t.受.Server - socket accept wait
+2017-09-10 21:29:26 [main] DEBUG t.受.Server - socket accept
+2017-09-10 21:29:26 [main] DEBUG t.受.Server - waiting...1s
+2017-09-10 21:29:27 [main] DEBUG t.受.Client - open socket
+2017-09-10 21:29:27 [main] DEBUG t.受.Client - waiting...5s
+2017-09-10 21:29:28 [main] DEBUG t.受.Server - getInputstream
+2017-09-10 21:29:28 [main] DEBUG t.受.Server - socket close
+2017-09-10 21:29:28 [main] DEBUG t.受.Server - end
+2017-09-10 21:29:28 [main] DEBUG t.受.Server - socket accept wait
+2017-09-10 21:29:32 [main] DEBUG t.受.Client - getOutputstream
+2017-09-10 21:29:32 [main] DEBUG t.受.Client - write
+2017-09-10 21:29:32 [main] DEBUG t.受.Client - flush
+2017-09-10 21:29:32 [main] DEBUG t.受.Client - getInputStream
+2017-09-10 21:29:32 [main] DEBUG t.受.Client - read wait
+2017-09-10 21:29:32 [main] DEBUG t.受.Client - Software caused connection abort: recv failed
+java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:224)
+	at test.受信者が送信者のwriteより先にソケットをcloseする3.Client.main(Client.java:37)
+```
