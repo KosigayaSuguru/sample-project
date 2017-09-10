@@ -234,3 +234,31 @@ java.net.SocketException: Software caused connection abort: recv failed
 	at java.net.SocketInputStream.read(SocketInputStream.java:224)
 	at test.受信者が送信者のwriteより先にソケットをcloseする3.Client.main(Client.java:37)
 ```
+
+## 受信者が送信者のwriteより先にソケットをcloseする4
+  
+CS→接続  
+S→getInputStream  
+S→socket.close  
+C→getInputStream  
+C→read = -1  
+C→close
+  
+3の送信者がflush無し版。writeのための処理をしないで、送信者がgetInputStreamとreadする。  
+readのタイミングで例外が発生せず、普通に終端(-1)を受けてcloseしている。  
+
+### 生ログ
+
+```
+2017-09-11 00:38:33 [main] DEBUG t.受.Server - socket accept
+2017-09-11 00:38:33 [main] DEBUG t.受.Server - waiting...1s
+2017-09-11 00:38:33 [main] DEBUG t.受.Client - open socket
+2017-09-11 00:38:33 [main] DEBUG t.受.Client - waiting...5s
+2017-09-11 00:38:34 [main] DEBUG t.受.Server - getInputstream
+2017-09-11 00:38:34 [main] DEBUG t.受.Server - socket close
+2017-09-11 00:38:34 [main] DEBUG t.受.Server - end
+2017-09-11 00:38:34 [main] DEBUG t.受.Server - socket accept wait
+2017-09-11 00:38:38 [main] DEBUG t.受.Client - getInputStream
+2017-09-11 00:38:38 [main] DEBUG t.受.Client - read wait
+2017-09-11 00:38:38 [main] DEBUG t.受.Client - close
+```
