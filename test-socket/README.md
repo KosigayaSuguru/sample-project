@@ -95,6 +95,35 @@ S→即 -1 が返ってくる
 2017-09-10 11:57:17 [main] DEBUG t.送.Server - socket accept wait
 ```
 
+## 送信者が受信者がreadブロックしている時に ctrl+c する
+  
+CS→接続  
+S→getInputStream  
+S→readブロック  
+C→System.exit()  
+S→例外(Connection reset)  
+  
+### 生ログ
+
+```
+2017-09-10 20:16:44 [main] DEBUG t.送.Server - server open
+2017-09-10 20:16:44 [main] DEBUG t.送.Server - socket accept wait
+2017-09-10 20:16:47 [main] DEBUG t.送.Server - socket accept
+2017-09-10 20:16:47 [main] DEBUG t.送.Server - waiting...5s
+2017-09-10 20:16:47 [main] DEBUG t.送.Client - open socket
+2017-09-10 20:16:47 [main] DEBUG t.送.Client - waiting...10s
+2017-09-10 20:16:52 [main] DEBUG t.送.Server - getInputstream
+2017-09-10 20:16:52 [main] DEBUG t.送.Server - start read wait
+2017-09-10 20:16:57 [main] DEBUG t.送.Client - getOutputstream
+2017-09-10 20:16:57 [main] DEBUG t.送.Server - Connection reset
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:210)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:224)
+	at test.送信者が受信者のreadブロック中にCtrl_Cする.Server.main(Server.java:38)
+2017-09-10 20:16:57 [main] DEBUG t.送.Server - socket accept wait
+```
+
 ## 受信者が送信者のwriteより先にソケットをcloseする1
   
 CS→接続  
