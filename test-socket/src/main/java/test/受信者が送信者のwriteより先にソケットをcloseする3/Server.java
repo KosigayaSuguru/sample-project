@@ -27,8 +27,8 @@ public class Server {
 				log.debug("waiting...{}s", sleep / 1000);
 				Thread.sleep(sleep);
 
-				InputStream stream = socket.getInputStream();
 				log.debug("getInputstream");
+				InputStream stream = socket.getInputStream();
 
 				socket.close();
 				log.debug("socket close");
