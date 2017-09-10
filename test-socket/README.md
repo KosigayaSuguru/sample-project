@@ -2,9 +2,10 @@
   
 ざくっというと、
 
-* readブロック中に相手がcloseすると、readが-1（終端応答）を返す。
-* readブロック中に相手がclose以外の方法で切断すると、例外が発生する。（Ctrl+Cで終了させるとか、closeしないままアプリが終わるとか等）
-* writeは相手がcloseしてもできる（例外にならない）。
+* readブロック中に相手がclose()すると、read()が-1（終端応答）を返す。
+* readブロック中に相手がclose()以外の方法で切断すると、例外が発生する。（Ctrl+Cで終了させるとか、closeしないままアプリが終わるとか等）
+* write()は相手がclose()してもできる（例外にならない）。
+* 通信相手の生存確認が必要な場合、read()してみてエラーになるかどうかで確認するのがいいような気がする
 
 ## 送信者が受信者のreadより先にソケットをcloseする1
   
@@ -199,12 +200,11 @@ S→socket.close
 C→getOutputsream  
 C→write  
 C→flush  
-C→close  
 C→getInputStream  
 C→read  
 C→例外  
   
-2の亜種で、2で送信者がflushした後、getInputStream,とreadする。  
+2の亜種で、2で送信者がflushした後、送信者がgetInputStreamとreadする。  
 readのタイミングで例外が発生する。  
 
 ### 生ログ
