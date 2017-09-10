@@ -1,4 +1,4 @@
-package test.送信者が受信者のreadより先にソケットをcloseする;
+package test.送信者が受信者のreadより先にソケットをcloseする2;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,6 +33,7 @@ public class Server {
 
 				int a = 0;
 				ByteArrayOutputStream bstream = new ByteArrayOutputStream();
+				log.debug("start read wait");
 				while (true) {
 					a = stream.read();
 					log.debug("receive data:{}", a);

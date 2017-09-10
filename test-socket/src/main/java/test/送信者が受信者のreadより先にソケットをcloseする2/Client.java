@@ -1,4 +1,4 @@
-package test.送信者が受信者のreadより先にソケットをcloseする;
+package test.送信者が受信者のreadより先にソケットをcloseする2;
 
 import java.io.DataOutputStream;
 import java.net.Socket;
@@ -17,24 +17,6 @@ public class Client {
 
 			DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 			log.debug("getOutputstream");
-
-			int sleep = 5000;
-			log.debug("waiting...{}s", sleep / 1000);
-			Thread.sleep(sleep);
-
-			byte[] senddata = { 1, 1, 9, 2 };
-			stream.write(senddata);
-			log.debug("write");
-
-			stream.flush();
-			log.debug("flush");
-
-			int cnt = 5;
-			while (cnt > 0) {
-				Thread.sleep(1000);
-				log.debug(cnt + "");
-				cnt--;
-			}
 
 			socket.close();
 			log.debug("close");

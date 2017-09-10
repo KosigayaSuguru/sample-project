@@ -1,6 +1,6 @@
 # socketまとめ
   
-## 送信者が受信者のreadより先にソケットをcloseする
+## 送信者が受信者のreadより先にソケットをcloseする1
   
 クライアントが電文を送信した場合、  
   
@@ -39,8 +39,63 @@ S→即 -1 が返ってくる
 2017-09-10 03:22:27 [main] DEBUG test.Server - end
 2017-09-10 03:22:27 [main] DEBUG test.Server - socket accept wait
 ```
+## 送信者が受信者のreadより先にソケットをcloseする2
+  
+CS→接続  
+C→close  
+S→getInputStream  
+S→read  
+S→即 -1 が返ってくる  
+  
+送信者が接続して受信者のreadブロックが始まる前に、送信者が何も送信せずにcloseする。  
+  
+### 生ログ
 
-## 受信者が送信者のwriteより先にソケットをcloseする
+```
+2017-09-10 12:04:43 [main] DEBUG t.送.Server - socket accept
+2017-09-10 12:04:43 [main] DEBUG t.送.Server - waiting...5s
+2017-09-10 12:04:43 [main] DEBUG t.送.Client - open socket
+2017-09-10 12:04:43 [main] DEBUG t.送.Client - getOutputstream
+2017-09-10 12:04:43 [main] DEBUG t.送.Client - close
+2017-09-10 12:04:48 [main] DEBUG t.送.Server - getInputstream
+2017-09-10 12:04:48 [main] DEBUG t.送.Server - start read wait
+2017-09-10 12:04:48 [main] DEBUG t.送.Server - receive data:-1
+2017-09-10 12:04:48 [main] DEBUG t.送.Server - receive all data:[-1]
+2017-09-10 12:04:48 [main] DEBUG t.送.Server - socket close
+2017-09-10 12:04:48 [main] DEBUG t.送.Server - end
+2017-09-10 12:04:48 [main] DEBUG t.送.Server - socket accept wait
+```
+## 送信者が受信者のreadより先にソケットをcloseする3
+  
+CS→接続  
+S→getInputStream  
+S→read  
+C→close  
+S→即 -1 が返ってくる  
+  
+送信者が接続して受信者のreadブロックが始まってから、送信者が何も送信せずにcloseする。  
+  
+### 生ログ
+
+```
+2017-09-10 11:57:05 [main] DEBUG t.送.Server - server open
+2017-09-10 11:57:05 [main] DEBUG t.送.Server - socket accept wait
+2017-09-10 11:57:07 [main] DEBUG t.送.Server - socket accept
+2017-09-10 11:57:07 [main] DEBUG t.送.Server - waiting...5s
+2017-09-10 11:57:07 [main] DEBUG t.送.Client - open socket
+2017-09-10 11:57:07 [main] DEBUG t.送.Client - waiting...10s
+2017-09-10 11:57:12 [main] DEBUG t.送.Server - getInputstream
+2017-09-10 11:57:12 [main] DEBUG t.送.Server - start read wait
+2017-09-10 11:57:17 [main] DEBUG t.送.Client - getOutputstream
+2017-09-10 11:57:17 [main] DEBUG t.送.Client - close
+2017-09-10 11:57:17 [main] DEBUG t.送.Server - receive data:-1
+2017-09-10 11:57:17 [main] DEBUG t.送.Server - receive all data:[-1]
+2017-09-10 11:57:17 [main] DEBUG t.送.Server - socket close
+2017-09-10 11:57:17 [main] DEBUG t.送.Server - end
+2017-09-10 11:57:17 [main] DEBUG t.送.Server - socket accept wait
+```
+
+## 受信者が送信者のwriteより先にソケットをcloseする1
   
 CS→接続  
 S→getInputStream  
@@ -67,4 +122,36 @@ C→close
 2017-09-10 11:32:42 [main] DEBUG t.受.Client - write
 2017-09-10 11:32:42 [main] DEBUG t.受.Client - flush
 2017-09-10 11:32:42 [main] DEBUG t.受.Client - close
+```
+
+## 受信者が送信者のwriteより先にソケットをcloseする2
+  
+CS→接続  
+S→getInputStream  
+S→socket.close  
+C→getOutputsream  
+C→write  
+C→flush  
+C→close  
+  
+受信者がcloseしてからgetOutputStreamする。  
+結果は1と一緒。  
+  
+### 生ログ
+
+```
+2017-09-10 11:38:09 [main] DEBUG t.受.Server - server open
+2017-09-10 11:38:09 [main] DEBUG t.受.Server - socket accept wait
+2017-09-10 11:38:12 [main] DEBUG t.受.Server - socket accept
+2017-09-10 11:38:12 [main] DEBUG t.受.Server - waiting...1s
+2017-09-10 11:38:12 [main] DEBUG t.受.Client - open socket
+2017-09-10 11:38:12 [main] DEBUG t.受.Client - waiting...5s
+2017-09-10 11:38:13 [main] DEBUG t.受.Server - getInputstream
+2017-09-10 11:38:13 [main] DEBUG t.受.Server - socket close
+2017-09-10 11:38:13 [main] DEBUG t.受.Server - end
+2017-09-10 11:38:13 [main] DEBUG t.受.Server - socket accept wait
+2017-09-10 11:38:17 [main] DEBUG t.受.Client - getOutputstream
+2017-09-10 11:38:17 [main] DEBUG t.受.Client - write
+2017-09-10 11:38:17 [main] DEBUG t.受.Client - flush
+2017-09-10 11:38:17 [main] DEBUG t.受.Client - close
 ```

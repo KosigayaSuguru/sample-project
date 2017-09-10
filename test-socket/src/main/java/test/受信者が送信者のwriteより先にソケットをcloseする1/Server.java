@@ -1,4 +1,4 @@
-package test.受信者が送信者のwriteより先にソケットをcloseする;
+package test.受信者が送信者のwriteより先にソケットをcloseする1;
 
 import java.io.IOException;
 import java.io.InputStream;
