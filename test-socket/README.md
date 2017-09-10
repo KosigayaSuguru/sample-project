@@ -262,3 +262,58 @@ readのタイミングで例外が発生せず、普通に終端(-1)を受けて
 2017-09-11 00:38:38 [main] DEBUG t.受.Client - read wait
 2017-09-11 00:38:38 [main] DEBUG t.受.Client - close
 ```
+
+## 受信者が送信者のwriteより先にソケットをcloseする5
+  
+CS→接続  
+S→getInputStream  
+S→socket.close  
+C→getOutputsream  
+C→write 1回目  
+C→flush 1回目  
+C→write 2回目  
+C→flush 1回目  
+C→例外  
+
+3の送信者がflushした後、さらにwriteする版。この場合、2回目のwriteで例外が発生する。  
+netstatを見ていると、  
+1回目のwrite前
+```
+  TCP         0.0.0.0:9999           0.0.0.0:0              LISTENING
+  TCP         127.0.0.1:9999         127.0.0.1:50685        FIN_WAIT_2
+  TCP         127.0.0.1:50685        127.0.0.1:9999         CLOSE_WAIT
+  TCP         [::]:9999              [::]:0                 LISTENING
+```
+↓ 1回目のwrite後
+```
+  TCP         0.0.0.0:9999           0.0.0.0:0              LISTENING
+  TCP         [::]:9999              [::]:0                 LISTENING
+```
+となっている。  
+これまでの動作から、FIN_WAIT_2, CLOSE_WAITの状態になっているところ(相手側がsocket.close()した状態)で、read もしくは write の処理を実行すると、接続が完全に切断され、次の read or write で例外が出ているのではないかと思われる。
+
+
+### 生ログ
+
+```
+2017-09-11 01:52:08 [main] DEBUG t.受.Server - socket accept
+2017-09-11 01:52:08 [main] DEBUG t.受.Server - waiting...1s
+2017-09-11 01:52:08 [main] DEBUG t.受.Client - open socket
+2017-09-11 01:52:08 [main] DEBUG t.受.Client - waiting...5s
+2017-09-11 01:52:09 [main] DEBUG t.受.Server - getInputstream
+2017-09-11 01:52:09 [main] DEBUG t.受.Server - socket close
+2017-09-11 01:52:09 [main] DEBUG t.受.Server - end
+2017-09-11 01:52:09 [main] DEBUG t.受.Server - socket accept wait
+2017-09-11 01:52:13 [main] DEBUG t.受.Client - getOutputstream
+2017-09-11 01:52:13 [main] DEBUG t.受.Client - write1
+2017-09-11 01:52:13 [main] DEBUG t.受.Client - flush1
+2017-09-11 01:52:13 [main] DEBUG t.受.Client - write2
+2017-09-11 01:52:13 [main] DEBUG t.受.Client - Software caused connection abort: socket write error
+java.net.SocketException: Software caused connection abort: socket write error
+	at java.net.SocketOutputStream.socketWrite0(Native Method)
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:111)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:155)
+	at java.io.DataOutputStream.write(DataOutputStream.java:107)
+	at java.io.FilterOutputStream.write(FilterOutputStream.java:97)
+	at test.受信者が送信者のwriteより先にソケットをcloseする5.Client.main(Client.java:34)
+```
