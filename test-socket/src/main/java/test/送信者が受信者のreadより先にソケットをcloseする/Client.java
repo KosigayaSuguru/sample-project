@@ -1,4 +1,4 @@
-package test;
+package test.送信者が受信者のreadより先にソケットをcloseする;
 
 import java.io.DataOutputStream;
 import java.net.Socket;
