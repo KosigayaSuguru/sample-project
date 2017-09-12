@@ -27,13 +27,13 @@ public class Client {
 
 			byte[] b = { 1, 2, 3, 4, 5, 0, 0 };
 			stream.write(b);
-
-			InputStream inputStream = socket.getInputStream();
+			stream.flush();
 
 			// 受信確認電文の受信
 			int in = 0;
 			int[] check = { 0, 0 };
 			log.debug("start read wait");
+			InputStream inputStream = socket.getInputStream();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			while ((in = inputStream.read()) > -1) {
 				baos.write(in);
@@ -62,13 +62,6 @@ public class Client {
 					baos.reset();
 				}
 			}
-
-			// sleep = 2000;
-			// log.debug("waiting...{}s", sleep / 1000);
-			// Thread.sleep(sleep);
-			//
-			// byte[] bb = { 3, 4, 5, 6, 7 };
-			// stream.write(bb);
 
 			socket.close();
 			log.debug("socket close");
