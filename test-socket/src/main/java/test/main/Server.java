@@ -1,48 +1,110 @@
 package test.main;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.io.InputStream;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Server {
+public class Server implements Runnable {
 
-	public static void main(String[] args) throws IOException {
+	Socket socket;
+	// クローズ処理中かどうかのフラグ
+	boolean closing = false;
+	Logger log = LoggerFactory.getLogger(Server.class);
 
-		Logger log = LoggerFactory.getLogger(Server.class);
-		ExecutorService threadPool = Executors.newFixedThreadPool(10, new ServerThreadFactory());
+	public Server(Socket socket) {
+		this.socket = socket;
+	}
 
-		ServerSocket s = new ServerSocket(9999);
-		log.debug("server open");
+	@Override
+	public void run() {
 
 		while (true) {
+
 			try {
-				log.debug("socket accept wait");
-				Socket socket = s.accept();
-				log.debug("socket accept");
+				InputStream stream = socket.getInputStream();
+				log.debug("getInputstream");
 
-				threadPool.execute(new Receiver(socket));
+				int a = 0;
+				int[] check = { 0, 0 };
+				ByteArrayOutputStream bstream = new ByteArrayOutputStream();
+				log.debug("start read wait");
+				while (true) {
 
+					// あまり綺麗ではないけど、1byteずつ読み込んだ方が終端の処理がしやすい。。
+					a = stream.read();
+					log.debug("receive data:{}", a);
+
+					bstream.write(a);
+
+					// 終端が来てる時の処理
+					if (a == -1) {
+						StringBuilder ss = new StringBuilder();
+						for (byte b : bstream.toByteArray()) {
+							ss.append(String.format("[%2d]", b));
+						}
+						log.debug("receive all data:{}", ss);
+
+						// 終端のみが来ている場合、相手にクローズされているのでループを抜ける
+						if (bstream.size() == 1) {
+							break;
+						}
+						bstream.reset();
+					}
+
+					// 電文の区切りのチェック(2連続で0が送信されたらそこが区切り)
+					check[0] = check[1];
+					check[1] = a;
+					if (check[0] == 0 && check[1] == 0) {
+
+						StringBuilder ss = new StringBuilder();
+						for (byte b : bstream.toByteArray()) {
+							ss.append(String.format("[%2d]", b));
+						}
+						bstream.reset();
+						log.debug("receive part of data:{}", ss);
+
+						// 受信確認の応答送信
+						DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+						byte[] b = { 'r', 'e', 's', ' ', 'o', 'k', '\0', '\0' };
+						outputStream.write(b);
+						continue;
+					}
+
+				}
+				bstream.close();
+
+				close();
+				log.debug("socket close");
+				log.debug("end");
+				break;
+
+				// socket.close()以外の正規の手順を踏まずに接続が切れた場合、例外が吐かれるっぽい。。
+				// ※例：readブロック中に相手がCtrl+Cでアプリを終わらせたりとか
+				//
+				// クローズ処理中に例外が出た場合、ログ出力は無視する
 			} catch (Exception e) {
-				log.debug(e.getMessage(), e);
-
+				if (!closing) {
+					log.debug(e.getMessage(), e);
+				}
+				break;
 			}
+
 		}
+		log.debug("receiver thread end");
 	}
 
-	public static class ServerThreadFactory implements ThreadFactory {
+	public void close() {
+		closing = true;
 
-		int num = 0;
-
-		@Override
-		public Thread newThread(Runnable r) {
-			return new Thread(r, String.format("Receiver-%d", num++));
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
-
 }
