@@ -1,0 +1,59 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+	<id>project_assembly</id>
+	<formats>
+		<format>jar</format>
+	</formats>
+
+	<!-- 成果物jar内のどこに展開するかの設定（成果物jar内のルートに成果物を含める） -->
+	<includeBaseDirectory>false</includeBaseDirectory>
+
+	<fileSets>
+		<fileSet>
+			<!-- test-maven-build/target/classes/配下を対象にする -->
+			<directory>${project.build.directory}/classes/</directory>
+
+			<!-- 成果物jar内のどこに展開するかの設定（成果物jar内のルートに成果物を含める） -->
+			<outputDirectory>/</outputDirectory>
+
+			<!-- 成果物jarに含める対象の設定 -->
+			<includes>
+				<include>**/*.properties</include>
+			</includes>
+			<!-- 成果物jarに含めない対象の設定 -->
+			<excludes>
+				<exclude>out.properties</exclude>
+
+				<!-- META-INF/maven/ 配下にあるファイルを除外する（ディレクトリ単位で指定できないので、META-INF配下のファイルを全て対象にする） -->
+				<!-- ※ファイルが含まれなくなるとディレクトリも生成されなくなるっぽい -->
+				<exclude>META-INF/maven/**/*</exclude>
+			</excludes>
+		</fileSet>
+	</fileSets>
+
+	<dependencySets>
+		<dependencySet>
+			<!-- 成果物jar内のどこに展開するかの設定（成果物jar内のルートに成果物を含める） -->
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<!-- 依存ライブラリの指定したグループID（ここだとlogback）を成果物jar内に含める -->
+				<!-- ※logbackだけ指定しているため、jacksonが成果物jarに含まれていない -->
+				<include>ch.qos.logback:*</include>
+			</includes>
+
+			<!-- 依存ライブラリのjarを解凍する時のオプション -->
+			<unpackOptions>
+
+				<!-- META-INF/ 配下にあるファイルを除外する（ディレクトリ単位で指定できないので、META-INF配下のファイルを全て対象にする） -->
+				<!-- ※ファイルが含まれなくなるとディレクトリも生成されなくなるっぽい -->
+				<!-- ※依存ライブラリのjarが独自にMETA-INFを持っていることがあるので、それ用の除外設定が必要 -->
+				<excludes>
+					<exclude>META-INF/**/*</exclude>
+				</excludes>
+			</unpackOptions>
+			<!-- 依存ライブラリを解凍した状態でjarに含める -->
+			<unpack>true</unpack>
+		</dependencySet>
+	</dependencySets>
+</assembly>
