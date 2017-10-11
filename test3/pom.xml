@@ -4,31 +4,16 @@
 	<artifactId>test3</artifactId>
 	<packaging>war</packaging>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 	<parent>
 		<groupId>test3</groupId>
 		<artifactId>test3.parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../test3.parent</relativePath>
 	</parent>
+
 	<dependencies>
 		<dependency>
+			<!-- 親がmoduleとして持っている内製プロジェクトに対しての依存関係の設定はここに書く -->
 			<groupId>test3.module1</groupId>
 			<artifactId>test3.module1</artifactId>
 			<version>0.0.1-module1</version>
