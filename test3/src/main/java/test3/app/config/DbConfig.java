@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -45,6 +46,7 @@ public class DbConfig {
 	}
 
 	@Bean
+	@Primary
 	public DataSourceTransactionManager transactionManager() {
 		DataSourceTransactionManager tran = new DataSourceTransactionManager();
 		tran.setDataSource(dataSourceH2());
@@ -54,6 +56,14 @@ public class DbConfig {
 	@Bean
 	public JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSourceH2());
+	}
+
+	@Bean
+	@Primary
+	public DataSourceTransactionManager mySqlTransactionManager() {
+		DataSourceTransactionManager tran = new DataSourceTransactionManager();
+		tran.setDataSource(dataSourceTest2());
+		return tran;
 	}
 
 	@Bean
