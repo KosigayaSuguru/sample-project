@@ -59,7 +59,6 @@ public class DbConfig {
 	}
 
 	@Bean
-	@Primary
 	public DataSourceTransactionManager mySqlTransactionManager() {
 		DataSourceTransactionManager tran = new DataSourceTransactionManager();
 		tran.setDataSource(dataSourceTest2());

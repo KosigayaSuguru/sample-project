@@ -28,12 +28,14 @@ public class TransactionController extends WebApplicationObjectSupport {
 
 	@RequestMapping("/TransactionTest")
 	// トランザクション開始(MySQL用のTransactionManager使って)
-	@Transactional(transactionManager = "mySqlTransactionManager", rollbackFor = Exception.class)
+	@Transactional(transactionManager = "mySqlTransactionManager", rollbackFor = Exception.class, /** propagation = Propagation.NOT_SUPPORTED, */
+			readOnly = false)
+	// @Transactional(transactionManager = "mySqlTransactionManager", rollbackFor = Exception.class, readOnly = true)
 	// @Transactional(transactionManager = "mySqlTransactionManager", noRollbackFor = Exception.class)
 	public List<Map<String, Object>> transactionTest() {
 
 		try {
-			Thread.sleep(60000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 		}
 
