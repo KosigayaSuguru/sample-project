@@ -13,7 +13,8 @@ public class AppConfig {
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertyPlaceholder() throws Exception {
 
-		System.err.println(System.getProperty("aa.bb"));
+		String aabb = System.getProperty("aabb");
+		System.err.println(aabb);
 		String profile = System.getProperty("spring.profiles.active");
 
 		PropertySourcesPlaceholderConfigurer holder = new PropertySourcesPlaceholderConfigurer();
