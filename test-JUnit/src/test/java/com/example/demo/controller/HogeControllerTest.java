@@ -28,14 +28,25 @@ public class HogeControllerTest {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * 特定のフィールドにモックをインジェクトして、テストを実行する
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testHoge() throws Exception {
+
+		// mockitoのアノテーション(@Spy, @Mock, @InjectMocks)を使うと上手くいかないので、とりあえずコードで書いてる
+		// ※PowerMockのテストコード見ると、アノテーション使ってないから、PowerMockからだと、アノテーションは無理？
 		HogeController c = PowerMockito.spy(new HogeController());
 		TestBean b = PowerMockito.mock(TestBean.class);
 
+		// モックの設定
 		PowerMockito.when(b.getA()).thenReturn("mock TestBean.getA()");
 		PowerMockito.when(c, "testPublicMethod").thenReturn("public method mock return");
 		PowerMockito.when(c, "testPrivateMethod").thenReturn("private method mock return");
+
+		// c の　testBeanフィールドに b をインジェクトする
 		Whitebox.setInternalState(c, "testBean", b);
 
 		HogeJson hoge = c.hoge();
@@ -51,6 +62,11 @@ public class HogeControllerTest {
 		assertEquals("testPublicMethod", r);
 	}
 
+	/**
+	 * privateのメソッドに対してリフレクションを使って無理やり実行させてテストをさせる
+	 * 
+	 * @throws Exception
+	 */
 	@Test
 	public void testTestPrivateMethod() throws Exception {
 		HogeController c = new HogeController();
