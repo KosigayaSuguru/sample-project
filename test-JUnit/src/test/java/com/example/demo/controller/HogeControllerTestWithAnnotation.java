@@ -31,14 +31,12 @@ public class HogeControllerTestWithAnnotation {
 		MockitoAnnotations.initMocks(this);
 	}
 
-
 	@After
 	public void tearDown() throws Exception {
 	}
 
 	/**
-	 * 特定のフィールドにモックをインジェクトして、テストを実行する ※インジェクトが絡むところだけ抜粋
-	 * ※アノテーションでの設定多めVer
+	 * 特定のフィールドにモックをインジェクトして、テストを実行する ※インジェクトが絡むところだけ抜粋 ※アノテーションでの設定多めVer
 	 *
 	 * @throws Exception
 	 */
