@@ -1,8 +1,10 @@
 package com.example.demo.models;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
+@Primary
 public class TestBean {
 
 	public String a = "TestBean a";

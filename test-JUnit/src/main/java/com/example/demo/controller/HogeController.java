@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,8 +13,12 @@ public class HogeController {
 	@Autowired
 	TestBean testBean;
 
+	@Autowired
+	@Qualifier("testBean2")
+	TestBean testBean2;
+	
 	@GetMapping("/hoge")
-	HogeJson hoge() {
+	public HogeJson hoge() {
 
 		String r = testPublicMethod();
 		String rr = testPrivateMethod();

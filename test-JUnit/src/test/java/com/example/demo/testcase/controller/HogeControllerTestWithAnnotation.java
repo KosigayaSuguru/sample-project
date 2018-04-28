@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.testcase.controller;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,6 +13,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.example.demo.controller.HogeController;
 import com.example.demo.controller.HogeController.HogeJson;
 import com.example.demo.models.TestBean;
 
