@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:~/test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: null
+  h2:
+    console:
+      enabled: true
+
+#hibernateが出すログだけログレベルをDEBUGにする      
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+#ログを全体的にDEBUGにする
+debug: false
