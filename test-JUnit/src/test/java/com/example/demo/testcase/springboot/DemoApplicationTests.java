@@ -12,6 +12,11 @@ import com.example.demo.DemoApplication;
 import com.example.demo.config.AppTestConfig;
 import com.example.demo.controller.HogeController;
 
+/**
+ * 下記の確認用
+ * test側で、JUnitを実行したときに、test/resourceのapplication.yamlが使われること
+ * main側と同じ名前のBean(ここでは AppTestConfig.java, AppTestSubConfig.java)を@SpringBootTestで指定すると、test側が優先されること
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { DemoApplication.class, AppTestConfig.class })
 public class DemoApplicationTests {

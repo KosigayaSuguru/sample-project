@@ -17,6 +17,10 @@ import com.example.demo.controller.HogeController;
 import com.example.demo.controller.HogeController.HogeJson;
 import com.example.demo.models.TestBean;
 
+/**
+ * HogeControllerに対して、アノテーションを使用しないでテストを実行する。
+ * HogeControllerのフィールドに対してモックの設定はWhiteboxを使う。
+ */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ HogeController.class })
 public class HogeControllerTest {
@@ -37,8 +41,7 @@ public class HogeControllerTest {
 	@Test
 	public void testHoge() throws Exception {
 
-		// mockitoのアノテーション(@Spy, @Mock, @InjectMocks)を使うと上手くいかないので、とりあえずコードで書いてる
-		// ※PowerMockのテストコード見ると、アノテーション使ってないから、PowerMockからだと、アノテーションは無理？
+		// mockitoのアノテーション(@Spy, @Mock, @InjectMocks)を使わないで、とりあえずコードで書いてる
 		HogeController c = PowerMockito.spy(new HogeController());
 		TestBean b = PowerMockito.mock(TestBean.class);
 

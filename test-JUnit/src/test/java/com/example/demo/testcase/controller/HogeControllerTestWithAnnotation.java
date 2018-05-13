@@ -17,6 +17,10 @@ import com.example.demo.controller.HogeController;
 import com.example.demo.controller.HogeController.HogeJson;
 import com.example.demo.models.TestBean;
 
+/**
+ * HogeControllerに対して、なるべくアノテーションを使用してテストを実行する。
+ * @Mock、@InjectMockを使ってテストを実行している。
+ */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ HogeController.class })
 public class HogeControllerTestWithAnnotation {
