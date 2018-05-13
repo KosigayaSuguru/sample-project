@@ -31,6 +31,7 @@ public class HogeController {
 		a.pub = r;
 		a.pri = rr;
 		a.testBeanA = testBean.getA();
+		a.testBeanChildA = testBean.getCldA();
 
 		return a;
 	}
@@ -43,7 +44,6 @@ public class HogeController {
 		return "testPublicMethod";
 	}
 
-	@SuppressWarnings("unused")
 	public static class HogeJson {
 		public String field1;
 		public String field2;
@@ -52,5 +52,6 @@ public class HogeController {
 		public String pub;
 		public String pri;
 		public String testBeanA;
+		public String testBeanChildA;
 	}
 }
