@@ -2,6 +2,6 @@ package com.example.demo.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 
-@MapperScan("mapper")
+@MapperScan("com.example.mapper")
 public class DbConfig {
 }

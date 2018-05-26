@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.component.AsyncTest;
 import com.example.demo.component.Hoge;
-
-import mapper.Test3Mapper;
-import mapper.Test3Vo;
+import com.example.mapper.Test3Mapper;
+import com.example.mapper.Test3Vo;
 
 @RestController
 public class TestController {

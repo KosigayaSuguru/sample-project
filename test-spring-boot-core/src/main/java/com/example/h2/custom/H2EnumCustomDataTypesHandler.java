@@ -1,4 +1,4 @@
-package h2.custom;
+package com.example.h2.custom;
 
 import org.h2.api.CustomDataTypesHandler;
 import org.h2.store.DataHandler;

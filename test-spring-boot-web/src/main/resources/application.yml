@@ -9,7 +9,7 @@ spring:
       enabled: true
 
 mybatis:
-  type-handlers-package: mapper.typehandler
+  type-handlers-package: com.example.mapper.typehandler
 
 logging:
   level:

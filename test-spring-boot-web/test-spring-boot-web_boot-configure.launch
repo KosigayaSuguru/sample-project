@@ -10,7 +10,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.example.demo.TestSpringBootApplication"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="test-spring-boot-web"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.springframework.ide.eclipse.boot.launch.BootMavenSourcePathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dspring.profiles.active=local -Dh2.customDataTypesHandler=h2.custom.H2EnumCustomDataTypesHandler"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dspring.profiles.active=local -Dh2.customDataTypesHandler=com.example.h2.custom.H2EnumCustomDataTypesHandler"/>
 <stringAttribute key="process_factory_id" value="org.springframework.ide.eclipse.boot.launch.process.BootProcessFactory"/>
 <booleanAttribute key="spring.boot.ansi.console" value="true"/>
 <booleanAttribute key="spring.boot.dash.hidden" value="false"/>
