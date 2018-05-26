@@ -37,7 +37,8 @@ public class TestController {
 
 		System.err.println(aaaa);
 		System.err.println(hoge.test());
-		return test3Mapper.get();
+		List<Test3Vo> list = test3Mapper.get();
+		return list;
 	}
 
 	/*

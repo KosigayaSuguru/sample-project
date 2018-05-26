@@ -21,7 +21,7 @@ public class Test3Vo {
 	/**
 	 * enum_test:enum(9)
 	 */
-	private String enum_test;
+	private Testenum enumtest;
 
 	/**
 	 * update_date:timestamp(0)
@@ -52,12 +52,12 @@ public class Test3Vo {
 		this.test2_id = test2_id;
 	}
 
-	public String getEnum_test() {
-		return this.enum_test;
+	public Testenum getEnumtest() {
+		return this.enumtest;
 	}
 
-	public void setEnum_test(String enum_test) {
-		this.enum_test = enum_test;
+	public void setEnumtest(Testenum enumtest) {
+		this.enumtest = enumtest;
 	}
 
 	public LocalDateTime getUpdate_date() {
@@ -67,20 +67,4 @@ public class Test3Vo {
 	public void setUpdate_date(LocalDateTime update_date) {
 		this.update_date = update_date;
 	}
-
-	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("[Test3Vo:");
-		buffer.append(" id: ");
-		buffer.append(id);
-		buffer.append(" test2_id: ");
-		buffer.append(test2_id);
-		buffer.append(" enum_test: ");
-		buffer.append(enum_test);
-		buffer.append(" update_date: ");
-		buffer.append(update_date);
-		buffer.append("]");
-		return buffer.toString();
-	}
-
 }
