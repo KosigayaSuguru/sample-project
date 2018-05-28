@@ -15,6 +15,8 @@ public class TestBean {
 	@Autowired
 	public TestBeanChild cld;
 
+	private TestBeanChild privateCld;
+
 	public String getA() {
 		return a;
 	}
@@ -26,8 +28,23 @@ public class TestBean {
 	public String getC() {
 		return c;
 	}
-	
+
 	public String getCldA() {
 		return cld.getA();
+	}
+
+	public String getPrivateCldA() {
+		return privateCld.getA();
+	}
+
+	public static TestBean newInstance() {
+
+		TestBean testBean = new TestBean();
+		TestBeanChild testBeanChild = new TestBeanChild();
+		testBean.cld = testBeanChild;
+
+		TestBeanChild testBeanChild2 = new TestBeanChild();
+		testBean.privateCld = testBeanChild2;
+		return testBean;
 	}
 }
