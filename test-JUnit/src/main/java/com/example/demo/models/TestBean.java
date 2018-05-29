@@ -21,6 +21,10 @@ public class TestBean {
 		return a;
 	}
 
+	public void setA(String a) {
+		this.a = a;
+	}
+
 	public String getB() {
 		return b;
 	}
