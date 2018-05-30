@@ -1,8 +1,16 @@
 package com.example.demo.testcase.springboot.jmockito;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import com.example.demo.DemoApplication;
+import com.example.demo.config.AppTestConfig;
 import com.example.demo.models.TestBean;
 import com.example.demo.models.TestBeanChild;
 
@@ -248,6 +256,33 @@ public class JMockitoTests {
 					System.out.println("test: " + s);
 				}
 			};
+		}
+	}
+
+	public static class Calendarクラス使って挙動確認 {
+
+		@Test
+		public void etc(@Mocked Calendar cal) {
+
+			new Expectations(Calendar.class) {
+				{
+					cal.getTimeInMillis();
+					result = 20000;
+					minTimes = 0;
+				}
+			};
+
+			System.out.println(cal.getTimeInMillis()); // 部分モックの設定が効いている
+			System.out.println(cal.getTimeZone()); // 部分モック設定前からからいるモックインスタンスだからnullになる？
+			System.out.println();
+			System.out.println(Calendar.getInstance()); // Calendar.getInstance() はモック化していないので非モックの動作
+			System.out.println(Calendar.getInstance().getTimeInMillis()); // 実質、Calendar#getTimeInMillis()を実行しているので、部分モックが効いてる
+			System.out.println(Calendar.getInstance().getTimeZone()); // 部分モック設定がないメソッドなので非モック動作
+			System.out.println();
+			Calendar b = Calendar.getInstance(); // 一回、変数に格納しても動作は一緒
+			System.out.println(b);
+			System.out.println(b.getTimeInMillis());
+			System.out.println(b.getTimeZone());
 		}
 	}
 }
