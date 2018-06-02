@@ -1,7 +1,9 @@
 package com.example.demo.testcase.springboot.jmockito;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -255,6 +257,14 @@ public class JMockitoTests {
 
 	public static class Calendarクラス使って挙動確認 {
 
+		@Before
+		public void before() {
+			System.out.println("- - - - - - - - - - - - - - - - - - - - ");
+		}
+		@After
+		public void after() {
+			System.out.println();
+		}
 		@Test
 		public void etc(@Mocked Calendar cal) {
 
@@ -277,6 +287,51 @@ public class JMockitoTests {
 			System.out.println(b);
 			System.out.println(b.getTimeInMillis());
 			System.out.println(b.getTimeZone());
+		}
+
+		@Test
+		public void factoryから生成されるようなヤツは実際のクラスに対してMockする方が良い1(@Mocked Calendar cal) {
+
+			new Expectations(Calendar.class) {
+				{
+					cal.getTimeInMillis();
+					result = 20001;
+					minTimes = 0;
+
+					cal.getCalendarType();
+					result = "hogehoge";
+					minTimes = 0;
+				}
+			};
+			Calendar a = Calendar.getInstance(); // 一回、変数に格納しても動作は一緒
+			System.out.println(a);
+			System.out.println(a.getClass());
+			System.out.println(a.getTimeInMillis()); // 部分モックの設定が効いている
+			System.out.println(a.getCalendarType()); // Calendarに対してのモック設定だとモックの値返してくれない
+			System.err.println("Calendarに対してのモック設定だとモックの値返してくれない");
+		}
+
+		@Test
+		public void factoryから生成されるようなヤツは実際のクラスに対してMockする方が良い2(@Mocked GregorianCalendar cal) {
+
+			new Expectations(GregorianCalendar.class) {
+				{
+					cal.getTimeInMillis();
+					result = 20001;
+					minTimes = 0;
+
+					cal.getCalendarType();
+					result = "hogehoge";
+					minTimes = 0;
+				}
+			};
+			Calendar a = Calendar.getInstance(); // 一回、変数に格納しても動作は一緒
+			System.out.println(a);
+			System.out.println(a.getClass());
+			System.out.println(a.getTimeInMillis()); // 部分モックの設定が効いている
+			System.out.println(a.getCalendarType()); // GregorianCalendarに対してのモック設定だとモックの値返してくれる
+			System.err.println("GregorianCalendarに対してのモック設定だとモックの値返してくれる");
+			System.err.println("※継承先でoverrideしてると継承元に対してのモック設定は無視されるっぽい");
 		}
 	}
 }
