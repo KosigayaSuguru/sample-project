@@ -1,16 +1,10 @@
 package com.example.demo.testcase.springboot.jmockito;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import com.example.demo.DemoApplication;
-import com.example.demo.config.AppTestConfig;
 import com.example.demo.models.TestBean;
 import com.example.demo.models.TestBeanChild;
 
